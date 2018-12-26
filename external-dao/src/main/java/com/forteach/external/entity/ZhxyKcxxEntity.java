@@ -14,23 +14,76 @@ import java.util.Objects;
 @Entity
 @Table(name = "ZHXY_KCXX", schema = "SZXY", catalog = "")
 public class ZhxyKcxxEntity implements Serializable {
+    /**
+     * 课程号
+     */
     @Id
     private String kch;
+    /**
+     * 课程名称
+     */
     private String kcmc;
+    /**
+     * 课程英文名称
+     */
     private String kcywmc;
+    /**
+     * 学分
+     */
     private Long xf;
+    /**
+     * 每周学时
+     */
     private Long mzxs;
+    /**
+     * 总学时
+     */
     private Long zxs;
+    /**
+     * 课程简介
+     */
     private String kcjj;
+    /**
+     * 教材
+     */
     private String jc;
+    /**
+     * 开课院系
+     */
     private String cksm;
+    /**
+     * 有效标志
+     * 
+     */
     private String yxbz;
+    /**
+     * 备注
+     */
     private String bz;
+    /**
+     * 修改时间
+     */
     private String timestamp;
+    /**
+     * 开课院系
+     */
     private String kkyx;
+    /**
+     * 周数
+     */
     private String zs;
+    /**
+     * 课程类别
+     */
     private String kclb;
+    /**
+     * 开课院系ID 
+     * 组织机构编号
+     */
     private String yxid;
+    /**
+     * 所属专业
+     */
     private String sszy;
 
     @Basic

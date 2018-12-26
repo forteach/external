@@ -10,18 +10,36 @@ import java.util.Objects;
  * @Email: zhang10092009@hotmail.com
  * @Date: 18-12-24 16:33
  * @Version: 1.0
- * @Description:
+ * @Description: 学期信息
  */
 @Entity
 @Table(name = "GZ_XQXXB", schema = "SZXY", catalog = "")
 public class GzXqxxbEntity implements Serializable {
     @Id
     private String xqbh;
+    /**
+     * 学期名称
+     */
     private String xqmc;
+    /**
+     * 开始时间
+     */
     private Date kssj;
+    /**
+     * 结束时间
+     */
     private Date jssj;
+    /**
+     * 是否当前　1 是　2 否
+     */
     private String sfdq;
+    /**
+     * 学期
+     */
     private String xq;
+    /**
+     * 学年
+     */
     private String xn;
 
     @Basic

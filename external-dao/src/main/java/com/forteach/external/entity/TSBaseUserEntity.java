@@ -17,16 +17,52 @@ import java.util.Objects;
 public class TSBaseUserEntity implements Serializable {
     @Id
     private String id;
+    /**
+     * 流程
+     */
     private Long activitisync;
+    /**
+     * 浏览器
+     */
     private String browser;
+    /**
+     * 密码
+     */
     private String password;
+    /**
+     * 用户姓名
+     */
     private String realname;
+    /**
+     * 签名
+     */
     private byte[] signature;
+    /**
+     * 用户状态
+     */
     private Long status;
+    /**
+     * key
+     */
     private String userkey;
+    /**
+     * 用户名
+     */
     private String username;
+    /**
+     * 机构编号
+     */
     private String departid;
+    /**
+     * 删除标志
+     */
     private Long deleteFlag;
+    /**
+     * 管理权限
+     * １　本部门
+     * ２　全部部门
+     * ３　指定部门
+     */
     private String manageScope;
 
     @Basic

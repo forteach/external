@@ -11,7 +11,7 @@ import java.util.Objects;
  * @Email: zhang10092009@hotmail.com
  * @Date: 18-12-24 16:33
  * @Version: 1.0
- * @Description:
+ * @Description:　楼层信息
  */
 @Entity
 @ToString
@@ -19,7 +19,13 @@ import java.util.Objects;
 public class FloorEntity implements Serializable {
     @Id
     private String id;
+    /**
+     * 建筑ID
+     */
     private String parentId;
+    /**
+     * 路曾名称
+     */
     private String floorName;
 
     @Basic

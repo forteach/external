@@ -14,49 +14,169 @@ import java.util.Objects;
  * @Email: zhang10092009@hotmail.com
  * @Date: 18-12-24 16:34
  * @Version: 1.0
- * @Description:
+ * @Description: 学生信息表
  */
 @Entity
 @Table(name = "ZHXY_XSXX", schema = "SZXY", catalog = "")
 public class ZhxyXsxxEntity implements Serializable {
+    /**
+     * 出生日期
+     */
     private Date csrq;
+    /**
+     * 照片
+     */
     private byte[] zp;
+    /**
+     * 修改时间
+     */
     private Timestamp timestamp;
+    /**
+     * 是否毕业
+     */
     private String isgraduate;
+    /**
+     * 学籍状态
+     */
     private String xjzt;
+    /**
+     * 录取专业
+     */
     private String lqzy;
+    /**
+     * 高考考试号
+     */
     private String gkksh;
+    /**
+     * 年级
+     */
     private String nj;
+    /**
+     * 学生编号　学号
+     */
     @Id
     private String xsid;
+    /**
+     * 学生姓名
+     */
     private String xsxm;
+    /**
+     * 隶属学院　
+     * 教研室代码
+     */
     private String lsxy;
+    /**
+     * 隶属院系
+     * 专业代码
+     */
     private String lsyx;
+    /**
+     * 隶属班级
+     * 班级代码
+     */
     private String lsbj;
+    /**
+     * 姓名拼音
+     */
     private String xmpy;
+    /**
+     * 来校日期
+     */
     private String lxrq;
+    /**
+     * 曾用名
+     */
     private String cym;
+    /**
+     * 性别
+     * F 女 M 男
+     */
     private String xb;
+    /**
+     * 出生地码
+     */
     private String csdm;
+    /**
+     * 籍贯
+     */
     private String jg;
+    /**
+     * 国籍码
+     */
     private String gjm;
+    /**
+     * 身份证件类型
+     */
     private String sfzjlxm;
+    /**
+     * 身份证件号
+     */
     private String sfzjh;
+    /**
+     * 婚姻状态码
+     */
     private String hyztm;
+    /**
+     * 政治面貌
+     */
     private String zzmm;
+    /**
+     * 血型
+     */
     private String xx;
+    /**
+     * 通信地址
+     */
     private String txdz;
+    /**
+     * 家庭地址
+     */
     private String jtzz;
+    /**
+     * 现住址
+     */
     private String xzz;
+    /**
+     * 户口所在地
+     */
     private String hkszd;
+    /**
+     * 户口性质码
+     */
     private String hkxzm;
+    /**
+     * 移动电话
+     */
     private String yddh;
+    /**
+     * 家庭电话
+     */
     private String jtdh;
+    /**
+     * 电子信箱
+     */
     private String dzxx;
+    /**
+     * 有效标志
+     * 有效 Y
+     * 无效 N
+     */
     private String yxbz;
+    /**
+     * 备注
+     */
     private String bz;
+    /**
+     * 民族码
+     */
     private String mzm;
+    /**
+     * 
+     */
     private String zpKtl;
+    /**
+     * 学制
+     */
     private String xz;
 
     @Basic

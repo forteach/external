@@ -19,11 +19,12 @@ public class TSUserOrgManageEntity implements Serializable {
     @Id
     private String id;
     /**
-     * 用户姓名
+     * 用户编号
+     * 用户名关联username
      */
     private String username;
     /**
-     * 组织机构id
+     * 组织机构编号
      */
     private String departid;
     /**

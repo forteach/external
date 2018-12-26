@@ -9,21 +9,51 @@ import java.util.Objects;
  * @Email: zhang10092009@hotmail.com
  * @Date: 18-12-24 16:34
  * @Version: 1.0
- * @Description:
+ * @Description:　组织机构信息
  */
 @Entity
 @Table(name = "T_S_DEPART", schema = "SZXY", catalog = "")
 public class TSDepartEntity implements Serializable {
     @Id
     private String id;
+    /**
+     * 组织机构名称
+     */
     private String departname;
+    /**
+     * 描述
+     */
     private String description;
+    /**
+     * 父级编号
+     */
     private String parentdepartid;
+    /**
+     * 组织机构编码
+     */
     private String orgCode;
+    /**
+     * 机构类型
+     * １行政机构
+     * 2 教研室
+     */
     private String orgType;
+    /**
+     * 手机号
+     */
     private String mobile;
+    /**
+     *
+     */
     private String fax;
+    /**
+     * 地址
+     */
     private String address;
+    /**
+     * 序号
+     * 顺序号　用于组织机构排序
+     */
     private String departOrder;
 
     @Basic

@@ -9,17 +9,37 @@ import java.util.Objects;
  * @Email: zhang10092009@hotmail.com
  * @Date: 18-12-24 16:33
  * @Version: 1.0
- * @Description:
+ * @Description:　班主任信息表
  */
 @Entity
 @Table(name = "GZ_ZGDW_FDY_SDXSBJ", schema = "SZXY", catalog = "")
 public class GzZgdwFdySdxsbjEntity implements Serializable {
+    
     @Id
     private String id;
+    /**
+     * 班级代码
+     * 关联班级信息表　bjdm
+     */
     private String sdbjdm;
+    /**
+     * 上岗日期
+     */
     private String sgrq;
+    /**
+     * 离岗日期
+     */
     private String lgrq;
+    /**
+     * 教工号　
+     * 关联教职工信息表jgh
+     */
     private String zgh;
+    /**
+     * 类别
+     * 1 辅导员
+     * 2 班主任
+     */
     private String sslb;
 
     @Basic

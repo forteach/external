@@ -11,82 +11,294 @@ import java.util.Objects;
  * @Email: zhang10092009@hotmail.com
  * @Date: 18-12-24 16:34
  * @Version: 1.0
- * @Description:
+ * @Description:　教职工信息
  */
 @Entity
 @Table(name = "ZHXY_JZGXX", schema = "SZXY", catalog = "")
 public class ZhxyJzgxxEntity implements Serializable {
-    @Id
+    /**
+     *  教工号
+     */
+    
     private String jgh;
+    /**
+     * 单位号
+     */
     private String dwh;
+    /**
+     * 姓名
+     */
     private String xm;
+    /**
+     * 姓名拼音
+     */
     private String xmpy;
+    /**
+     * 曾用名
+     */
     private String cym;
+    /**
+     * 性别码
+     */
     private String xbm;
+    /**
+     * 出生日期
+     */
     private String csrq;
+    /**
+     * 出生地码
+     */
     private String csdm;
+    /**
+     * 籍贯
+     */
     private String jg;
+    /**
+     * 民族码
+     */
     private String mzm;
+    /**
+     * 国籍码
+     */
     private String gjm;
+    /**
+     * 身份证件类型码
+     */
     private String sfzjlxm;
+    /**
+     * 身份证件号
+     */
     private String sfzjh;
+    /**
+     * 婚姻状况码
+     */
     private String hyzkm;
+    /**
+     * 港澳台侨码
+     */
     private String gatqwm;
+    /**
+     * 健康状况码
+     */
     private String jkzkm;
+    /**
+     * 宗教信仰码
+     */
     private String zjxym;
+    /**
+     * 血型码
+     */
     private String xxm;
+    /**
+     * 家庭出身码
+     */
     private String jtcsm;
+    /**
+     * 本人成分码
+     */
     private String brcfm;
+    /**
+     * 文化程度码
+     */
     private String whcdm;
+    /**
+     * 参加工作年月
+     */
     private String cjgzny;
+    /**
+     * 来校日期
+     */
     private String lxrq;
+    /**
+     * 起薪日期
+     */
     private String qxrq;
+    /**
+     * 从教年月
+     */
     private String cjny;
+    /** 
+     * 编制类别码
+     */
     private String bzlbm;
+    /**
+     * 教职工类别码
+     */
     private String jzglbm;
+    /**
+     * 任课状态码
+     */
     private String rkzkm;
+    /**
+     * 档案编号
+     */
     private String dabh;
+    /**
+     * 档案文本
+     */
     private String dawb;
+    /**
+     * 当前状态
+     */
     private String dqzt;
+    /**
+     * 邮政编码
+     */
     private String yzbm;
+    /**
+     * 通信地址
+     */
     private String txdz;
+    /**
+     * 家庭住址
+     */
     private String jtzz;
+    /**
+     * 现住址
+     */
     private String xzz;
+    /**
+     * 户口所在地
+     */
     private String hkszd;
+    /**
+     * 户口性质码
+     */
     private String hkxzm;
+    /**
+     * 办公电话
+     */
     private String bgdh;
+    /**
+     * 住宅电话
+     */
     private String zzdh;
+    /**
+     * 移动电话
+     */
     private String yddh;
+    /**
+     * 传真号码
+     */
     private String czhm;
+    /**
+     * 电子信箱
+     */
     private String dzxx;
+    /**
+     * 主页地址
+     */
     private String zydz;
+    /**
+     * 特长
+     */
     private String tc;
+    /**
+     * 校区码
+     */
     private String xqm;
+    /**
+     * 学科类别码
+     */
     private String xklbm;
+    /**
+     * 一级学科吗
+     */
     private String yjxkm;
+    /**
+     * 二级学科码
+     */
     private String ejxkm;
+    /**
+     * 研究方向
+     */
     private String yjfx;
+    /**
+     * LSXY
+     */
     private String lsxy;
+    /**
+     * 隶属院校
+     */
     private String lsyx;
+    /**
+     * 有效标示
+     */
     private String yxbz;
+    /**
+     * 政治面貌
+     */
     private String zzmm;
+    /**
+     * 照片
+     */
     private byte[] zp;
+    /**
+     * 备注
+     */
     private String bz;
+    /**
+     * 修改时间
+     */
     private Timestamp timestamp;
+    /**
+     * 职称
+     */
     private String zc;
+    /**
+     * 部门名称
+     */
     private String bmmc;
+    /**
+     * 办公地址
+     */
     private String bgdz;
+
+    @Id
     private String id;
+    /**
+     * 入党团时间
+     */
     private String rdtsj;
+    /**
+     * 人员分类
+     */
     private String ryfl;
+    /**
+     * 人员状态
+     */
     private String ryzt;
+    /**
+     * 领导职务级别
+     */
     private String ldzwjb;
+    /**
+     * 职称类别
+     */
     private String zclb;
+    /**
+     * 入编文号
+     */
     private String rbwh;
+    /**
+     * 入编日期
+     */
     private String rbrq;
+    /**
+     * 进入形式
+     */
     private String jrxs;
+    /**
+     * QQ 号
+     */
     private String qqh;
+    /**
+     * 微信号
+     */
     private String wxh;
+    /**
+     * 行政职务
+     */
     private String xzzw;
 
     @Basic

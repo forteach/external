@@ -11,7 +11,7 @@ import java.util.Objects;
  * @Email: zhang10092009@hotmail.com
  * @Date: 18-12-24 16:33
  * @Version: 1.0
- * @Description:
+ * @Description:　建筑信息
  */
 @Entity
 @Table(name = "BUILDING", schema = "SZXY", catalog = "")
@@ -19,6 +19,9 @@ import java.util.Objects;
 public class BuildingEntity implements Serializable {
     @Id
     private String id;
+    /**
+     * 建筑名称
+     */
     private String dxmc;
 
     @Basic

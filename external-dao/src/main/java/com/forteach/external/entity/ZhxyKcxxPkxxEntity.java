@@ -35,9 +35,21 @@ public class ZhxyKcxxPkxxEntity implements Serializable {
      * 学期ID
      */
     private String xqId;
+    /**
+     * 总学时
+     */
     private Long zxs;
+    /**
+     * 学分
+     */
     private Long xf;
+    /**
+     * 总周学时
+     */
     private Long zzxs;
+    /**
+     * 
+     */
     private Long syxs;
     private Long sjxs;
     private Long qtxs;
@@ -68,10 +80,26 @@ public class ZhxyKcxxPkxxEntity implements Serializable {
     private String jsmc;
     private String xq;
     private String zq;
+    /**
+     * 周止
+     */
     private String zz;
+    /**
+     * 节起
+     */
     private String jq;
+    /**
+     * 节止
+     */
     private String jz;
+    /**
+     * 星期数字
+     * 星期存储数字
+     */
     private String xqS;
+    /**
+     * 教室编号
+     */
     private String jsid;
 
     @Basic

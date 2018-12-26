@@ -18,14 +18,43 @@ import java.util.Objects;
 public class TSRoleEntity implements Serializable {
     @Id
     private String id;
+    /**
+     * 角色编码
+     */
     private String rolecode;
+    /**
+     * 角色名称
+     */
     private String rolename;
+    /**
+     * 修改人姓名
+     */
     private String updateName;
+    /**
+     * 修改时间
+     */
     private Date updateDate;
+    /**
+     * 修改人
+     */
     private String updateBy;
+    /**
+     * 创建人
+     */
     private String createName;
+    /**
+     * 创建时间
+     */
     private Date createDate;
+    /**
+     * 创建人
+     */
     private String createBy;
+    /**
+     * 角色类型
+     * １, 系统全局据角色
+     * 2. 部门私有角色
+     */
     private String roletype;
     private String dept;
 

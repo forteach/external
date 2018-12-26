@@ -9,21 +9,48 @@ import java.util.Objects;
  * @Email: zhang10092009@hotmail.com
  * @Date: 18-12-24 16:33
  * @Version: 1.0
- * @Description:
+ * @Description:　班级信息表
  */
 @Entity
 @Table(name = "GZ_BJXXB", schema = "SZXY", catalog = "")
 public class GzBjxxbEntity implements Serializable {
     @Id
     private String bjbh;
+    /**
+     * 班级名称
+     */
     private String bjmc;
+    /**
+     * 所属年级
+     */
     private Long ssnj;
+    /**
+     * 专业代码
+     */
     private String zydm;
+    /**
+     * 专业名称
+     */
     private String zymc;
+    /**
+     * 学生人数
+     */
     private Long xsrs;
+    /**
+     * 男生树
+     */
     private Long nss;
+    /**
+     * 女生数
+     */
     private Long nvss;
+    /**
+     * 班主任编号
+     */
     private String bzrbh;
+    /**
+     * 部门编号
+     */
     private String bmbh;
 
     @Basic

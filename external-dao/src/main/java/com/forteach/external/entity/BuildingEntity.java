@@ -11,7 +11,7 @@ import java.util.Objects;
  * @Email: zhang10092009@hotmail.com
  * @Date: 18-12-24 16:33
  * @Version: 1.0
- * @Description:　建筑信息
+ * @Description:　建筑信息表
  */
 @Entity
 @Table(name = "BUILDING", schema = "SZXY", catalog = "")

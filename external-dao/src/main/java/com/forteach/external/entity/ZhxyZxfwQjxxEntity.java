@@ -32,6 +32,9 @@ public class ZhxyZxfwQjxxEntity implements Serializable {
     private String spjb;
     private String sqrq;
     private String sqr;
+    /**
+     * 备注
+     */
     private String bz;
     private String xjzt;
     private String sjts;

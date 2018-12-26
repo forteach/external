@@ -51,11 +51,14 @@ public class TSRoleEntity implements Serializable {
      */
     private String createBy;
     /**
-     * 角色类型
-     * １, 系统全局据角色
-     * 2. 部门私有角色
+     *     角色类型
+     * 1： 系统全局据角色
+     * 2： 部门私有角色
      */
     private String roletype;
+    /**
+     * 所属部门
+     */
     private String dept;
 
     @Basic

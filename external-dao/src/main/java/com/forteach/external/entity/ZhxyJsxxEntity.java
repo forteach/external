@@ -11,27 +11,72 @@ import java.util.Objects;
  * @Email: zhang10092009@hotmail.com
  * @Date: 18-12-24 16:34
  * @Version: 1.0
- * @Description:
+ * @Description: 教室信息表
  */
 @Entity
 @ToString
 @Table(name = "ZHXY_JSXX", schema = "SZXY", catalog = "")
 public class ZhxyJsxxEntity implements Serializable {
+    /**
+     * 教师号
+     */
     @Id
     private String jsh;
+    /**
+     * 校区号
+     */
     private String xqh;
+    /**
+     * 教学楼号
+     */
     private String jxlh;
+    /**
+     * 所在楼层
+     */
     private String szlc;
+    /**
+     * 教室用途
+     */
     private String jsyt;
+    /**
+     * 座位数
+     */
     private Long zws;
+    /**
+     * 有效座位数
+     */
     private Long yxzws;
+    /**
+     * 考试座位数
+     */
     private Long kszws;
+    /**
+     * 教室类型码
+     */
     private String jslxm;
+    /**
+     * 教室描述
+     */
     private String jsms;
+    /**
+     * 教室管理部门
+     */
     private String jsglbm;
+    /**
+     * 有效标志
+     */
     private String yxbz;
+    /**
+     * 备注
+     */
     private String bz;
+    /**
+     * 教室名称
+     */
     private String jsmc;
+    /**
+     * 修改时间
+     */
     private String timestamp;
 
     @Basic

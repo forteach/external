@@ -9,7 +9,7 @@ import java.util.Objects;
  * @Email: zhang10092009@hotmail.com
  * @Date: 18-12-24 16:34
  * @Version: 1.0
- * @Description:
+ * @Description: 排课信息表
  */
 @Entity
 @Table(name = "ZHXY_KCXX_PKXX", schema = "SZXY")
@@ -51,45 +51,137 @@ public class ZhxyKcxxPkxxEntity implements Serializable {
      * 
      */
     private Long syxs;
+    /**
+     * 
+     */
     private Long sjxs;
+    /**
+     * 
+     */
     private Long qtxs;
+    /**
+     * 课程类别
+     */
     private String kclb;
+    /**
+     * 考核方式
+     */
     private String khfs;
+    /**
+     * 
+     */
     private Long jkksz;
+    /**
+     * 
+     */
     private Long jkjsz;
+    /**
+     * 教师代码 
+     * 关联教职工信息表的教工号
+     */
     private String tZjjs;
+    /**
+     * 上课班级
+     * 关联班级信息表的 bjdm
+     */
     private String tSkbj;
+    /**
+     * 人数
+     */
     private Long tRs;
+    /**
+     * 班级
+     */
     private Long tBs;
+    /**
+     * 排课描述
+     */
     private String pkms;
+    /**
+     * 
+     */
     private Long tJs;
+    /**
+     * 
+     */
     private Long tYcs;
+    /**
+     * 教学楼
+     */
     private String jxl;
+    /**
+     * 
+     */
     private String js;
+    /**
+     * 
+     */
     private String jslx;
+    /**
+     * 
+     */
     private String sxh;
+    /**
+     * 
+     */
     private String dzs;
+    /**
+     * 周安排
+     */
     private String timezc;
+    /**
+     * 课程类别1
+     */
     private String kclb1;
+     /**
+     * 课程类别2
+     */
     private String kclb2;
+    /**
+     * 
+     */
     private String skbjzcjc;
+    /**
+     * 上课教师姓名
+     */
     private String xm;
+    /**
+     * 周次 1-15
+     */
     private String zc;
+    /**
+     * 节次 上课节次 如 3-4
+     */
     private String jc;
+    /**
+     * 周别 
+     * 0为不分单双周
+     * 1 单周
+     * 2 双周
+     */
     private String zb;
+    /**
+     * 教室名称
+     */
     private String jsmc;
+    /**
+     * 星期
+     */
     private String xq;
+    /**
+     * 周起 ：1
+     */
     private String zq;
     /**
-     * 周止
+     * 周止 15
      */
     private String zz;
     /**
-     * 节起
+     * 节起 ：3
      */
     private String jq;
     /**
-     * 节止
+     * 节止:4
      */
     private String jz;
     /**
@@ -98,7 +190,7 @@ public class ZhxyKcxxPkxxEntity implements Serializable {
      */
     private String xqS;
     /**
-     * 教室编号
+     * 教室编号 上课教室编号
      */
     private String jsid;
 

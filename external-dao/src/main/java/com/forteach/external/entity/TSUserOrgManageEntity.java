@@ -52,7 +52,7 @@ public class TSUserOrgManageEntity implements Serializable {
      */
     private String updateBy;
     /**
-     * 跟新日期
+     * 更新日期
      */
     private Date updateDate;
 

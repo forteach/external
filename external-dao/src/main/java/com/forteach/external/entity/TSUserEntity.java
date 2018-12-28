@@ -54,7 +54,7 @@ public class TSUserEntity implements Serializable {
      */
     private String createName;
     /**
-     * 修改日期
+     * 创建日期
      */
     private Date createDate;
     /**

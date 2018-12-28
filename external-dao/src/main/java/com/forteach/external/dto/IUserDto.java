@@ -15,28 +15,28 @@ public interface IUserDto {
      *
      * @return
      */
-    public String id();
+    public String getId();
 
     /**
      * 用户名
      *
      * @return
      */
-    public String userName();
+    public String getUserName();
 
     /**
      * 用户手机号　对应注册数据号
      *
      * @return
      */
-    public String registerPhone();
+    public String getRegisterPhone();
 
     /**
      * 邮箱
      *
      * @return
      */
-    public String email();
+    public String getEmail();
 
     /**
      * 性别
@@ -45,34 +45,34 @@ public interface IUserDto {
      *
      * @return
      */
-    public String genders();
+    public String getGenders();
 
     /**
      * 创建时间
      *
      * @return
      */
-    public Date cTime();
+    public Date getCTime();
 
     /**
      * 修改时间
      *
      * @return
      */
-    public Date uTime();
+    public Date getUTime();
 
     /**
      * 创建用户
      *
      * @return
      */
-    public String cUser();
+    public String getCUser();
 
     /**
      * 修改用户
      *
      * @return
      */
-    public String uUser();
+    public String getUUser();
 
 }

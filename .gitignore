@@ -28,3 +28,4 @@
 /.nb-gradle/
 external-controller/target/
 external-dao/target/
+external-dao/src/test/resources/

@@ -30,7 +30,7 @@ public class TSUserRepositoryTest {
     public void findAllUserDto(){
         List<IUserDto> list = repository.findAllUserDto();
         list.forEach(iUserDto -> {
-
+            System.out.println(iUserDto.getId());
         });
     }
 

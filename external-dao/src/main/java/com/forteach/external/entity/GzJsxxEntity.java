@@ -14,10 +14,22 @@ import java.util.Objects;
 @Entity
 @Table(name = "GZ_JSXX", schema = "SZXY", catalog = "")
 public class GzJsxxEntity implements Serializable {
+    /**
+     * 教师编号
+     */
     @Id
     private String jsbh;
+    /**
+     * 教师姓名
+     */
     private String jsxm;
+    /**
+     * 教研室编号
+     */
     private String jysbh;
+    /**
+     * 教研室名称
+     */
     private String jysmc;
 
     @Basic

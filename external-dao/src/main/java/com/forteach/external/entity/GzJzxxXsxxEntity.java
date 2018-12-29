@@ -16,7 +16,13 @@ import java.util.Objects;
 public class GzJzxxXsxxEntity implements Serializable {
     @Id
     private String id;
+    /**
+     * 家长id
+     */
     private String jzid;
+    /**
+     * 学生id
+     */
     private String xsid;
 
     @Basic

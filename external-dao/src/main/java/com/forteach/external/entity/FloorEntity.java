@@ -24,7 +24,7 @@ public class FloorEntity implements Serializable {
      */
     private String parentId;
     /**
-     * 路曾名称
+     * 楼层名称
      */
     private String floorName;
 

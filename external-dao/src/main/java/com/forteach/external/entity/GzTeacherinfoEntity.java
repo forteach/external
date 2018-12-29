@@ -14,31 +14,108 @@ import java.util.Objects;
 @Entity
 @Table(name = "GZ_TEACHERINFO", schema = "SZXY", catalog = "")
 public class GzTeacherinfoEntity implements Serializable {
+    /**
+     * 编号
+     */
     @Id
     private String id;
+    /**
+     * 工号
+     */
     private String gh;
+    /**
+     * 姓名
+     */
     private String xm;
+    /**
+     * 研究方向
+     */
     private String yjfx;
+    /**
+     * 身份证件号
+     */
     private String sfzjh;
+    /**
+     * 职称
+     */
     private String zc;
+    /**
+     * 国籍地区
+     */
     private String gjdqm;
+    /**
+     * 所在部门id
+     */
     private String organizationId;
+    /**
+     * 来校日期
+     */
     private String lxrq;
+    /**
+     * 编制类别
+     */
     private String bzlbm;
+    /**
+     * 港澳台侨外（代码）
+     */
     private String gatqwm;
+    /**
+     * 性别（代码）
+     */
     private String xbm;
+    /**
+     * 政治面貌代码
+     */
     private String zzmmm;
+    /**
+     * 出生地
+     */
     private String csdm;
+    /**
+     * 籍贯
+     */
     private String jg;
+    /**
+     * 出生日期
+     */
     private String csrq;
+    /**
+     * 民族(代码）
+     */
     private String mzm;
+    /**
+     * 最高学历（代码）
+     */
     private String zgxlm;
+    /**
+     * 文化程度
+     */
     private String whcdm;
+    /**
+     * 婚姻状况（代码）
+     */
     private String hyzkm;
+    /**
+     * 联系电话
+     */
     private String lxdh;
+    /**
+     * 家庭地址
+     */
     private String homeaddress;
+    /**
+     * 行政职务
+     */
     private String job;
+    /**
+     * 是否班主任
+     * 0 否
+     * 1 是
+     */
     private String classleader;
+    /**
+     * 电子邮箱
+     */
     private String email;
 
     @Basic

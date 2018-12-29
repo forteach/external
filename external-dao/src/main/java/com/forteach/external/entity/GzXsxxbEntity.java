@@ -99,22 +99,73 @@ public class GzXsxxbEntity implements Serializable {
      * 入学分数
      */
     private String rxfs;
+    /**
+     * 学生状态
+     */
     private String xszt;
+    /**
+     * 备注
+     */
     private String bz;
+    /**
+     * 所属年级
+     */
     private Long ssnj;
+    /**
+     * 是否大专
+     */
     private String sfdz;
+    /**
+     * 是否中专
+     */
     private String sfzz;
+    /**
+     * 是否高分
+     */
     private String sfgf;
+    /**
+     * 是否走读
+     */
     private String sfzd;
+    /**
+     * 学年
+     */
     private String xn;
+    /**
+     * 入学年级
+     */
     private String rxnj;
+    /**
+     * 报名时间
+     */
     private String bmsj;
+    /**
+     * 是否外地
+     */
     private String sfwd;
+    /**
+     * 是否交费
+     */
     private String sfjf;
+    /**
+     * 毕业学校
+     */
     private String byxx;
+    /**
+     * 招生批次
+     */
     private String zspc;
+    /**
+     * 报名专业
+     */
     private String bmzy;
+    /**
+     * 报名部门
+     */
     private String bmbx;
+    /**
+     * 通知书编号
+     */
     private String tzsbh;
 
     @Basic

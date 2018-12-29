@@ -14,8 +14,14 @@ import java.util.Objects;
 @Entity
 @Table(name = "FLOOR_ROOM", schema = "SZXY", catalog = "")
 public class FloorRoomEntity implements Serializable {
+    /**
+     * 楼层id
+     */
     @Id
     private String floorId;
+    /**
+     * 房间id
+     */
     private String mapobjectId;
 
     @Basic

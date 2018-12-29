@@ -16,9 +16,21 @@ import java.util.Objects;
 public class TSRoleFunctionEntity implements Serializable {
     @Id
     private String id;
+    /**
+     * 菜单类型
+     */
     private String operation;
+    /**
+     * 菜单id
+     */
     private String functionid;
+    /**
+     * 角色id
+     */
     private String roleid;
+    /**
+     * 权限id
+     */
     private String datarule;
 
     @Basic

@@ -14,27 +14,90 @@ import java.util.Objects;
 @Entity
 @Table(name = "GZ_XSXXB", schema = "SZXY", catalog = "")
 public class GzXsxxbEntity implements Serializable {
+    /**
+     * 学号
+     */
     @Id
     private String xh;
+    /**
+     * 学生姓名
+     */
     private String xsxm;
+    /**
+     * 学习专业
+     */
     private String xxzy;
+    /**
+     * 所属班级
+     */
     private String ssbj;
+    /**
+     * 曾用名
+     */
     private String cym;
+    /**
+     * 身份证号
+     */
     private String sfzh;
+    /**
+     * 出生日期
+     */
     private String csrq;
+    /**
+     * 性别
+     */
     private String xb;
+    /**
+     * 籍贯
+     */
     private String jg;
+    /**
+     * 生源地
+     */
     private String syd;
+    /**
+     * 户口所在地
+     */
     private String hkszd;
+    /**
+     * 民族
+     */
     private String mz;
+    /**
+     * 信仰宗教
+     */
     private String xyzj;
+    /**
+     * 政治面貌
+     */
     private String zzmm;
+    /**
+     * 联系电话
+     */
     private String lxdh;
+    /**
+     * 电子邮箱
+     */
     private String dzyx;
+    /**
+     * 家庭住址
+     */
     private String jtzz;
+    /**
+     * 邮政编码
+     */
     private String yzbm;
+    /**
+     * 联系人
+     */
     private String lxr;
+    /**
+     * 学生照片
+     */
     private String xszp;
+    /**
+     * 入学分数
+     */
     private String rxfs;
     private String xszt;
     private String bz;

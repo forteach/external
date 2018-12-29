@@ -17,16 +17,49 @@ import java.util.Objects;
 public class TSDataRuleEntity implements Serializable {
     @Id
     private String id;
+    /**
+     * 规则名称
+     */
     private String ruleName;
+    /**
+     * 规则字段
+     */
     private String ruleColumn;
+    /**
+     * 条件规则
+     */
     private String ruleConditions;
+    /**
+     * 规则值
+     */
     private String ruleValue;
+    /**
+     * 创建日期
+     */
     private Date createDate;
+    /**
+     * 创建人
+     */
     private String createBy;
+    /**
+     * 创建人姓名
+     */
     private String createName;
+    /**
+     * 修改日期
+     */
     private Date updateDate;
+    /**
+     * 修改人
+     */
     private String updateBy;
+    /**
+     * 修改人姓名
+     */
     private String updateName;
+    /**
+     * 菜单id
+     */
     private String functionid;
 
     @Basic

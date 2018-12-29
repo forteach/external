@@ -14,12 +14,30 @@ import java.util.Objects;
 @Entity
 @Table(name = "GZ_ZYXXB", schema = "SZXY", catalog = "")
 public class GzZyxxbEntity implements Serializable {
+    /**
+     * 专业编号
+     */
     @Id
     private String zybh;
+    /**
+     * 专业名称
+     */
     private String zymc;
+    /**
+     * 培养目标
+     */
     private String pymb;
+    /**
+     * 就业方向
+     */
     private String jyfx;
+    /**
+     * 开办时间
+     */
     private String kbsj;
+    /**
+     * 
+     */
     private String dwdm;
 
     @Basic

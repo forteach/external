@@ -19,51 +19,177 @@ import java.util.Objects;
 public class ZhxyZxfwQjxxEntity implements Serializable {
     @Id
     private String id;
+    /**
+     * 学生编号
+     */
     private String xsbh;
+    /**
+     * 请假类型
+     */
     private String qjlx;
+    /**
+     * 请假事由
+     */
     private String qjsy;
+    /**
+     * 开始日期
+     */
     private String ksrq;
+    /**
+     * 结束日期
+     */
     private String jsrq;
+    /**
+     * 请假天数
+     */
     private String qjts;
+    /**
+     * 审核状态
+     */
     private String shzt;
+    /**
+     * 辅导○意见
+     */
     private String fdyyj;
+    /**
+     * 院系意见
+     */
     private String yxyj;
+    /**
+     * 学校意见
+     */
     private String xgbyj;
+    /**
+     * 审批级别
+     */
     private String spjb;
+    /**
+     * 申请日期
+     */
     private String sqrq;
+    /**
+     * 申请人
+     */
     private String sqr;
     /**
      * 备注
      */
     private String bz;
+    /**
+     * 销假状态
+     */
     private String xjzt;
+    /**
+     * 实际天数
+     */
     private String sjts;
+    /**
+     * 请假说明
+     */
     private String xjsy;
+    /**
+     * 附件
+     */
     private String fj;
+    /**
+     * 附件位置
+     */
     private String fjwz;
+    /**
+     * 附件名称
+     */
     private String fjmc;
+    /**
+     * 班主任审核时间
+     */
     private String bzrshsj;
+    /**
+     * 辅导员审核时间
+     */
     private String fdyshsj;
+    /**
+     * 院系审核时间
+     */
     private String xyldshsj;
+    /**
+     * 学校审核时间
+     */
     private String xscshsj;
+    /**
+     * 班级意见
+     */
     private String bjyj;
+    /**
+     * 请假学年
+     */
     private Long qjxn;
+    /**
+     * 请假学期
+     */
     private String qjxq;
+    /**
+     * 到校时间
+     */
     private String dxsj;
+    /**
+     * 
+     */
     private String sffsyj;
+    /**
+     * 联系电话
+     */
     private String lxdh;
+    /**
+     * 班主任工号
+     */
     private String bzrgh;
+    /**
+     * 班主任姓名
+     */
     private String bzrxm;
+    /**
+     * 辅导员工号
+     */
     private String fdygh;
+    /**
+     * 辅导员姓名
+     */
     private String fdyxm;
+    /**
+     * 院系审核人工号
+     */
     private String xyldgh;
+    /**
+     * 院系审核人姓名
+     */
     private String xyldxm;
+    /**
+     * 学校审核人工号
+     */
     private String xscgh;
+    /**
+     * 学校审核人姓名
+     */
     private String xscxm;
+    /**
+     * 去向
+     */
     private String qx;
+    /**
+     * 开始第几节
+     */
     private Long ksdjj;
+    /**
+     * 结束第几节
+     */
     private Long jsdjj;
+    /**
+     * 流水号
+     */
     private String lsh;
+    /**
+     * 外出目的地
+     */
     private String wcmdd;
 
     @Basic

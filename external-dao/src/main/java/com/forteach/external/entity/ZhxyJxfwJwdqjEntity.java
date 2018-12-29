@@ -14,20 +14,65 @@ import java.util.Objects;
 @Entity
 @Table(name = "ZHXY_JXFW_JWDQJ", schema = "SZXY", catalog = "")
 public class ZhxyJxfwJwdqjEntity implements Serializable {
+    /**
+     * 编号
+     */
     @Id
     private String id;
+    /**
+     * 标题
+     */
     private String bt;
+    /**
+     * 教工号
+     */
     private String jgh;
+    /**
+     * 请假开始时间
+     */
     private String qjkssj;
+    /**
+     * 请假结束时间
+     */
     private String qjjssj;
+    /**
+     * 请假小时数
+     */
     private String qjxss;
+    /**
+     * 请假类型
+     */
     private String qjlx;
+    /**
+     * 请假事由
+     */
     private String qjsy;
+    /**
+     * 有效标示
+     */
     private String yxbz;
+    /**
+     * 修改时间
+     */
     private String timestamp;
+    /**
+     * 备注
+     */
     private String bz;
+    /**
+     * 未调课节次
+     */
     private String wtkjc;
+    /**
+     * 请假项目
+     * ｔk 调课
+     * zb 坐班
+     * bzr 班主任
+     */
     private String qjxm;
+    /**
+     * 请假细类
+     */
     private String qjxl;
 
     @Basic

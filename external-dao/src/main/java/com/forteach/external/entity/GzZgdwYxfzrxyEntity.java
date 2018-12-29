@@ -17,13 +17,37 @@ import java.util.Objects;
 public class GzZgdwYxfzrxyEntity implements Serializable {
     @Id
     private String id;
+    /**
+     * 教工号
+     */
     private String jgh;
+    /**
+     * 教研室号
+     */
     private String xybh;
+    /**
+     * 修改人
+     */
     private String updateBy;
+    /**
+     * 修改人姓名
+     */
     private String updateName;
+    /**
+     * 修改时间
+     */
     private Date updateTime;
+    /**
+     * 创建人
+     */
     private String createBy;
+    /**
+     * 创建人姓名
+     */
     private String createName;
+    /**
+     * 创建时间
+     */
     private Date createTime;
 
     @Basic

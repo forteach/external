@@ -26,6 +26,6 @@ public interface TSUserRepository extends JpaRepository<TSUserEntity, String> {
 
     @Transactional(readOnly = true)
     @Query(value = " SELECT u.id AS id, u.xm AS userName, u.mobilephone AS registerPhone, u.email AS email, u.xbdm AS genders, u.createDate AS cTime," +
-            " u.updateDate AS uTime, u.createBy AS cUser,  u.updateBy AS uUser FROM TSUserEntity AS u ")
+            " u.updateDate AS uTime, u.createBy AS cUser,  u.updateBy AS uUser FROM TSUserEntity AS u WHERE ")
     List<IUserDto> findByUpdateDate(Date updateDate);
 }

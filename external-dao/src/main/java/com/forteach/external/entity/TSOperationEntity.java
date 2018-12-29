@@ -16,12 +16,33 @@ import java.util.Objects;
 public class TSOperationEntity implements Serializable {
     @Id
     private String id;
+    /**
+     * 操作权限code
+     */
     private String operationcode;
+    /**
+     * 皮肤
+     */
     private String operationicon;
+    /**
+     * 操作权限名称
+     */
     private String operationname;
+    /**
+     * 状态
+     */
     private Long status;
+    /**
+     * 菜单id
+     */
     private String functionid;
+    /**
+     * 皮肤id
+     */
     private String iconid;
+    /**
+     * 操作类型
+     */
     private Long operationtype;
 
     @Basic

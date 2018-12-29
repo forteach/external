@@ -19,6 +19,9 @@ import java.util.Objects;
 public class RoomEntity implements Serializable {
     @Id
     private String id;
+    /**
+     * 房间名称
+     */
     private String dxmc;
 
     @Basic

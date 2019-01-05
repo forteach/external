@@ -18,11 +18,21 @@ import java.util.List;
  */
 public interface ZhxyKcxxRepository extends JpaRepository<ZhxyKcxxEntity, String> {
 
+    /**
+     * 查询是有效状态的教师信息
+     * @param isValidated
+     * @return
+     */
     @Transactional(readOnly = true)
-    @Query(value = "SELECT kch AS courseId, kcmc AS courseName, kcjj AS courseDescribe, sszy AS spcialtyId FROM ZhxyKcxxEntity WHERE yxbz = ?1")
+    @Query(value = "SELECT kch AS courseId, kcmc AS courseName, kcjj AS courseDescribe, sszy AS spcialtyId, yxbz AS isValidated FROM ZhxyKcxxEntity WHERE yxbz = ?1")
     List<ICourseDto> findAllDto(String isValidated);
 
+    /**
+     * 查询最近修改的教师信息
+     * @param timeStamp
+     * @return
+     */
     @Transactional(readOnly = true)
-    @Query(value = "SELECT kch AS courseId, kcmc AS courseName, kcjj AS courseDescribe, sszy AS spcialtyId FROM ZhxyKcxxEntity WHERE yxbz = ?1 AND timestamp >= ?2")
-    List<ICourseDto> findAllDtoByTimestamp(String isValidated, String timeStamp);
+    @Query(value = "SELECT kch AS courseId, kcmc AS courseName, kcjj AS courseDescribe, sszy AS spcialtyId, yxbz AS isValidated FROM ZhxyKcxxEntity WHERE timestamp >= ?1")
+    List<ICourseDto> findAllDtoByTimestamp(String timeStamp);
 }

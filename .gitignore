@@ -12,12 +12,14 @@
 
 ### IntelliJ IDEA ###
 *.iml
+*.yaml
 *.class
 /.idea/
 *.iws
 *.ipr
 *.yml
 *.lst
+*.sh
 /.vscode/
 ### NetBeans ###
 /nbproject/private/

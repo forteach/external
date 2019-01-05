@@ -19,7 +19,7 @@ import javax.sql.DataSource;
  * @Email: zhang10092009@hotmail.com
  * @Date: 19-1-3 15:08
  * @Version: 1.0
- * @Description:
+ * @Description:　数字化校园 ORACLE 配置
  */
 @Configuration
 @EnableTransactionManagement

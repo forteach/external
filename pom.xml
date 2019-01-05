@@ -3,65 +3,13 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>com.forteach</groupId>
-	<artifactId>external</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+    <groupId>com.forteach</groupId>
+    <artifactId>external</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <modules>
+        <module>external</module>
+    </modules>
 
-	<modules>
-		<module>external-dao</module>
-		<module>external-controller</module>
-	</modules>
-
-	<packaging>pom</packaging>
-
-	<name>external</name>
-
-	<parent>
-		<groupId>org.springframework.boot</groupId>
-		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.1.0.RELEASE</version>
-	</parent>
-
-	<dependencies>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
-		</dependency>
-	</dependencies>
-
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<maven.compiler.encoding>UTF-8</maven.compiler.encoding>
-		<maven.compiler.source>1.8</maven.compiler.source>
-		<maven.compiler.target>1.8</maven.compiler.target>
-		<maven.tomcat.uriEncoding>UTF-8</maven.tomcat.uriEncoding>
-		<file.encoding>utf-8</file.encoding>
-		<maven.test.skip>false</maven.test.skip>
-		<project.deploy.directory>./target</project.deploy.directory>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<maven.build.timestamp.format>yyyy-MM-dd HH:mm:ss</maven.build.timestamp.format>
-	</properties>
-
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-				<version>2.1.0.RELEASE</version>
-				<configuration>
-					<mainClass>com.forteach.external.Application</mainClass>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
+    <packaging>pom</packaging>
 
 </project>

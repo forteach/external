@@ -6,6 +6,7 @@ import cn.hutool.core.util.RandomUtil;
 import cn.hutool.core.util.StrUtil;
 import com.forteach.external.common.Dic;
 import com.forteach.external.mysql.domain.Teacher;
+import com.forteach.external.mysql.domain.TeacherBuilder;
 import com.forteach.external.mysql.repository.TeacherRepository;
 import com.forteach.external.oracle.dto.ITeacherDto;
 import com.forteach.external.oracle.entity.ZhxyJsxxEntity;
@@ -21,8 +22,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static com.forteach.external.common.Dic.ISVALIDATED_N;
-import static com.forteach.external.common.Dic.ISVALIDATED_Y;
+import static com.forteach.external.common.Dic.*;
 
 /**
  * @Auther: zhangyy
@@ -50,7 +50,8 @@ public class TeacherServiceImpl implements TeacherService {
                 .stream()
                 .parallel()
                 .forEach(iTeacherDto -> {
-                    list.add(Teacher.builder().teacherId(StrUtil.isNotBlank(iTeacherDto.getTeacherId()) ? iTeacherDto.getTeacherId() : IdUtil.fastSimpleUUID())
+                    list.add(Teacher.builder()
+                            .teacherId(StrUtil.isNotBlank(iTeacherDto.getTeacherId()) ? iTeacherDto.getTeacherId() : IdUtil.fastSimpleUUID())
                             .teacherName(iTeacherDto.getTeacherName())
                             .teacherCode(iTeacherDto.getTeacherCode())
                             .build());
@@ -61,13 +62,15 @@ public class TeacherServiceImpl implements TeacherService {
     @Transactional(rollbackFor = Exception.class)
     public void saveAllByTimestamp(){
         List<Teacher> list = new ArrayList<>();
-        zhxyJzgxxRepository.findAllByDtoByTimestamp(ISVALIDATED_Y, DateUtil.offsetDay(new Date(), -1).toTimestamp())
+        zhxyJzgxxRepository.findAllByDtoByTimestamp(DateUtil.offsetDay(new Date(), -1).toTimestamp())
                 .stream()
                 .parallel()
                 .forEach(iTeacherDto -> {
-                    list.add(Teacher.builder().teacherId(StrUtil.isNotBlank(iTeacherDto.getTeacherId()) ? iTeacherDto.getTeacherId() : IdUtil.fastSimpleUUID())
-                            .teacherName(iTeacherDto.getTeacherName())
-                            .teacherCode(iTeacherDto.getTeacherCode())
+                    list.add(TeacherBuilder.aTeacher()
+                            .withTeacherId(StrUtil.isNotBlank(iTeacherDto.getTeacherId()) ? iTeacherDto.getTeacherId() : IdUtil.fastSimpleUUID())
+                            .withTeacherName(iTeacherDto.getTeacherName())
+                            .withTeacherCode(iTeacherDto.getTeacherCode())
+                            .withIsValidated(ISVALIDATED_Y.equals(iTeacherDto.getIsValidated()) ? ISVALIDATED_0 : ISVALIDATED_1)
                             .build());
                 });
         teacherRepository.saveAll(list);

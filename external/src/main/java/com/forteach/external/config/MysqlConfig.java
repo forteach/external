@@ -20,7 +20,7 @@ import javax.sql.DataSource;
  * @Email: zhang10092009@hotmail.com
  * @Date: 19-1-3 14:32
  * @Version: 1.0
- * @Description:
+ * @Description: mysql 数据库配置
  */
 @Configuration
 @EnableJpaRepositories(

@@ -31,4 +31,10 @@ public interface ICourseDto extends Serializable {
      * @return
      */
     public String getSpcialtyId();
+
+    /**
+     * 有效标识
+     * @return
+     */
+    public String getIsValidated();
 }

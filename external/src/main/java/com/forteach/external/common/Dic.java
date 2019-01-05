@@ -11,5 +11,9 @@ public class Dic {
 
     public final static String ISVALIDATED_Y = "Y";
 
+    public final static String ISVALIDATED_0 = "0";
+
     public final static String ISVALIDATED_N = "N";
+
+    public final static String ISVALIDATED_1 = "1";
 }

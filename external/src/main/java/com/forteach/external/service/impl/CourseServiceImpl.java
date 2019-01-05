@@ -4,6 +4,7 @@ import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.IdUtil;
 import cn.hutool.core.util.StrUtil;
 import com.forteach.external.mysql.domain.Course;
+import com.forteach.external.mysql.domain.CourseBuilder;
 import com.forteach.external.mysql.repository.CourseRepository;
 import com.forteach.external.oracle.dto.ICourseDto;
 import com.forteach.external.oracle.repository.ZhxyKcxxRepository;
@@ -60,15 +61,16 @@ public class CourseServiceImpl implements CourseService {
     @Override
     public void saveByTimestamp() {
         List<Course> list = new ArrayList<>();
-        zhxyKcxxRepository.findAllDtoByTimestamp(ISVALIDATED_Y, DateUtil.offsetDay(new Date(), -1).toDateStr())
+        zhxyKcxxRepository.findAllDtoByTimestamp(DateUtil.offsetDay(new Date(), -1).toDateStr())
                 .stream()
                 .parallel()
                 .forEach(iCourseDto -> {
-                    list.add(Course.builder()
-                            .courseId(StrUtil.isNotBlank(iCourseDto.getCourseId()) ? iCourseDto.getCourseId() : IdUtil.fastSimpleUUID())
-                            .courseName(iCourseDto.getCourseName())
-                            .specialtyId(iCourseDto.getSpcialtyId())
-                            .courseDescribe(iCourseDto.getCourseDescribe())
+                    list.add(CourseBuilder.aCourse()
+                            .withCourseId(StrUtil.isNotBlank(iCourseDto.getCourseId()) ? iCourseDto.getCourseId() : IdUtil.fastSimpleUUID())
+                            .withCourseName(iCourseDto.getCourseName())
+                            .withSpecialtyId(iCourseDto.getSpcialtyId())
+                            .withCourseDescribe(iCourseDto.getCourseDescribe())
+                            .withIsValidated(iCourseDto.getIsValidated())
                             .build());
                 });
         courseRepository.saveAll(list);

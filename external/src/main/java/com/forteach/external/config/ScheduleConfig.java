@@ -42,6 +42,7 @@ public class ScheduleConfig {
     @Async
     public void classesTasks(){
         log.info("开始执行定时任务更新班级信息 ==> {}", LocalDateTime.now());
+        log.debug("执行线程 : {}", Thread.currentThread().getName());
         classesService.saveAll();
         log.info("{}　<== 执行更新班级信息定时任务结束", LocalDateTime.now());
     }
@@ -54,6 +55,7 @@ public class ScheduleConfig {
     @Async
     public void teacherTasks(){
         log.info("开始执行定时任务更新教师信息 ==> {}", LocalDateTime.now());
+        log.debug("执行线程 : {}", Thread.currentThread().getName());
         teacherService.saveAllByTimestamp();
         log.info("{}　<== 执行更新教师信息定时任务结束", LocalDateTime.now());
     }
@@ -66,6 +68,7 @@ public class ScheduleConfig {
     @Async
     public void courseTasks(){
         log.info("开始执行定时任务更新课程信息 ==> {}", LocalDateTime.now());
+        log.debug("执行线程 : {}", Thread.currentThread().getName());
         courseService.saveByTimestamp();
         log.info("{}　<== 执行更新课程信息定时任务结束", LocalDateTime.now());
     }

@@ -47,6 +47,7 @@ public class CourseServiceImpl implements CourseService {
         zhxyKcxxRepository.findAllDto(ISVALIDATED_Y)
                 .stream()
                 .parallel()
+                .filter(iCourseDto -> StrUtil.isNotBlank(iCourseDto.getCourseId()))
                 .forEach(iCourseDto -> {
                     list.add(Course.builder()
                             .courseId(StrUtil.isNotBlank(iCourseDto.getCourseId()) ? iCourseDto.getCourseId() : IdUtil.fastSimpleUUID())
@@ -64,6 +65,7 @@ public class CourseServiceImpl implements CourseService {
         zhxyKcxxRepository.findAllDtoByTimestamp(DateUtil.offsetDay(new Date(), -1).toDateStr())
                 .stream()
                 .parallel()
+                .filter(iCourseDto -> StrUtil.isNotBlank(iCourseDto.getCourseId()))
                 .forEach(iCourseDto -> {
                     list.add(CourseBuilder.aCourse()
                             .withCourseId(StrUtil.isNotBlank(iCourseDto.getCourseId()) ? iCourseDto.getCourseId() : IdUtil.fastSimpleUUID())

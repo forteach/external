@@ -49,6 +49,7 @@ public class TeacherServiceImpl implements TeacherService {
         zhxyJzgxxRepository.findAllByDto(ISVALIDATED_Y)
                 .stream()
                 .parallel()
+                .filter(iTeacherDto -> StrUtil.isNotBlank(iTeacherDto.getTeacherId()))
                 .forEach(iTeacherDto -> {
                     list.add(Teacher.builder()
                             .teacherId(StrUtil.isNotBlank(iTeacherDto.getTeacherId()) ? iTeacherDto.getTeacherId() : IdUtil.fastSimpleUUID())
@@ -65,6 +66,7 @@ public class TeacherServiceImpl implements TeacherService {
         zhxyJzgxxRepository.findAllByDtoByTimestamp(DateUtil.offsetDay(new Date(), -1).toTimestamp())
                 .stream()
                 .parallel()
+                .filter(iTeacherDto -> StrUtil.isNotBlank(iTeacherDto.getTeacherId()))
                 .forEach(iTeacherDto -> {
                     list.add(TeacherBuilder.aTeacher()
                             .withTeacherId(StrUtil.isNotBlank(iTeacherDto.getTeacherId()) ? iTeacherDto.getTeacherId() : IdUtil.fastSimpleUUID())

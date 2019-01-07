@@ -16,4 +16,6 @@ public class Dic {
     public final static String ISVALIDATED_N = "N";
 
     public final static String ISVALIDATED_1 = "1";
+
+    public static final String STUDENT_ADO = "studentsData$";
 }

@@ -42,6 +42,7 @@ public class ClassesServerImpl implements ClassesService {
         gzBjxxbRepository.findAllDto()
                 .stream()
                 .parallel()
+                .filter(iClassesDto -> StrUtil.isNotBlank(iClassesDto.getClassId()))
                 .forEach(iClassesDto -> {
                     list.add(Classes.builder()
                             .classId(StrUtil.isNotBlank(iClassesDto.getClassId()) ? iClassesDto.getClassId() : IdUtil.fastSimpleUUID())

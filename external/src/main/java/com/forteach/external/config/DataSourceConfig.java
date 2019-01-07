@@ -7,6 +7,8 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
+import org.springframework.stereotype.Indexed;
+
 import javax.sql.DataSource;
 
 /**
@@ -16,6 +18,7 @@ import javax.sql.DataSource;
  * @Version: 1.0
  * @Description: 多数据源源配置
  */
+@Indexed
 @Configuration
 public class DataSourceConfig{
 

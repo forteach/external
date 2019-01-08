@@ -4,6 +4,7 @@ import com.forteach.external.service.StudentService;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.core.annotation.Order;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
@@ -20,6 +21,13 @@ import javax.annotation.Resource;
 public class RedisRunner implements ApplicationRunner {
     @Resource
     private StudentService studentService;
+
+    /**
+     * 保存用户信息到 redis
+     * @param args
+     * @throws Exception
+     */
+    @Async
     @Override
     public void run(ApplicationArguments args) throws Exception {
         studentService.saveAll();

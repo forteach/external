@@ -1,4 +1,4 @@
-package com.forteach.external.redis.model.pojo;
+package com.forteach.external.redis.pojo;
 
 import java.util.HashMap;
 

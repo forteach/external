@@ -1,11 +1,7 @@
-package com.forteach.external.redis.model.pojo;
+package com.forteach.external.redis.pojo;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.io.Serializable;
 
 /**
  * @Auther: zhangyy

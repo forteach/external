@@ -24,7 +24,7 @@ public interface ZhxyKcxxRepository extends JpaRepository<ZhxyKcxxEntity, String
      * @return
      */
     @Transactional(readOnly = true)
-    @Query(value = "SELECT kch AS courseId, kcmc AS courseName, kcjj AS courseDescribe, sszy AS spcialtyId, yxbz AS isValidated FROM ZhxyKcxxEntity WHERE yxbz = ?1")
+    @Query(value = "SELECT kch AS courseId, kcmc AS courseName, kcjj AS courseDescribe, yxbz AS isValidated FROM ZhxyKcxxEntity WHERE yxbz = ?1")
     List<ICourseDto> findAllDto(String isValidated);
 
     /**
@@ -33,6 +33,6 @@ public interface ZhxyKcxxRepository extends JpaRepository<ZhxyKcxxEntity, String
      * @return
      */
     @Transactional(readOnly = true)
-    @Query(value = "SELECT kch AS courseId, kcmc AS courseName, kcjj AS courseDescribe, sszy AS spcialtyId, yxbz AS isValidated FROM ZhxyKcxxEntity WHERE timestamp >= ?1")
+    @Query(value = "SELECT kch AS courseId, kcmc AS courseName, kcjj AS courseDescribe, yxbz AS isValidated FROM ZhxyKcxxEntity WHERE timestamp >= ?1")
     List<ICourseDto> findAllDtoByTimestamp(String timeStamp);
 }

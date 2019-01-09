@@ -20,8 +20,4 @@ public interface GzBjxxbRepository extends JpaRepository<GzBjxxbEntity, String> 
     @Transactional(readOnly = true)
     @Query(value = "select bjbh as classId, bjmc as className from GzBjxxbEntity ")
     List<IClassesDto> findAllDto();
-
-//    @Transactional(readOnly = true)
-//    @Query(value = "")
-//    List<IClassesDto> findByDtoBy
 }

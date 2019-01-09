@@ -10,7 +10,6 @@ package com.forteach.external.mysql.domain;
 public final class CourseBuilder {
     private String courseId;
     private String isValidated;
-    private String specialtyId;
     private String courseName;
     private String courseDescribe;
 
@@ -31,11 +30,6 @@ public final class CourseBuilder {
         return this;
     }
 
-    public CourseBuilder withSpecialtyId(String specialtyId) {
-        this.specialtyId = specialtyId;
-        return this;
-    }
-
     public CourseBuilder withCourseName(String courseName) {
         this.courseName = courseName;
         return this;
@@ -51,7 +45,6 @@ public final class CourseBuilder {
         Course course = new Course();
         course.setCourseId(courseId);
         course.setIsValidated(isValidated);
-        course.setSpecialtyId(specialtyId);
         course.setCourseName(courseName);
         course.setCourseDescribe(courseDescribe);
         return course;

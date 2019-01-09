@@ -27,12 +27,6 @@ public interface ICourseDto extends Serializable {
     public String getCourseDescribe();
 
     /**
-     * 课程专业
-     * @return
-     */
-    public String getSpcialtyId();
-
-    /**
      * 有效标识
      * @return
      */

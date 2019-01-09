@@ -12,13 +12,12 @@ import com.forteach.external.service.CourseService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import static com.forteach.external.common.Dic.ISVALIDATED_Y;
+import static com.forteach.external.common.Dic.*;
 
 /**
  * @Auther: zhangyy
@@ -51,7 +50,6 @@ public class CourseServiceImpl implements CourseService {
                     list.add(Course.builder()
                             .courseId(StrUtil.isNotBlank(iCourseDto.getCourseId()) ? iCourseDto.getCourseId() : IdUtil.fastSimpleUUID())
                             .courseName(iCourseDto.getCourseName())
-                            .specialtyId(iCourseDto.getSpcialtyId())
                             .courseDescribe(iCourseDto.getCourseDescribe())
                             .build());
                 });
@@ -68,9 +66,8 @@ public class CourseServiceImpl implements CourseService {
                     list.add(CourseBuilder.aCourse()
                             .withCourseId(StrUtil.isNotBlank(iCourseDto.getCourseId()) ? iCourseDto.getCourseId() : IdUtil.fastSimpleUUID())
                             .withCourseName(iCourseDto.getCourseName())
-                            .withSpecialtyId(iCourseDto.getSpcialtyId())
                             .withCourseDescribe(iCourseDto.getCourseDescribe())
-                            .withIsValidated(iCourseDto.getIsValidated())
+                            .withIsValidated(ISVALIDATED_Y.equals(iCourseDto.getIsValidated()) ? ISVALIDATED_0 : ISVALIDATED_1)
                             .build());
                 });
         courseRepository.saveAll(list);

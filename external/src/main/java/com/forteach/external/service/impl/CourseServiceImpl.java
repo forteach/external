@@ -45,8 +45,7 @@ public class CourseServiceImpl implements CourseService {
     public void saveDto() {
         List<Course> list = new ArrayList<>();
         zhxyKcxxRepository.findAllDto(ISVALIDATED_Y)
-                .stream()
-                .parallel()
+                .parallelStream()
                 .filter(iCourseDto -> StrUtil.isNotBlank(iCourseDto.getCourseId()))
                 .forEach(iCourseDto -> {
                     list.add(Course.builder()
@@ -62,9 +61,8 @@ public class CourseServiceImpl implements CourseService {
     @Override
     public void saveByTimestamp() {
         List<Course> list = new ArrayList<>();
-        zhxyKcxxRepository.findAllDtoByTimestamp(DateUtil.offsetDay(new Date(), -1).toDateStr())
-                .stream()
-                .parallel()
+        zhxyKcxxRepository.findAllDtoByTimestamp(DateUtil.offsetDay(new Date(), -2).toDateStr())
+                .parallelStream()
                 .filter(iCourseDto -> StrUtil.isNotBlank(iCourseDto.getCourseId()))
                 .forEach(iCourseDto -> {
                     list.add(CourseBuilder.aCourse()

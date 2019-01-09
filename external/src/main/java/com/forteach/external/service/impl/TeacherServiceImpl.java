@@ -47,8 +47,7 @@ public class TeacherServiceImpl implements TeacherService {
     public void saveAll(){
         List<Teacher> list = new ArrayList<>();
         zhxyJzgxxRepository.findAllByDto(ISVALIDATED_Y)
-                .stream()
-                .parallel()
+                .parallelStream()
                 .filter(iTeacherDto -> StrUtil.isNotBlank(iTeacherDto.getTeacherId()))
                 .forEach(iTeacherDto -> {
                     list.add(Teacher.builder()
@@ -63,13 +62,12 @@ public class TeacherServiceImpl implements TeacherService {
     @Transactional(rollbackFor = Exception.class)
     public void saveAllByTimestamp(){
         List<Teacher> list = new ArrayList<>();
-        zhxyJzgxxRepository.findAllByDtoByTimestamp(DateUtil.offsetDay(new Date(), -1).toTimestamp())
-                .stream()
-                .parallel()
+        zhxyJzgxxRepository.findAllByDtoByTimestamp(DateUtil.offsetDay(new Date(), -2).toTimestamp())
+                .parallelStream()
                 .filter(iTeacherDto -> StrUtil.isNotBlank(iTeacherDto.getTeacherId()))
                 .forEach(iTeacherDto -> {
                     list.add(TeacherBuilder.aTeacher()
-                            .withTeacherId(StrUtil.isNotBlank(iTeacherDto.getTeacherId()) ? iTeacherDto.getTeacherId() : IdUtil.fastSimpleUUID())
+                            .withTeacherId(iTeacherDto.getTeacherId())
                             .withTeacherName(iTeacherDto.getTeacherName())
                             .withTeacherCode(iTeacherDto.getTeacherCode())
                             .withIsValidated(ISVALIDATED_Y.equals(iTeacherDto.getIsValidated()) ? ISVALIDATED_0 : ISVALIDATED_1)

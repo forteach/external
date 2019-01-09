@@ -1,6 +1,7 @@
 package com.forteach.external.runner;
 
 import com.forteach.external.service.StudentService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.core.annotation.Order;
@@ -18,6 +19,7 @@ import javax.annotation.Resource;
  */
 @Component
 @Order(value = 1)
+@Slf4j
 public class RedisRunner implements ApplicationRunner {
     @Resource
     private StudentService studentService;
@@ -31,5 +33,8 @@ public class RedisRunner implements ApplicationRunner {
     @Override
     public void run(ApplicationArguments args) throws Exception {
         studentService.saveAll();
+        if(log.isInfoEnabled()) {
+            log.info("Thread name : {}, save students redis OK!", Thread.currentThread().getName());
+        }
     }
 }

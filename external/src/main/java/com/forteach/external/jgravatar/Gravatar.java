@@ -5,10 +5,13 @@ import java.io.InputStream;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.Validate;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Configuration;
 
 /**
  * A gravatar is a dynamic image resource that is requested from the
@@ -28,6 +31,7 @@ import org.apache.commons.lang.Validate;
  * byte[] jpg = gravatar.download("info@ralfebert.de");
  * </code>
  */
+@Slf4j
 public final class Gravatar {
 
 	private final static int DEFAULT_SIZE = 80;
@@ -80,6 +84,9 @@ public final class Gravatar {
 		// with all whitespace trimmed
 		String emailHash = DigestUtils.md5Hex(email.toLowerCase().trim());
 		String params = formatUrlParameters();
+		if (log.isDebugEnabled()){
+			log.debug("GRAVATAR_URL ==> {}",  GRAVATAR_URL);
+		}
 		return GRAVATAR_URL + emailHash + ".jpg" + params;
 	}
 

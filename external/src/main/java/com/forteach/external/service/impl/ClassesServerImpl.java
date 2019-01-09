@@ -40,8 +40,7 @@ public class ClassesServerImpl implements ClassesService {
     public void saveAll() {
         List<Classes> list = new ArrayList<>();
         gzBjxxbRepository.findAllDto()
-                .stream()
-                .parallel()
+                .parallelStream()
                 .filter(iClassesDto -> StrUtil.isNotBlank(iClassesDto.getClassId()))
                 .forEach(iClassesDto -> {
                     list.add(Classes.builder()

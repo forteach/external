@@ -42,20 +42,24 @@ public class ScheduleConfig {
     @Async
     public void classesTasks(){
         log.info("开始执行定时任务更新班级信息 ==> {}", LocalDateTime.now());
-        log.debug("执行线程 : {}", Thread.currentThread().getName());
+        if (log.isDebugEnabled()){
+           log.debug("执行线程 : {}", Thread.currentThread().getName());
+        }
         classesService.saveAll();
-        log.info("{}　<== 执行更新班级信息定时任务结束", LocalDateTime.now());
+        log.info( "{}　<== 执行更新班级信息定时任务结束", LocalDateTime.now());
     }
 
     @Schedules({
             // TODO 注释每分钟执行任务
 //            @Scheduled(cron = "0 0/1 * * * ?"),
-            @Scheduled(cron = "0 0 2 * * ?")
+            @Scheduled(cron = "0 10 1 * * ?")
     })
     @Async
     public void teacherTasks(){
         log.info("开始执行定时任务更新教师信息 ==> {}", LocalDateTime.now());
-        log.debug("执行线程 : {}", Thread.currentThread().getName());
+        if (log.isDebugEnabled()) {
+            log.debug("执行线程 : {}", Thread.currentThread().getName());
+        }
         teacherService.saveAllByTimestamp();
         log.info("{}　<== 执行更新教师信息定时任务结束", LocalDateTime.now());
     }
@@ -63,12 +67,14 @@ public class ScheduleConfig {
     @Schedules({
             // TODO 注释每分钟执行任务
 //            @Scheduled(cron = "0 0/1 * * * ?"),
-            @Scheduled(cron = "0 0 3 * * ?")
+            @Scheduled(cron = "0 20 1 * * ?")
     })
     @Async
     public void courseTasks(){
         log.info("开始执行定时任务更新课程信息 ==> {}", LocalDateTime.now());
-        log.debug("执行线程 : {}", Thread.currentThread().getName());
+        if (log.isDebugEnabled()) {
+            log.debug("执行线程 : {}", Thread.currentThread().getName());
+        }
         courseService.saveByTimestamp();
         log.info("{}　<== 执行更新课程信息定时任务结束", LocalDateTime.now());
     }

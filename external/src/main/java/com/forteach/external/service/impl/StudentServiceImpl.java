@@ -50,13 +50,11 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public void saveAll() {
         zhxyXsxxRepository.findAllRedisDto()
-                .stream()
-                .parallel()
+                .parallelStream()
                 .filter(iStudentDto -> StrUtil.isNotBlank(iStudentDto.getId()))
                 .filter(iStudentDto -> StrUtil.isNotBlank(iStudentDto.getName()))
                 .map(this::builderStudent)
                 .forEach(this::accept);
-        log.info("Thread name : {}, save students redis OK!", Thread.currentThread().getName());
     }
 
     /**

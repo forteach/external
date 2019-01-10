@@ -17,6 +17,10 @@ import java.util.List;
  */
 public interface ZhxyXsxxRepository extends JpaRepository<ZhxyXsxxEntity, String> {
 
+    /**
+     * 查询有效的学生信息需要保存到　redis 缓存
+     * @return
+     */
     @Transactional(readOnly = true)
     @Query(value = "select xsid as id, xsxm as name from ZhxyXsxxEntity where yxbz = 'Y'")
     List<IStudentDto> findAllRedisDto();

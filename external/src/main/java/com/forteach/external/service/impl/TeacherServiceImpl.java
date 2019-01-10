@@ -59,6 +59,10 @@ public class TeacherServiceImpl implements TeacherService {
         teacherRepository.saveAll(list);
     }
 
+    /**
+     * 执行定时任务需要保存的最近两天修改的信息
+     * 修改最近教师信息
+     */
     @Transactional(rollbackFor = Exception.class)
     public void saveAllByTimestamp(){
         List<Teacher> list = new ArrayList<>();

@@ -17,6 +17,10 @@ import java.util.List;
  */
 public interface GzBjxxbRepository extends JpaRepository<GzBjxxbEntity, String> {
 
+    /**
+     * 查询需要的班级信息
+     * @return
+     */
     @Transactional(readOnly = true)
     @Query(value = "select bjbh as classId, bjmc as className from GzBjxxbEntity ")
     List<IClassesDto> findAllDto();

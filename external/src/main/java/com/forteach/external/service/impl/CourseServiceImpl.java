@@ -56,6 +56,10 @@ public class CourseServiceImpl implements CourseService {
         courseRepository.saveAll(list);
     }
 
+    /**
+     * 执行定时任务需要保存的最近两天修改的信息
+     * 课程信息
+     */
     @Override
     public void saveByTimestamp() {
         List<Course> list = new ArrayList<>();

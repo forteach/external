@@ -43,6 +43,7 @@ public class TeacherServiceImpl implements TeacherService {
         return zhxyJzgxxRepository.findAllByDto(ISVALIDATED_Y);
     }
 
+    @Override
     @Transactional(rollbackFor = Exception.class)
     public void saveAll(){
         List<Teacher> list = new ArrayList<>();
@@ -63,6 +64,7 @@ public class TeacherServiceImpl implements TeacherService {
      * 执行定时任务需要保存的最近两天修改的信息
      * 修改最近教师信息
      */
+    @Override
     @Transactional(rollbackFor = Exception.class)
     public void saveAllByTimestamp(){
         List<Teacher> list = new ArrayList<>();

@@ -22,6 +22,6 @@ public interface ZhxyXsxxRepository extends JpaRepository<ZhxyXsxxEntity, String
      * @return
      */
     @Transactional(readOnly = true)
-    @Query(value = "select xsid as id, xsxm as name from ZhxyXsxxEntity where yxbz = 'Y'")
+    @Query(value = "select xsid as id, xsxm as name, sfzjh AS IDCardNo from ZhxyXsxxEntity where yxbz = 'Y'")
     List<IStudentDto> findAllRedisDto();
 }

@@ -12,4 +12,6 @@ public interface IStudentDto {
     public String getId();
 
     public String getName();
+
+    public String getIDCardNo();
 }

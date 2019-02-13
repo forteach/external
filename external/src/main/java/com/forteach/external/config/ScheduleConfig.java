@@ -75,7 +75,10 @@ public class ScheduleConfig {
         if (log.isDebugEnabled()) {
             log.debug("执行线程 : {}", Thread.currentThread().getName());
         }
+        //保存到mysql
         courseService.saveByTimestamp();
+        //保存到redis
+        courseService.saveRedis();
         log.info("{}　<== 执行更新课程信息定时任务结束", LocalDateTime.now());
     }
 

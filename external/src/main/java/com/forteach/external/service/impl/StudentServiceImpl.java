@@ -1,5 +1,6 @@
 package com.forteach.external.service.impl;
 
+import cn.hutool.core.map.MapUtil;
 import cn.hutool.core.util.StrUtil;
 import com.forteach.external.jgravatar.Gravatar;
 import com.forteach.external.jgravatar.GravatarDefaultImage;
@@ -14,6 +15,7 @@ import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.util.HashMap;
+
 import static com.forteach.external.common.Dic.STUDENT_ADO;
 
 /**
@@ -51,8 +53,7 @@ public class StudentServiceImpl implements StudentService {
     public void saveAll() {
         zhxyXsxxRepository.findAllRedisDto()
                 .parallelStream()
-                .filter(iStudentDto -> StrUtil.isNotBlank(iStudentDto.getId()))
-                .filter(iStudentDto -> StrUtil.isNotBlank(iStudentDto.getName()))
+                .filter(iStudentDto -> StrUtil.isNotBlank(iStudentDto.getId()) && StrUtil.isNotBlank(iStudentDto.getName()) && StrUtil.isNotBlank(iStudentDto.getIDCardNo()))
                 .map(this::builderStudent)
                 .forEach(this::accept);
     }
@@ -63,9 +64,10 @@ public class StudentServiceImpl implements StudentService {
      * @return
      */
     private Student builderStudent(IStudentDto iStudentDto){
-        HashMap<String, String> map = new HashMap<>();
+        HashMap<String, String> map = MapUtil.newHashMap();
         map.put("id", iStudentDto.getId());
         map.put("name", iStudentDto.getName());
+        map.put("IDCardNo", iStudentDto.getIDCardNo());
         map.put("portrait", this.jGravatart(iStudentDto));
         return StudentBuilder.aStudent()
                 .withId(iStudentDto.getId())

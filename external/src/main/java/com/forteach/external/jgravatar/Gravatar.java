@@ -84,9 +84,6 @@ public final class Gravatar {
 		// with all whitespace trimmed
 		String emailHash = DigestUtils.md5Hex(email.toLowerCase().trim());
 		String params = formatUrlParameters();
-		if (log.isDebugEnabled()){
-			log.debug("GRAVATAR_URL ==> {}",  GRAVATAR_URL);
-		}
 		return GRAVATAR_URL + emailHash + ".jpg" + params;
 	}
 

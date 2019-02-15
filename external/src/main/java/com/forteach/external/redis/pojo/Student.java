@@ -13,7 +13,12 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Student extends RedisBash {
+    /**
+     * 学生id
+     */
     private String id;
+    /**
+     * 学生姓名
+     */
     private String name;
-
 }

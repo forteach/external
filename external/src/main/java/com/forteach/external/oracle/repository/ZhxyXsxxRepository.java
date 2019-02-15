@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 /**
@@ -24,4 +25,13 @@ public interface ZhxyXsxxRepository extends JpaRepository<ZhxyXsxxEntity, String
     @Transactional(readOnly = true)
     @Query(value = "select xsid as id, xsxm as name, sfzjh AS IDCardNo from ZhxyXsxxEntity where yxbz = 'Y'")
     List<IStudentDto> findAllRedisDto();
+
+    /**
+     * 查询近期修改的学生信息
+     * @param timeStamp
+     * @return
+     */
+    @Transactional(readOnly = true)
+    @Query(value = "select xsid as id, xsxm as name, sfzjh AS IDCardNo, yxbz AS isValidated from ZhxyXsxxEntity where timestamp >= ?1")
+    List<IStudentDto> findAllDtoByTimeStamp(Timestamp timeStamp);
 }

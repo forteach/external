@@ -9,9 +9,27 @@ package com.forteach.external.oracle.dto;
  */
 public interface IStudentDto {
 
+    /**
+     * 学生编号
+     * @return
+     */
     public String getId();
 
+    /**
+     * 用户信息
+     * @return
+     */
     public String getName();
 
+    /**
+     * 身份证号码
+     * @return
+     */
     public String getIDCardNo();
+
+    /**
+     * 有效状态 1有效
+     * @return
+     */
+    public String getIsValidated();
 }

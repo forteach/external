@@ -2,6 +2,7 @@ package com.forteach.external.config;
 
 import com.forteach.external.service.ClassesService;
 import com.forteach.external.service.CourseService;
+import com.forteach.external.service.StudentService;
 import com.forteach.external.service.TeacherService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Configuration;
@@ -33,6 +34,9 @@ public class ScheduleConfig {
 
     @Resource
     private TeacherService teacherService;
+
+    @Resource
+    private StudentService studentService;
 
     @Schedules({
             // TODO 注释每分钟执行任务
@@ -80,6 +84,22 @@ public class ScheduleConfig {
         //保存到redis
         courseService.saveRedis();
         log.info("{}　<== 执行更新课程信息定时任务结束", LocalDateTime.now());
+    }
+
+    @Schedules({
+            // TODO 注释每分钟执行任务
+//            @Scheduled(cron = "0 0/2 * * * ?"),
+            @Scheduled(cron = "0 30 1 * * ?")
+    })
+    @Async
+    public void studentTasks(){
+        log.info("开始执行定时任务更新学生信息 ==> {}", LocalDateTime.now());
+        if (log.isDebugEnabled()) {
+            log.debug("执行线程 : {}", Thread.currentThread().getName());
+        }
+        //执行更新数据
+        studentService.updateTimestamp();
+        log.info("{}　<== 执行更新学生信息定时任务结束", LocalDateTime.now());
     }
 
 }

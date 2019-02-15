@@ -18,7 +18,7 @@ import javax.annotation.Resource;
  * @Description:
  */
 @Component
-@Order(value = 1)
+@Order(value = 100)
 @Slf4j
 public class RedisRunner implements ApplicationRunner {
     @Resource

@@ -8,5 +8,14 @@ package com.forteach.external.service;
  * @Description:
  */
 public interface StudentService {
+    /**
+     * 程序启动时执行的保存学生信息到redis 和 mysql
+     */
     void saveAll();
+
+    /**
+     * 每天执行一次的近期修改的用户信息
+     */
+    void updateTimestamp();
+
 }

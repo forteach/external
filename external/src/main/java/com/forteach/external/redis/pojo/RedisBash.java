@@ -12,7 +12,7 @@ import java.util.HashMap;
  */
 public abstract class RedisBash implements Serializable {
     private String key;
-    private HashMap map;
+    private HashMap<String, String> map;
 
     public String getKey() {
         return key;
@@ -22,7 +22,7 @@ public abstract class RedisBash implements Serializable {
         this.key = key;
     }
 
-    public HashMap getMap() {
+    public HashMap<String, String> getMap() {
         return map;
     }
 

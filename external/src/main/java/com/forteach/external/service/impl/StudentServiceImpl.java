@@ -1,22 +1,29 @@
 package com.forteach.external.service.impl;
 
+import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.map.MapUtil;
 import cn.hutool.core.util.StrUtil;
 import com.forteach.external.jgravatar.Gravatar;
 import com.forteach.external.jgravatar.GravatarDefaultImage;
+import com.forteach.external.mysql.domain.StudentEntitys;
+import com.forteach.external.mysql.domain.StudentEntitysBuilder;
+import com.forteach.external.mysql.repository.StudentRepository;
 import com.forteach.external.oracle.dto.IStudentDto;
 import com.forteach.external.oracle.repository.ZhxyXsxxRepository;
 import com.forteach.external.redis.pojo.Student;
 import com.forteach.external.redis.pojo.StudentBuilder;
 import com.forteach.external.service.StudentService;
+import com.forteach.external.util.StringUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.core.HashOperations;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 
-import static com.forteach.external.common.Dic.STUDENT_ADO;
+import static com.forteach.external.common.Dic.*;
 
 /**
  * @Auther: zhangyy
@@ -28,6 +35,9 @@ import static com.forteach.external.common.Dic.STUDENT_ADO;
 @Slf4j
 @Service
 public class StudentServiceImpl implements StudentService {
+
+    @Resource
+    private StudentRepository studentRepository;
 
     private static final Gravatar gravatar;
 
@@ -49,11 +59,31 @@ public class StudentServiceImpl implements StudentService {
     @Resource
     private ZhxyXsxxRepository zhxyXsxxRepository;
 
+    /**
+     * 查询有效的学生信息
+     */
     @Override
     public void saveAll() {
-        zhxyXsxxRepository.findAllRedisDto()
-                .parallelStream()
-                .filter(iStudentDto -> StrUtil.isNotBlank(iStudentDto.getId()) && StrUtil.isNotBlank(iStudentDto.getName()) && StrUtil.isNotBlank(iStudentDto.getIDCardNo()))
+        this.saveOrUpdateStudentsInfo(zhxyXsxxRepository.findAllRedisDto());
+    }
+
+    /**
+     * 查询3天内修改的用户信息
+     */
+    @Override
+    public void updateTimestamp() {
+        this.saveOrUpdateStudentsInfo(zhxyXsxxRepository.findAllDtoByTimeStamp(DateUtil.offsetDay(new Date(), -3).toTimestamp()));
+    }
+
+    /**
+     * 对查询到的学生信息进行处理
+     * @param list
+     */
+    private void saveOrUpdateStudentsInfo(List<IStudentDto> list) {
+        list.parallelStream()
+                .filter(iStudentDto -> StrUtil.isNotBlank(iStudentDto.getId())
+                        && StrUtil.isNotBlank(iStudentDto.getName())
+                        && StrUtil.isNotBlank(iStudentDto.getIDCardNo()))
                 .map(this::builderStudent)
                 .forEach(this::accept);
     }
@@ -68,6 +98,7 @@ public class StudentServiceImpl implements StudentService {
         map.put("id", iStudentDto.getId());
         map.put("name", iStudentDto.getName());
         map.put("IDCardNo", iStudentDto.getIDCardNo());
+        map.put("isValidated", StringUtil.changeIsValidated(iStudentDto.getIsValidated()));
         map.put("portrait", this.jGravatart(iStudentDto));
         return StudentBuilder.aStudent()
                 .withId(iStudentDto.getId())
@@ -90,6 +121,26 @@ public class StudentServiceImpl implements StudentService {
      * @param student
      */
     private void accept(Student student) {
-        hashOperations.putAll(student.getKey(), student.getMap());
+        String isValidated = student.getMap().get("isValidated");
+        if (ISVALIDATED_0.equals(isValidated)){
+            hashOperations.putAll(student.getKey(), student.getMap());
+        }else if (ISVALIDATED_1.equals(isValidated)) {
+            stringRedisTemplate.delete(student.getKey());
+        }
+        this.saveMySqlStudentInfo(student);
+    }
+
+    /**
+     * 将查询到的学生信息保存到mysql
+     * @param student
+     */
+    private void saveMySqlStudentInfo(Student student){
+        HashMap<String, String> map = student.getMap();
+        studentRepository.save(StudentEntitysBuilder.aStudentEntitys()
+                .id(map.get("id"))
+                .userName(map.get("name"))
+                .IDCardNo(map.get("IDCardNo"))
+                .isValidated(map.get("isValidated"))
+                .build());
     }
 }

@@ -14,5 +14,4 @@ import java.util.List;
  */
 public interface StudentRepository extends JpaRepository<StudentEntitys, String> {
 
-//    List<StudentEntitys> findByIsValidatedEqualsAndIDCardNo();
 }

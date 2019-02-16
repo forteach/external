@@ -4,7 +4,6 @@ import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.StrUtil;
 import lombok.Data;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-
 import javax.persistence.Column;
 import javax.persistence.EntityListeners;
 import javax.persistence.MappedSuperclass;
@@ -30,15 +29,15 @@ public abstract class Entitys implements Serializable {
 
 
     @Column(name = "u_time", columnDefinition = "VARCHAR(32)  COMMENT '更新时间'")
-    private String uTime = DateUtil.now();
+    private String updateTime = DateUtil.now();
 
     @Column(updatable = false, name = "c_time", columnDefinition = "VARCHAR(32) COMMENT '创建时间'")
-    private String cTime = StrUtil.isBlank(this.cTime) ? DateUtil.now() : this.cTime;
+    private String createTime = StrUtil.isBlank(this.createTime) ? DateUtil.now() : this.createTime;
 
     @Column(updatable = false, name = "c_user", columnDefinition = "VARCHAR(32) COMMENT '创建人'")
-    private String cUser;
+    private String createUser;
 
     @Column(name = "u_user", columnDefinition = "VARCHAR(32) COMMENT '修改人'")
-    private String uUser;
+    private String updateUser;
 
 }

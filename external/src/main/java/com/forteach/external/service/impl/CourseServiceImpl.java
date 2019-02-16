@@ -5,7 +5,7 @@ import cn.hutool.core.map.MapUtil;
 import cn.hutool.core.util.IdUtil;
 import cn.hutool.core.util.StrUtil;
 import com.forteach.external.mysql.domain.Course;
-import com.forteach.external.mysql.domain.CourseBuilder;
+import com.forteach.external.mysql.domain.builder.CourseBuilder;
 import com.forteach.external.mysql.repository.CourseRepository;
 import com.forteach.external.oracle.dto.ICourseDto;
 import com.forteach.external.oracle.repository.ZhxyKcxxRepository;

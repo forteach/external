@@ -2,14 +2,11 @@ package com.forteach.external.service.impl;
 
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.IdUtil;
-import cn.hutool.core.util.RandomUtil;
 import cn.hutool.core.util.StrUtil;
-import com.forteach.external.common.Dic;
 import com.forteach.external.mysql.domain.Teacher;
-import com.forteach.external.mysql.domain.TeacherBuilder;
+import com.forteach.external.mysql.domain.builder.TeacherBuilder;
 import com.forteach.external.mysql.repository.TeacherRepository;
 import com.forteach.external.oracle.dto.ITeacherDto;
-import com.forteach.external.oracle.entity.ZhxyJsxxEntity;
 import com.forteach.external.oracle.repository.ZhxyJzgxxRepository;
 import com.forteach.external.service.TeacherService;
 import lombok.extern.slf4j.Slf4j;
@@ -20,7 +17,6 @@ import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static com.forteach.external.common.Dic.*;
 

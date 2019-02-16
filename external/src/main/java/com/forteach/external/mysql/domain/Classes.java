@@ -1,6 +1,8 @@
 package com.forteach.external.mysql.domain;
 
 import lombok.*;
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -15,6 +17,8 @@ import java.io.Serializable;
 @Data
 @Entity
 @Builder
+@DynamicInsert
+@DynamicUpdate
 @EqualsAndHashCode(callSuper = true)
 @Table(name = "classes", indexes = {@Index(columnList = "class_id")})
 @org.hibernate.annotations.Table(appliesTo = "classes", comment = "班级")

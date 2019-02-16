@@ -1,10 +1,9 @@
 package com.forteach.external.mysql.domain;
 
 import com.forteach.external.redis.pojo.RedisBash;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 
@@ -15,7 +14,10 @@ import javax.persistence.*;
  * @Version: 1.0
  * @Description: 从学校查询其它系统导入的学生数据表
  */
+@Data
 @Entity
+@DynamicInsert
+@DynamicUpdate
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor

@@ -1,4 +1,6 @@
-package com.forteach.external.mysql.domain;
+package com.forteach.external.mysql.domain.builder;
+
+import com.forteach.external.mysql.domain.Teacher;
 
 /**
  * @Auther: zhangyy

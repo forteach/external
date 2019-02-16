@@ -1,6 +1,8 @@
 package com.forteach.external.mysql.domain;
 
 import lombok.*;
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -15,8 +17,10 @@ import java.io.Serializable;
  */
 @Data
 @Entity
-@EqualsAndHashCode(callSuper = true)
 @Builder
+@DynamicInsert
+@DynamicUpdate
+@EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
 @GenericGenerator(name = "system-uuid", strategy = "uuid")

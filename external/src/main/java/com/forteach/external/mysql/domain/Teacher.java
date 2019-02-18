@@ -18,8 +18,6 @@ import java.io.Serializable;
 @Data
 @Entity
 @Builder
-@DynamicInsert
-@DynamicUpdate
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor

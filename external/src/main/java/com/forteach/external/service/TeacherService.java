@@ -12,8 +12,20 @@ import java.util.List;
  * @Description:
  */
 public interface TeacherService {
+    /**
+     * 从其他数据库查询的教师信息
+     * @return
+     */
     List<ITeacherDto> findAllDto();
+
+    /**
+     * 保存教师信息
+     */
     void saveAll();
+
+    /**
+     * 保存最近修改的教师信息
+     */
     void saveAllByTimestamp();
 
 }

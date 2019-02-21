@@ -101,7 +101,7 @@ public class StudentServiceImpl implements StudentService {
         map.put("portrait", this.jGravatart(iStudentDto));
         return StudentBuilder.aStudent()
                 .withId(iStudentDto.getId())
-                .withKey(STUDENT_ADO + iStudentDto.getId())
+                .withKey(STUDENT_ADO.concat(iStudentDto.getId()))
                 .withMap(map)
                 .build();
     }

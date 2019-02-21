@@ -1,7 +1,6 @@
 package com.forteach.external.service.impl;
 
 import cn.hutool.core.date.DateUtil;
-import cn.hutool.core.util.IdUtil;
 import cn.hutool.core.util.StrUtil;
 import com.forteach.external.mysql.domain.Teacher;
 import com.forteach.external.mysql.domain.builder.TeacherBuilder;
@@ -10,6 +9,8 @@ import com.forteach.external.oracle.dto.ITeacherDto;
 import com.forteach.external.oracle.repository.ZhxyJzgxxRepository;
 import com.forteach.external.service.TeacherService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.redis.core.HashOperations;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -30,10 +31,23 @@ import static com.forteach.external.common.Dic.*;
 @Slf4j
 @Service
 public class TeacherServiceImpl implements TeacherService {
+
     @Resource
     private TeacherRepository teacherRepository;
+
     @Resource
     private ZhxyJzgxxRepository zhxyJzgxxRepository;
+
+    @Resource
+    private HashOperations<String, String, String> hashOperations;
+
+    @Resource
+    private StringRedisTemplate stringRedisTemplate;
+
+    /**
+     * 保存查询到的教师信息
+     * @return
+     */
     @Override
     public List<ITeacherDto> findAllDto() {
         return zhxyJzgxxRepository.findAllByDto(ISVALIDATED_Y);
@@ -42,18 +56,7 @@ public class TeacherServiceImpl implements TeacherService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void saveAll(){
-        List<Teacher> list = new ArrayList<>();
-        zhxyJzgxxRepository.findAllByDto(ISVALIDATED_Y)
-                .parallelStream()
-                .filter(iTeacherDto -> StrUtil.isNotBlank(iTeacherDto.getTeacherId()))
-                .forEach(iTeacherDto -> {
-                    list.add(Teacher.builder()
-                            .teacherId(StrUtil.isNotBlank(iTeacherDto.getTeacherId()) ? iTeacherDto.getTeacherId() : IdUtil.fastSimpleUUID())
-                            .teacherName(iTeacherDto.getTeacherName())
-                            .teacherCode(iTeacherDto.getTeacherCode())
-                            .build());
-        });
-        teacherRepository.saveAll(list);
+        this.saveTeacher(zhxyJzgxxRepository.findAllByDto(ISVALIDATED_Y));
     }
 
     /**
@@ -63,9 +66,16 @@ public class TeacherServiceImpl implements TeacherService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void saveAllByTimestamp(){
+        this.saveTeacher(zhxyJzgxxRepository.findAllByDtoByTimestamp(DateUtil.offsetDay(new Date(), -3).toTimestamp()));
+    }
+
+    /**
+     * 保存更新查询到的教师信息列表
+     * @param iTeacherDtos
+     */
+    private void saveTeacher(List<ITeacherDto> iTeacherDtos){
         List<Teacher> list = new ArrayList<>();
-        zhxyJzgxxRepository.findAllByDtoByTimestamp(DateUtil.offsetDay(new Date(), -2).toTimestamp())
-                .parallelStream()
+        iTeacherDtos.parallelStream()
                 .filter(iTeacherDto -> StrUtil.isNotBlank(iTeacherDto.getTeacherId()))
                 .forEach(iTeacherDto -> {
                     list.add(TeacherBuilder.aTeacher()
@@ -77,5 +87,4 @@ public class TeacherServiceImpl implements TeacherService {
                 });
         teacherRepository.saveAll(list);
     }
-
 }

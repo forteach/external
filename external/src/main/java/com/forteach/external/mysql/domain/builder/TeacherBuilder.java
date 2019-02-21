@@ -10,9 +10,21 @@ import com.forteach.external.mysql.domain.Teacher;
  * @Description:
  */
 public final class TeacherBuilder {
+    /**
+     * 是否有效 0 有效　1 无效
+     */
     private String isValidated;
+    /**
+     * 教师id
+     */
     private String teacherId;
+    /**
+     * 教师姓名
+     */
     private String teacherName;
+    /**
+     * 教师代码
+     */
     private String teacherCode;
 
     private TeacherBuilder() {

@@ -17,8 +17,8 @@ import javax.persistence.*;
 @Data
 @Entity
 @EqualsAndHashCode(callSuper = true)
-@NoArgsConstructor
-@AllArgsConstructor
+@DynamicInsert
+@DynamicUpdate
 @Table(name = "student_info",indexes = {@Index(columnList = "id"), @Index(columnList = "id_card_no")})
 @org.hibernate.annotations.Table(appliesTo = "student_info", comment = "从学校数据库查询的学生信息")
 public class StudentEntitys extends Entitys {
@@ -32,4 +32,12 @@ public class StudentEntitys extends Entitys {
     @Column(name = "id_card_no", columnDefinition = "VARCHAR(32) COMMENT '身份证号码'")
     private String IDCardNo;
 
+    public StudentEntitys() {
+    }
+
+    public StudentEntitys(String id, String userName, String IDCardNo) {
+        this.id = id;
+        this.userName = userName;
+        this.IDCardNo = IDCardNo;
+    }
 }

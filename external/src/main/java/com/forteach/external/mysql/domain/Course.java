@@ -20,8 +20,8 @@ import java.io.Serializable;
 @Table(name = "o_course", indexes = {@Index(columnList = "course_id")})
 @EqualsAndHashCode(callSuper = true)
 @org.hibernate.annotations.Table(appliesTo = "o_course", comment = "科目课程信息,从数字化校园查询的")
-@NoArgsConstructor
-@AllArgsConstructor
+@DynamicInsert
+@DynamicUpdate
 public class Course extends Entitys implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -36,4 +36,12 @@ public class Course extends Entitys implements Serializable {
     @Column(name = "course_describe", columnDefinition = "MEDIUMTEXT COMMENT'课程描述'" )
     private String courseDescribe;
 
+    public Course() {
+    }
+
+    public Course(String courseId, String courseName, String courseDescribe) {
+        this.courseId = courseId;
+        this.courseName = courseName;
+        this.courseDescribe = courseDescribe;
+    }
 }

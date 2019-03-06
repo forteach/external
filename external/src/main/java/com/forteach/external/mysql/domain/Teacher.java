@@ -19,8 +19,8 @@ import java.io.Serializable;
 @Entity
 @Builder
 @EqualsAndHashCode(callSuper = true)
-@NoArgsConstructor
-@AllArgsConstructor
+@DynamicInsert
+@DynamicUpdate
 @GenericGenerator(name = "system-uuid", strategy = "uuid")
 @Table(name = "teacher",indexes = {@Index(columnList = "teacher_id"), @Index(columnList = "specialty_id")})
 @org.hibernate.annotations.Table(appliesTo = "teacher", comment = "老师")
@@ -43,4 +43,13 @@ public class Teacher extends Entitys implements Serializable {
     @Column(name = "teacher_code", columnDefinition = "VARCHAR(32) COMMENT '教师编号'")
     private String teacherCode;
 
+    public Teacher() {
+    }
+
+    public Teacher(String teacherId, String specialtyId, @NotNull(message = "教师名称不能为空") String teacherName, @NotNull(message = "教师编号不能为空") String teacherCode) {
+        this.teacherId = teacherId;
+        this.specialtyId = specialtyId;
+        this.teacherName = teacherName;
+        this.teacherCode = teacherCode;
+    }
 }

@@ -20,8 +20,8 @@ import java.io.Serializable;
 @EqualsAndHashCode(callSuper = true)
 @Table(name = "classes", indexes = {@Index(columnList = "class_id")})
 @org.hibernate.annotations.Table(appliesTo = "classes", comment = "班级")
-@AllArgsConstructor
-@NoArgsConstructor
+@DynamicInsert
+@DynamicUpdate
 public class Classes extends Entitys implements Serializable {
 
     @Id
@@ -30,4 +30,12 @@ public class Classes extends Entitys implements Serializable {
 
     @Column(name = "class_name", columnDefinition = "VARCHAR(60) COMMENT '班级名称'")
     private String className;
+
+    public Classes() {
+    }
+
+    public Classes(String classId, String className) {
+        this.classId = classId;
+        this.className = className;
+    }
 }

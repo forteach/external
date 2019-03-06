@@ -84,7 +84,7 @@ public class TeacherServiceImpl implements TeacherService {
                             .withTeacherId(iTeacherDto.getTeacherId())
                             .withTeacherName(iTeacherDto.getTeacherName())
                             .withTeacherCode(iTeacherDto.getTeacherCode())
-                            .withIsValidated(ISVALIDATED_Y.equals(iTeacherDto.getIsValidated()) ? ISVALIDATED_0 : ISVALIDATED_1)
+                            .withIsValidated(ISVALIDATED_N.equals(iTeacherDto.getIsValidated()) ? ISVALIDATED_1 : ISVALIDATED_0)
                             .build());
                 });
         teacherRepository.saveAll(list);

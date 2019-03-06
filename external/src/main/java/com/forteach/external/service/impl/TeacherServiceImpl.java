@@ -76,7 +76,9 @@ public class TeacherServiceImpl implements TeacherService {
     private void saveTeacher(List<ITeacherDto> iTeacherDtos){
         List<Teacher> list = new ArrayList<>();
         iTeacherDtos.parallelStream()
-                .filter(iTeacherDto -> StrUtil.isNotBlank(iTeacherDto.getTeacherId()))
+                .filter(iTeacherDto -> StrUtil.isNotBlank(iTeacherDto.getTeacherId()) &&
+                                StrUtil.isNotBlank(iTeacherDto.getTeacherCode()) &&
+                                StrUtil.isNotBlank(iTeacherDto.getTeacherName()))
                 .forEach(iTeacherDto -> {
                     list.add(TeacherBuilder.aTeacher()
                             .withTeacherId(iTeacherDto.getTeacherId())

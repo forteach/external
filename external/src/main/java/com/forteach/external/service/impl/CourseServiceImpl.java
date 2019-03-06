@@ -52,10 +52,10 @@ public class CourseServiceImpl implements CourseService {
         List<Course> list = new ArrayList<>();
         zhxyKcxxRepository.findAllDto(ISVALIDATED_Y)
                 .parallelStream()
-                .filter(iCourseDto -> StrUtil.isNotBlank(iCourseDto.getCourseId()))
+                .filter(iCourseDto -> StrUtil.isNotBlank(iCourseDto.getCourseId()) && StrUtil.isNotBlank(iCourseDto.getCourseName()))
                 .forEach(iCourseDto -> {
                     list.add(Course.builder()
-                            .courseId(StrUtil.isNotBlank(iCourseDto.getCourseId()) ? iCourseDto.getCourseId() : IdUtil.fastSimpleUUID())
+                            .courseId(iCourseDto.getCourseId())
                             .courseName(iCourseDto.getCourseName())
                             .courseDescribe(iCourseDto.getCourseDescribe())
                             .build());
@@ -73,10 +73,10 @@ public class CourseServiceImpl implements CourseService {
         List<Course> list = new ArrayList<>();
         zhxyKcxxRepository.findAllDtoByTimestamp(DateUtil.offsetDay(new Date(), -3).toDateStr())
                 .parallelStream()
-                .filter(iCourseDto -> StrUtil.isNotBlank(iCourseDto.getCourseId()))
+                .filter(iCourseDto -> StrUtil.isNotBlank(iCourseDto.getCourseId()) && StrUtil.isNotBlank(iCourseDto.getCourseName()))
                 .forEach(iCourseDto -> {
                     list.add(CourseBuilder.aCourse()
-                            .withCourseId(StrUtil.isNotBlank(iCourseDto.getCourseId()) ? iCourseDto.getCourseId() : IdUtil.fastSimpleUUID())
+                            .withCourseId(iCourseDto.getCourseId())
                             .withCourseName(iCourseDto.getCourseName())
                             .withCourseDescribe(iCourseDto.getCourseDescribe())
                             .withIsValidated(ISVALIDATED_Y.equals(iCourseDto.getIsValidated()) ? ISVALIDATED_0 : ISVALIDATED_1)
@@ -89,7 +89,7 @@ public class CourseServiceImpl implements CourseService {
     public void saveRedis(){
         zhxyKcxxRepository.findAllDto(ISVALIDATED_Y)
                 .parallelStream()
-                .filter(iCourseDto -> StrUtil.isNotBlank(iCourseDto.getCourseId()))
+                .filter(iCourseDto -> StrUtil.isNotBlank(iCourseDto.getCourseId()) && StrUtil.isNotBlank(iCourseDto.getCourseName()))
                 .forEach(this::addRedis);
     }
 
@@ -103,7 +103,6 @@ public class CourseServiceImpl implements CourseService {
         map.put("courseName", iCourseDto.getCourseName());
         map.put("courseDescribe", iCourseDto.getCourseDescribe());
         hashOperations.putAll(COURSE_PREFIX.concat(iCourseDto.getCourseId()), map);
-//        stringRedisTemplate.expire(COURSE_PREFIX.concat(iCourseDto.getCourseId()), 1, TimeUnit.MINUTES);
     }
 
 }

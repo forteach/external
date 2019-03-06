@@ -41,10 +41,10 @@ public class ClassesServerImpl implements ClassesService {
         List<Classes> list = new ArrayList<>();
         gzBjxxbRepository.findAllDto()
                 .parallelStream()
-                .filter(iClassesDto -> StrUtil.isNotBlank(iClassesDto.getClassId()))
+                .filter(iClassesDto -> StrUtil.isNotBlank(iClassesDto.getClassId()) && StrUtil.isNotBlank(iClassesDto.getClassName()))
                 .forEach(iClassesDto -> {
                     list.add(Classes.builder()
-                            .classId(StrUtil.isNotBlank(iClassesDto.getClassId()) ? iClassesDto.getClassId() : IdUtil.fastSimpleUUID())
+                            .classId(iClassesDto.getClassId())
                             .className(iClassesDto.getClassName())
                             .build());
                 });

@@ -2,7 +2,6 @@ package com.forteach.external.service.impl;
 
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.map.MapUtil;
-import cn.hutool.core.util.IdUtil;
 import cn.hutool.core.util.StrUtil;
 import com.forteach.external.mysql.domain.Course;
 import com.forteach.external.mysql.domain.builder.CourseBuilder;
@@ -12,14 +11,10 @@ import com.forteach.external.oracle.repository.ZhxyKcxxRepository;
 import com.forteach.external.service.CourseService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.core.HashOperations;
-import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import javax.annotation.Resource;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 import static com.forteach.external.common.Dic.*;
 
 /**
@@ -36,8 +31,6 @@ public class CourseServiceImpl implements CourseService {
     @Resource
     private HashOperations<String, String, String> hashOperations;
     @Resource
-    private StringRedisTemplate stringRedisTemplate;
-    @Resource
     private CourseRepository courseRepository;
     @Resource
     private ZhxyKcxxRepository zhxyKcxxRepository;
@@ -52,6 +45,7 @@ public class CourseServiceImpl implements CourseService {
         List<Course> list = new ArrayList<>();
         zhxyKcxxRepository.findAllDto(ISVALIDATED_Y)
                 .parallelStream()
+                .filter(Objects::nonNull)
                 .filter(iCourseDto -> StrUtil.isNotBlank(iCourseDto.getCourseId()) && StrUtil.isNotBlank(iCourseDto.getCourseName()))
                 .forEach(iCourseDto -> {
                     list.add(Course.builder()
@@ -73,6 +67,7 @@ public class CourseServiceImpl implements CourseService {
         List<Course> list = new ArrayList<>();
         zhxyKcxxRepository.findAllDtoByTimestamp(DateUtil.offsetDay(new Date(), -3).toDateStr())
                 .parallelStream()
+                .filter(Objects::nonNull)
                 .filter(iCourseDto -> StrUtil.isNotBlank(iCourseDto.getCourseId()) && StrUtil.isNotBlank(iCourseDto.getCourseName()))
                 .forEach(iCourseDto -> {
                     list.add(CourseBuilder.aCourse()
@@ -89,6 +84,7 @@ public class CourseServiceImpl implements CourseService {
     public void saveRedis(){
         zhxyKcxxRepository.findAllDto(ISVALIDATED_Y)
                 .parallelStream()
+                .filter(Objects::nonNull)
                 .filter(iCourseDto -> StrUtil.isNotBlank(iCourseDto.getCourseId()) && StrUtil.isNotBlank(iCourseDto.getCourseName()))
                 .forEach(this::addRedis);
     }

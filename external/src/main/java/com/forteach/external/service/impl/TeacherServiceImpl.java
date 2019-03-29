@@ -9,16 +9,13 @@ import com.forteach.external.oracle.dto.ITeacherDto;
 import com.forteach.external.oracle.repository.ZhxyJzgxxRepository;
 import com.forteach.external.service.TeacherService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.redis.core.HashOperations;
-import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
+import java.util.Objects;
 import static com.forteach.external.common.Dic.*;
 
 /**
@@ -37,12 +34,6 @@ public class TeacherServiceImpl implements TeacherService {
 
     @Resource
     private ZhxyJzgxxRepository zhxyJzgxxRepository;
-
-    @Resource
-    private HashOperations<String, String, String> hashOperations;
-
-    @Resource
-    private StringRedisTemplate stringRedisTemplate;
 
     /**
      * 保存查询到的教师信息
@@ -76,6 +67,7 @@ public class TeacherServiceImpl implements TeacherService {
     private void saveTeacher(List<ITeacherDto> iTeacherDtos){
         List<Teacher> list = new ArrayList<>();
         iTeacherDtos.parallelStream()
+                .filter(Objects::nonNull)
                 .filter(iTeacherDto -> StrUtil.isNotBlank(iTeacherDto.getTeacherId()) &&
                                 StrUtil.isNotBlank(iTeacherDto.getTeacherCode()) &&
                                 StrUtil.isNotBlank(iTeacherDto.getTeacherName()))

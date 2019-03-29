@@ -21,7 +21,7 @@ import javax.annotation.Resource;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-
+import java.util.Objects;
 import static com.forteach.external.common.Dic.*;
 
 /**
@@ -80,6 +80,7 @@ public class StudentServiceImpl implements StudentService {
      */
     private void saveOrUpdateStudentsInfo(List<IStudentDto> list) {
         list.parallelStream()
+                .filter(Objects::nonNull)
                 .filter(iStudentDto -> StrUtil.isNotBlank(iStudentDto.getId())
                         && StrUtil.isNotBlank(iStudentDto.getName())
                         && StrUtil.isNotBlank(iStudentDto.getIDCardNo()))

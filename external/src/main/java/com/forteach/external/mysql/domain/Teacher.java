@@ -22,7 +22,7 @@ import java.io.Serializable;
 @DynamicInsert
 @DynamicUpdate
 @GenericGenerator(name = "system-uuid", strategy = "uuid")
-@Table(name = "teacher",indexes = {@Index(columnList = "teacher_id"), @Index(columnList = "specialty_id")})
+@Table(name = "teacher",indexes = {@Index(columnList = "teacher_id", name = "teacher_id_index"), @Index(columnList = "specialty_id", name = "specialty_id_index")})
 @org.hibernate.annotations.Table(appliesTo = "teacher", comment = "老师")
 public class Teacher extends Entitys implements Serializable {
 

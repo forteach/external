@@ -18,7 +18,7 @@ import java.io.Serializable;
 @Entity
 @Builder
 @EqualsAndHashCode(callSuper = true)
-@Table(name = "classes", indexes = {@Index(columnList = "class_id")})
+@Table(name = "classes", indexes = {@Index(columnList = "class_id", name = "class_id_index")})
 @org.hibernate.annotations.Table(appliesTo = "classes", comment = "班级")
 @DynamicInsert
 @DynamicUpdate

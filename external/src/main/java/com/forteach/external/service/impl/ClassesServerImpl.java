@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * @Auther: zhangyy
@@ -41,6 +42,7 @@ public class ClassesServerImpl implements ClassesService {
         List<Classes> list = new ArrayList<>();
         gzBjxxbRepository.findAllDto()
                 .parallelStream()
+                .filter(Objects::nonNull)
                 .filter(iClassesDto -> StrUtil.isNotBlank(iClassesDto.getClassId()) && StrUtil.isNotBlank(iClassesDto.getClassName()))
                 .forEach(iClassesDto -> {
                     list.add(Classes.builder()

@@ -17,7 +17,7 @@ import java.io.Serializable;
 @Data
 @Entity
 @Builder
-@Table(name = "o_course", indexes = {@Index(columnList = "course_id")})
+@Table(name = "o_course", indexes = {@Index(columnList = "course_id", name = "course_id_index")})
 @EqualsAndHashCode(callSuper = true)
 @org.hibernate.annotations.Table(appliesTo = "o_course", comment = "科目课程信息,从数字化校园查询的")
 @DynamicInsert

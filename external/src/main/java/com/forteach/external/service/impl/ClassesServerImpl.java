@@ -48,6 +48,7 @@ public class ClassesServerImpl implements ClassesService {
                     list.add(Classes.builder()
                             .classId(iClassesDto.getClassId())
                             .className(iClassesDto.getClassName())
+                            .grade(iClassesDto.getGrade())
                             .build());
                 });
         classesRepository.saveAll(list);

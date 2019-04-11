@@ -31,11 +31,15 @@ public class Classes extends Entitys implements Serializable {
     @Column(name = "class_name", columnDefinition = "VARCHAR(60) COMMENT '班级名称'")
     private String className;
 
+    @Column(name = "grade", columnDefinition = "INT(11) COMMENT '年级'")
+    private Long grade;
+
     public Classes() {
     }
 
-    public Classes(String classId, String className) {
+    public Classes(String classId, String className, Long grade) {
         this.classId = classId;
         this.className = className;
+        this.grade = grade;
     }
 }

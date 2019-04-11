@@ -23,6 +23,12 @@ public interface IClassesDto extends Serializable {
     public String getClassName();
 
     /**
+     * 年级
+     * @return
+     */
+    public Long getGrade();
+
+    /**
      * 班级生效标识
 //     * @return
      */

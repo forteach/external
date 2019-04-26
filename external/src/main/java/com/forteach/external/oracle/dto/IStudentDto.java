@@ -28,6 +28,12 @@ public interface IStudentDto {
     public String getIDCardNo();
 
     /**
+     * 班级编号
+     * @return
+     */
+    public String getClassId();
+
+    /**
      * 有效状态 1有效
      * @return
      */

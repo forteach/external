@@ -14,6 +14,7 @@ public final class StudentEntitysBuilder {
     private String id;
     private String userName;
     private String IDCardNo;
+    private String classId;
 
     private StudentEntitysBuilder() {
     }
@@ -41,9 +42,13 @@ public final class StudentEntitysBuilder {
         this.IDCardNo = IDCardNo;
         return this;
     }
+    public StudentEntitysBuilder classId(String classId) {
+        this.classId = classId;
+        return this;
+    }
 
     public StudentEntitys build() {
-        StudentEntitys studentEntitys = new StudentEntitys(id, userName, IDCardNo);
+        StudentEntitys studentEntitys = new StudentEntitys(id, userName, IDCardNo, classId);
         studentEntitys.setIsValidated(isValidated);
         return studentEntitys;
     }

@@ -14,6 +14,7 @@ import com.forteach.external.redis.pojo.StudentBuilder;
 import com.forteach.external.service.StudentService;
 import com.forteach.external.util.StringUtil;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.redis.core.HashOperations;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
@@ -39,6 +40,8 @@ public class StudentServiceImpl implements StudentService {
     private StudentRepository studentRepository;
 
     private static final Gravatar gravatar;
+    @Resource
+    private MongoTemplate mongoTemplate;
 
     /**
      * 初始化用户图像设置信息
@@ -81,9 +84,11 @@ public class StudentServiceImpl implements StudentService {
     private void saveOrUpdateStudentsInfo(List<IStudentDto> list) {
         list.parallelStream()
                 .filter(Objects::nonNull)
-                .filter(iStudentDto -> StrUtil.isNotBlank(iStudentDto.getId())
+                .filter(iStudentDto ->
+                        StrUtil.isNotBlank(iStudentDto.getId())
                         && StrUtil.isNotBlank(iStudentDto.getName())
-                        && StrUtil.isNotBlank(iStudentDto.getIDCardNo()))
+                        && StrUtil.isNotBlank(iStudentDto.getIDCardNo())
+                        && StrUtil.isNotBlank(iStudentDto.getClassId()))
                 .map(this::builderStudent)
                 .forEach(this::accept);
     }
@@ -98,6 +103,7 @@ public class StudentServiceImpl implements StudentService {
         map.put("id", iStudentDto.getId());
         map.put("name", iStudentDto.getName());
         map.put("IDCardNo", iStudentDto.getIDCardNo());
+        map.put("classId", iStudentDto.getClassId());
         map.put("isValidated", StringUtil.changeIsValidated(iStudentDto.getIsValidated()));
         map.put("portrait", this.jGravatart(iStudentDto));
         return StudentBuilder.aStudent()
@@ -122,11 +128,13 @@ public class StudentServiceImpl implements StudentService {
      */
     private void accept(Student student) {
         String isValidated = student.getMap().get("isValidated");
+        //记录redis
         if (ISVALIDATED_0.equals(isValidated)){
             hashOperations.putAll(student.getKey(), student.getMap());
         }else if (ISVALIDATED_1.equals(isValidated)) {
             stringRedisTemplate.delete(student.getKey());
         }
+        //保存mysql
         this.saveMySqlStudentInfo(student);
     }
 
@@ -140,6 +148,7 @@ public class StudentServiceImpl implements StudentService {
                 .id(map.get("id"))
                 .userName(map.get("name"))
                 .IDCardNo(map.get("IDCardNo"))
+                .classId(map.get("classId"))
                 .isValidated(map.get("isValidated"))
                 .build());
     }

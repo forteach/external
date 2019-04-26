@@ -1,7 +1,7 @@
 package com.forteach.external.mysql.domain;
 
-import com.forteach.external.redis.pojo.RedisBash;
-import lombok.*;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
@@ -32,12 +32,16 @@ public class StudentEntitys extends Entitys {
     @Column(name = "id_card_no", columnDefinition = "VARCHAR(32) COMMENT '身份证号码'")
     private String IDCardNo;
 
+    @Column(name = "class_id", columnDefinition = "VARCHAR(32) COMMENT '学生所属班级id'")
+    private String classId;
+
     public StudentEntitys() {
     }
 
-    public StudentEntitys(String id, String userName, String IDCardNo) {
+    public StudentEntitys(String id, String userName, String IDCardNo, String classId) {
         this.id = id;
         this.userName = userName;
         this.IDCardNo = IDCardNo;
+        this.classId = classId;
     }
 }

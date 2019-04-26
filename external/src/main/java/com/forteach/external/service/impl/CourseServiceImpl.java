@@ -3,6 +3,7 @@ package com.forteach.external.service.impl;
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.map.MapUtil;
 import cn.hutool.core.util.StrUtil;
+import com.forteach.external.mongodb.domain.CourseInfo;
 import com.forteach.external.mysql.domain.Course;
 import com.forteach.external.mysql.domain.builder.CourseBuilder;
 import com.forteach.external.mysql.repository.CourseRepository;
@@ -10,11 +11,14 @@ import com.forteach.external.oracle.dto.ICourseDto;
 import com.forteach.external.oracle.repository.ZhxyKcxxRepository;
 import com.forteach.external.service.CourseService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.redis.core.HashOperations;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 import javax.annotation.Resource;
 import java.util.*;
+
 import static com.forteach.external.common.Dic.*;
 
 /**
@@ -34,27 +38,17 @@ public class CourseServiceImpl implements CourseService {
     private CourseRepository courseRepository;
     @Resource
     private ZhxyKcxxRepository zhxyKcxxRepository;
+    @Resource
+    private MongoTemplate mongoTemplate;
+
     @Override
     public List<ICourseDto> findAllDto() {
         return zhxyKcxxRepository.findAllDto(ISVALIDATED_Y);
     }
 
     @Override
-    @Transactional(rollbackFor = Exception.class)
     public void saveDto() {
-        List<Course> list = new ArrayList<>();
-        zhxyKcxxRepository.findAllDto(ISVALIDATED_Y)
-                .parallelStream()
-                .filter(Objects::nonNull)
-                .filter(iCourseDto -> StrUtil.isNotBlank(iCourseDto.getCourseId()) && StrUtil.isNotBlank(iCourseDto.getCourseName()))
-                .forEach(iCourseDto -> {
-                    list.add(Course.builder()
-                            .courseId(iCourseDto.getCourseId())
-                            .courseName(iCourseDto.getCourseName())
-                            .courseDescribe(iCourseDto.getCourseDescribe())
-                            .build());
-                });
-        courseRepository.saveAll(list);
+        this.saveAll(zhxyKcxxRepository.findAllDto(ISVALIDATED_Y));
     }
 
     /**
@@ -62,26 +56,41 @@ public class CourseServiceImpl implements CourseService {
      * 课程信息
      */
     @Override
-    @Transactional(rollbackFor = Exception.class)
     public void saveByTimestamp() {
+        this.saveAll(zhxyKcxxRepository.findAllDtoByTimestamp(DateUtil.offsetDay(new Date(), -3).toDateStr()));
+    }
+
+    private void saveAll(List<ICourseDto> iCourseDtos) {
         List<Course> list = new ArrayList<>();
-        zhxyKcxxRepository.findAllDtoByTimestamp(DateUtil.offsetDay(new Date(), -3).toDateStr())
-                .parallelStream()
+        List<CourseInfo> courseInfoList = new ArrayList<>();
+        iCourseDtos.parallelStream()
                 .filter(Objects::nonNull)
                 .filter(iCourseDto -> StrUtil.isNotBlank(iCourseDto.getCourseId()) && StrUtil.isNotBlank(iCourseDto.getCourseName()))
                 .forEach(iCourseDto -> {
+                    //mysql
                     list.add(CourseBuilder.aCourse()
                             .withCourseId(iCourseDto.getCourseId())
                             .withCourseName(iCourseDto.getCourseName())
                             .withCourseDescribe(iCourseDto.getCourseDescribe())
                             .withIsValidated(ISVALIDATED_Y.equals(iCourseDto.getIsValidated()) ? ISVALIDATED_0 : ISVALIDATED_1)
                             .build());
+                    //mongodb
+                    courseInfoList.add(CourseInfo.builder()
+                            .courseDescribe(iCourseDto.getCourseDescribe())
+                            .courseId(iCourseDto.getCourseId())
+                            .courseName(iCourseDto.getCourseName())
+                            .build());
                 });
+
+        //mysql
         courseRepository.saveAll(list);
+
+        //mongodb
+        mongoTemplate.insertAll(courseInfoList);
     }
 
     @Override
-    public void saveRedis(){
+    public void saveRedis() {
         zhxyKcxxRepository.findAllDto(ISVALIDATED_Y)
                 .parallelStream()
                 .filter(Objects::nonNull)
@@ -91,9 +100,10 @@ public class CourseServiceImpl implements CourseService {
 
     /**
      * 保存到redis数据库
+     *
      * @param iCourseDto
      */
-    private void addRedis(ICourseDto iCourseDto){
+    private void addRedis(ICourseDto iCourseDto) {
         HashMap<String, String> map = MapUtil.newHashMap();
         map.put("courseId", iCourseDto.getCourseId());
         map.put("courseName", iCourseDto.getCourseName());

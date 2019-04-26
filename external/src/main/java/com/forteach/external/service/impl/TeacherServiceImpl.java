@@ -2,6 +2,7 @@ package com.forteach.external.service.impl;
 
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.StrUtil;
+import com.forteach.external.mongodb.domain.TeacherInfo;
 import com.forteach.external.mysql.domain.Teacher;
 import com.forteach.external.mysql.domain.builder.TeacherBuilder;
 import com.forteach.external.mysql.repository.TeacherRepository;
@@ -9,6 +10,7 @@ import com.forteach.external.oracle.dto.ITeacherDto;
 import com.forteach.external.oracle.repository.ZhxyJzgxxRepository;
 import com.forteach.external.service.TeacherService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import javax.annotation.Resource;
@@ -34,6 +36,9 @@ public class TeacherServiceImpl implements TeacherService {
 
     @Resource
     private ZhxyJzgxxRepository zhxyJzgxxRepository;
+
+    @Resource
+    private  MongoTemplate mongoTemplate;
 
     /**
      * 保存查询到的教师信息
@@ -66,19 +71,30 @@ public class TeacherServiceImpl implements TeacherService {
      */
     private void saveTeacher(List<ITeacherDto> iTeacherDtos){
         List<Teacher> list = new ArrayList<>();
+        List<TeacherInfo> teacherInfoList = new ArrayList<>();
         iTeacherDtos.parallelStream()
                 .filter(Objects::nonNull)
                 .filter(iTeacherDto -> StrUtil.isNotBlank(iTeacherDto.getTeacherId()) &&
                                 StrUtil.isNotBlank(iTeacherDto.getTeacherCode()) &&
                                 StrUtil.isNotBlank(iTeacherDto.getTeacherName()))
                 .forEach(iTeacherDto -> {
+                    //mysql
                     list.add(TeacherBuilder.aTeacher()
                             .withTeacherId(iTeacherDto.getTeacherId())
                             .withTeacherName(iTeacherDto.getTeacherName())
                             .withTeacherCode(iTeacherDto.getTeacherCode())
                             .withIsValidated(ISVALIDATED_N.equals(iTeacherDto.getIsValidated()) ? ISVALIDATED_1 : ISVALIDATED_0)
                             .build());
+                    //mongodb
+                    teacherInfoList.add(TeacherInfo.builder()
+                            .teacherCode(iTeacherDto.getTeacherCode())
+                            .teacherId(iTeacherDto.getTeacherId())
+                            .teacherName(iTeacherDto.getTeacherName())
+                            .build());
                 });
+        //保存mysql
         teacherRepository.saveAll(list);
+        //保存mongodb
+        mongoTemplate.insertAll(teacherInfoList);
     }
 }

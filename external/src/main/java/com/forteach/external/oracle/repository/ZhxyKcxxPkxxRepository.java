@@ -1,7 +1,11 @@
 package com.forteach.external.oracle.repository;
 
+import com.forteach.external.oracle.dto.TeacherClassCourseDto;
 import com.forteach.external.oracle.entity.ZhxyKcxxPkxxEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+
+import java.util.List;
 
 /**
  * @Auther: zhangyy
@@ -12,4 +16,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
  */
 public interface ZhxyKcxxPkxxRepository extends JpaRepository<ZhxyKcxxPkxxEntity, String> {
 
+    @Query(value = "select tZjjs as teacherId, tSkbj as classId, kcId as courseId from ZhxyKcxxPkxxEntity")
+    List<TeacherClassCourseDto> findByClassIdAndCourse();
 }

@@ -4,7 +4,6 @@ import com.forteach.external.oracle.dto.ICourseDto;
 import com.forteach.external.oracle.entity.ZhxyKcxxEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;

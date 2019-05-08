@@ -1,4 +1,4 @@
-package com.forteach.external.mysql.domain;
+package com.forteach.external.mysql.domain.base;
 
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.StrUtil;

@@ -4,7 +4,6 @@ import com.forteach.external.oracle.dto.ITeacherDto;
 import com.forteach.external.oracle.entity.ZhxyJzgxxEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Timestamp;
@@ -25,7 +24,7 @@ public interface ZhxyJzgxxRepository extends JpaRepository<ZhxyJzgxxEntity, Stri
      * @return
      */
     @Transactional(readOnly = true)
-    @Query(value = "select z.id as teacherId, z.jgh as teacherCode, z.xm as teacherName, z.ryzt as idValidated from ZhxyJzgxxEntity as z where z.yxbz = ?1")
+    @Query(value = "select id as teacherId, jgh as teacherCode, xm as teacherName, ryzt as idValidated from ZhxyJzgxxEntity where yxbz = ?1")
     List<ITeacherDto> findAllByDto(String isValidated);
 
     /**

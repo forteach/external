@@ -1,5 +1,6 @@
 package com.forteach.external.mysql.domain;
 
+import com.forteach.external.mysql.domain.base.Entitys;
 import lombok.*;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
@@ -22,7 +23,10 @@ import java.io.Serializable;
 @DynamicInsert
 @DynamicUpdate
 @GenericGenerator(name = "system-uuid", strategy = "uuid")
-@Table(name = "teacher",indexes = {@Index(columnList = "teacher_id", name = "teacher_id_index"), @Index(columnList = "specialty_id", name = "specialty_id_index")})
+@Table(name = "teacher",indexes = {
+        @Index(columnList = "teacher_id", name = "teacher_id_index"),
+        @Index(columnList = "specialty_id", name = "specialty_id_index")
+})
 @org.hibernate.annotations.Table(appliesTo = "teacher", comment = "老师")
 public class Teacher extends Entitys implements Serializable {
 

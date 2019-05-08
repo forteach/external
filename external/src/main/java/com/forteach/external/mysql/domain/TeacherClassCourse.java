@@ -1,14 +1,12 @@
 package com.forteach.external.mysql.domain;
 
-import lombok.Builder;
-import lombok.Data;
+import com.forteach.external.mysql.domain.base.Entitys;
+import com.forteach.external.mysql.domain.primarykey.TeacherClassCoursePrimaryKey;
+import lombok.*;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
-import javax.persistence.Entity;
-import javax.persistence.IdClass;
-import javax.persistence.Index;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
 
 /**
@@ -23,13 +21,21 @@ import java.io.Serializable;
 @Builder
 @DynamicInsert
 @DynamicUpdate
-@IdClass(TeacherClassCoursePrimarykey.class)
+@EqualsAndHashCode(callSuper = true)
+@IdClass(TeacherClassCoursePrimaryKey.class)
 @Table(name = "teacher_class_course", indexes = {
         @Index(columnList = "teacher_id", name = "teacher_id_index"),
         @Index(columnList = "class_id", name = "class_id_index"),
-        @Index(columnList = "course_id", name = "course_id_index")})
+        @Index(columnList = "course_id", name = "course_id_index")
+})
+@AllArgsConstructor
+@NoArgsConstructor
 @org.hibernate.annotations.Table(appliesTo = "teacher_class_course", comment = "老师授课的班级和课程信息")
-public class TeacherAndClassAndCourse extends Entitys implements Serializable {
+public class TeacherClassCourse extends Entitys implements Serializable {
+    private static final long serialVersionUID = 1L;
+
+    @EmbeddedId
+    private TeacherClassCoursePrimaryKey teacherClassCoursePrimarykey;
 
     private String teacherId;
 

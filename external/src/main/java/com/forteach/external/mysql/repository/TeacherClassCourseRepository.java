@@ -1,6 +1,6 @@
 package com.forteach.external.mysql.repository;
 
-import com.forteach.external.mysql.domain.TeacherAndClassAndCourse;
+import com.forteach.external.mysql.domain.TeacherClassCourse;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
@@ -10,6 +10,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @version: 1.0
  * @description: 教师对应的班级信息
  */
-public interface TeacherClassCourseRepository extends JpaRepository<TeacherAndClassAndCourse, String> {
+public interface TeacherClassCourseRepository extends JpaRepository<TeacherClassCourse, String> {
 
 }

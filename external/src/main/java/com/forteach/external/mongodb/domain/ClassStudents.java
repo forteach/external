@@ -1,5 +1,6 @@
 package com.forteach.external.mongodb.domain;
 
+import com.forteach.external.mongodb.domain.base.BaseEntity;
 import lombok.Builder;
 import lombok.Data;
 import org.springframework.data.mongodb.core.index.Indexed;
@@ -17,7 +18,7 @@ import java.util.List;
 @Data
 @Builder
 @Document(collection = "classStudents")
-public class ClassStudents extends BaseEntity{
+public class ClassStudents extends BaseEntity {
 
     /**
      * 班级id

@@ -37,9 +37,29 @@ public class Dic {
     /**
      * 课程redis 前缀
      */
-    public static final String COURSE_PREFIX = "course#";
+    public static final String COURSE_PREFIX = "course$";
     /**
      * 班级redis 前缀
      */
-    private static final String CLASS_PREFIX = "class#";
+    private static final String CLASS_PREFIX = "class$";
+
+    /**
+     * 老师创建临时课堂后缀
+     */
+    public static final String OPEN_CLASSROOM = "OpenRoom";
+
+    /**
+     * 老师创建临时课堂章节后缀
+     */
+    public static final String CLASSROOM_CHAPTER = "RoomChapter";
+
+    /**
+     * 课堂相关信息ID-Redis的编码前缀
+     */
+    public static final String CLASS_ROOM_QR_CODE_PREFIX = "RoomMember";
+
+    /**
+     * 老师创建临时课堂前缀
+     */
+    public static final String CLASSROOM_TEACHER = "RoomTeacher";
 }

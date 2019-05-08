@@ -1,5 +1,6 @@
 package com.forteach.external.oracle.dto;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -9,7 +10,7 @@ import java.util.Date;
  * @Version: 1.0
  * @Description:　系统用户信息
  */
-public interface ISysUserDto {
+public interface ISysUserDto extends Serializable {
     /**
      * 用户id
      *

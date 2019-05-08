@@ -101,6 +101,7 @@ public class StudentServiceImpl implements StudentService {
     private Student builderStudent(IStudentDto iStudentDto){
         HashMap<String, String> map = MapUtil.newHashMap();
         map.put("id", iStudentDto.getId());
+        map.put("studentId", iStudentDto.getId());
         map.put("name", iStudentDto.getName());
         map.put("IDCardNo", iStudentDto.getIDCardNo());
         map.put("classId", iStudentDto.getClassId());

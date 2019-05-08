@@ -1,6 +1,7 @@
 package com.forteach.external.mysql.domain;
 
 
+import com.forteach.external.mysql.domain.base.Entitys;
 import lombok.*;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
@@ -17,11 +18,13 @@ import java.io.Serializable;
 @Data
 @Entity
 @Builder
-@Table(name = "o_course", indexes = {@Index(columnList = "course_id", name = "course_id_index")})
-@EqualsAndHashCode(callSuper = true)
-@org.hibernate.annotations.Table(appliesTo = "o_course", comment = "科目课程信息,从数字化校园查询的")
 @DynamicInsert
 @DynamicUpdate
+@Table(name = "o_course", indexes = {
+        @Index(columnList = "course_id", name = "course_id_index")
+})
+@EqualsAndHashCode(callSuper = true)
+@org.hibernate.annotations.Table(appliesTo = "o_course", comment = "科目课程信息,从数字化校园查询的")
 public class Course extends Entitys implements Serializable {
 
     private static final long serialVersionUID = 1L;

@@ -1,5 +1,7 @@
 package com.forteach.external.runner;
 
+import com.forteach.external.schedule.CourseSchedule;
+import com.forteach.external.service.CourseService;
 import com.forteach.external.service.StudentService;
 import com.forteach.external.service.TeacherClassCourseService;
 import com.forteach.external.service.TeacherService;
@@ -17,7 +19,7 @@ import javax.annotation.Resource;
  * @Email: zhang10092009@hotmail.com
  * @Date: 19-1-7 17:26
  * @Version: 1.0
- * @Description:
+ * @Description: 启动后就执行的方法, @Order 执行顺序
  */
 @Component
 @Order(value = 100)
@@ -25,14 +27,15 @@ import javax.annotation.Resource;
 public class RedisRunner implements ApplicationRunner {
 
     private final StudentService studentService;
-
+    private final CourseService courseService;
     private final TeacherService teacherService;
     private final TeacherClassCourseService teacherClassCourseService;
 
-    private RedisRunner(StudentService studentService, TeacherService teacherService, TeacherClassCourseService teacherClassCourseService){
+    private RedisRunner(StudentService studentService, TeacherService teacherService, TeacherClassCourseService teacherClassCourseService, CourseService courseService){
         this.studentService = studentService;
         this.teacherService = teacherService;
         this.teacherClassCourseService = teacherClassCourseService;
+        this.courseService = courseService;
     }
 
     /**
@@ -43,11 +46,12 @@ public class RedisRunner implements ApplicationRunner {
     @Async
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        studentService.saveAll();
-        teacherService.saveAll();
-        teacherClassCourseService.saveTeacherClassAndCourseAll();
-        if(log.isInfoEnabled()) {
-            log.info("Thread name : {}, save students redis OK!", Thread.currentThread().getName());
-        }
+//        studentService.saveAll();
+//        teacherService.saveAll();
+//        teacherClassCourseService.saveTeacherClassAndCourseAll();
+//        courseService.saveDto();
+//        if(log.isInfoEnabled()) {
+//            log.info("Thread name : {}, save students redis OK!", Thread.currentThread().getName());
+//        }
     }
 }

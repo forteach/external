@@ -1,28 +1,21 @@
 package com.forteach.external.service.impl;
 
-import cn.hutool.core.map.MapUtil;
 import cn.hutool.core.util.StrUtil;
 import com.forteach.external.mongodb.domain.ClassesInfo;
 import com.forteach.external.mysql.domain.Classes;
 import com.forteach.external.mysql.repository.ClassesRepository;
 import com.forteach.external.oracle.dto.IClassesDto;
-import com.forteach.external.oracle.dto.ICourseDto;
 import com.forteach.external.oracle.repository.GzBjxxbRepository;
 import com.forteach.external.service.ClassesService;
-import jdk.internal.instrumentation.ClassInstrumentation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.mongodb.core.MongoTemplate;
-import org.springframework.data.redis.core.HashOperations;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
-
-import static com.forteach.external.common.Dic.COURSE_PREFIX;
 
 /**
  * @Auther: zhangyy
@@ -40,8 +33,6 @@ public class ClassesServerImpl implements ClassesService {
     private ClassesRepository classesRepository;
     @Resource
     private MongoTemplate mongoTemplate;
-    @Resource
-    private HashOperations<String, String, Object> hashOperations;
     @Override
     public List<IClassesDto> findAllDto() {
         return gzBjxxbRepository.findAllDto();
@@ -69,20 +60,15 @@ public class ClassesServerImpl implements ClassesService {
                             .build());
                 });
         //保存mysql
-        classesRepository.saveAll(list);
+        if (list.size() > 0) {
+            classesRepository.saveAll(list);
+        }
         //保存mongodb
-        mongoTemplate.insertAll(classesInfos);
-    }
+        if (classesInfos.size() > 0) {
 
-//    /**
-//     * 保存到redis数据库
-//     * @param iClassesDto
-//     */
-//    private void addRedis(IClassesDto iClassesDto){
-//        HashMap<String, Object> map = MapUtil.newHashMap();
-//        map.put("classId", iClassesDto.getClassId());
-//        map.put("className", iClassesDto.getClassName());
-//        map.put("grade", iClassesDto.getGrade());
-//        hashOperations.putAll(COURSE_PREFIX.concat(iClassesDto.getClassId()), map);
-//    }
+            mongoTemplate.dropCollection(ClassesInfo.class);
+
+            mongoTemplate.insertAll(classesInfos);
+        }
+    }
 }

@@ -1,4 +1,4 @@
-package com.forteach.external.mongodb.domain;
+package com.forteach.external.mongodb.domain.base;
 
 import lombok.Data;
 import org.springframework.data.annotation.Id;

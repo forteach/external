@@ -13,11 +13,12 @@ import com.forteach.external.service.CourseService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.redis.core.HashOperations;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 import static com.forteach.external.common.Dic.*;
 
@@ -34,10 +35,16 @@ public class CourseServiceImpl implements CourseService {
 
     @Resource
     private HashOperations<String, String, String> hashOperations;
+
+//    @Resource
+//    private StringRedisTemplate redisTemplate;
+
     @Resource
     private CourseRepository courseRepository;
+
     @Resource
     private ZhxyKcxxRepository zhxyKcxxRepository;
+
     @Resource
     private MongoTemplate mongoTemplate;
 
@@ -65,13 +72,14 @@ public class CourseServiceImpl implements CourseService {
         List<CourseInfo> courseInfoList = new ArrayList<>();
         iCourseDtos.parallelStream()
                 .filter(Objects::nonNull)
-                .filter(iCourseDto -> StrUtil.isNotBlank(iCourseDto.getCourseId()) && StrUtil.isNotBlank(iCourseDto.getCourseName()))
+                .filter(iCourseDto -> StrUtil.isNotBlank(iCourseDto.getCourseId()) &&
+                                StrUtil.isNotBlank(iCourseDto.getCourseName()))
                 .forEach(iCourseDto -> {
                     //mysql
                     list.add(CourseBuilder.aCourse()
                             .withCourseId(iCourseDto.getCourseId())
                             .withCourseName(iCourseDto.getCourseName())
-                            .withCourseDescribe(iCourseDto.getCourseDescribe())
+                            .withCourseDescribe(iCourseDto.getCourseDescribe() == null ? "" : iCourseDto.getCourseDescribe())
                             .withIsValidated(ISVALIDATED_Y.equals(iCourseDto.getIsValidated()) ? ISVALIDATED_0 : ISVALIDATED_1)
                             .build());
                     //mongodb
@@ -83,10 +91,17 @@ public class CourseServiceImpl implements CourseService {
                 });
 
         //mysql
-        courseRepository.saveAll(list);
+        if (list.size() > 0) {
+            courseRepository.saveAll(list);
+        }
 
         //mongodb
-        mongoTemplate.insertAll(courseInfoList);
+        if (courseInfoList.size() > 0) {
+
+            mongoTemplate.dropCollection(CourseInfo.class);
+
+            mongoTemplate.insertAll(courseInfoList);
+        }
     }
 
     @Override
@@ -94,7 +109,8 @@ public class CourseServiceImpl implements CourseService {
         zhxyKcxxRepository.findAllDto(ISVALIDATED_Y)
                 .parallelStream()
                 .filter(Objects::nonNull)
-                .filter(iCourseDto -> StrUtil.isNotBlank(iCourseDto.getCourseId()) && StrUtil.isNotBlank(iCourseDto.getCourseName()))
+                .filter(iCourseDto -> StrUtil.isNotBlank(iCourseDto.getCourseId())
+                        && StrUtil.isNotBlank(iCourseDto.getCourseName()))
                 .forEach(this::addRedis);
     }
 
@@ -108,7 +124,15 @@ public class CourseServiceImpl implements CourseService {
         map.put("courseId", iCourseDto.getCourseId());
         map.put("courseName", iCourseDto.getCourseName());
         map.put("courseDescribe", iCourseDto.getCourseDescribe());
-        hashOperations.putAll(COURSE_PREFIX.concat(iCourseDto.getCourseId()), map);
+        String key = getKey(iCourseDto.getCourseId());
+        hashOperations.putAll(key, map);
+//        redisTemplate.expire(key, 5, TimeUnit.DAYS);
+    }
+
+
+
+    private String getKey(String courseId){
+        return COURSE_PREFIX.concat(courseId);
     }
 
 }

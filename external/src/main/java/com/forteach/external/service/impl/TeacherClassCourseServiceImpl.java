@@ -1,15 +1,18 @@
 package com.forteach.external.service.impl;
 
+import cn.hutool.core.util.StrUtil;
 import com.forteach.external.mongodb.domain.ClassTeacherCourse;
-import com.forteach.external.mysql.domain.TeacherAndClassAndCourse;
+import com.forteach.external.mysql.domain.TeacherClassCourse;
 import com.forteach.external.mysql.repository.TeacherClassCourseRepository;
 import com.forteach.external.oracle.repository.ZhxyKcxxPkxxRepository;
 import com.forteach.external.service.TeacherClassCourseService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * @author: zhangyy
@@ -18,6 +21,7 @@ import java.util.List;
  * @version: 1.0
  * @description:
  */
+@Slf4j
 @Service
 public class TeacherClassCourseServiceImpl implements TeacherClassCourseService {
 
@@ -34,28 +38,42 @@ public class TeacherClassCourseServiceImpl implements TeacherClassCourseService 
 
     @Override
     public void saveTeacherClassAndCourseAll(){
-        List<TeacherAndClassAndCourse> list = new ArrayList<>();
+        List<TeacherClassCourse> list = new ArrayList<>();
         List<ClassTeacherCourse> courseList = new ArrayList<>();
-        zhxyKcxxPkxxRepository.findByClassIdAndCourse()
+        zhxyKcxxPkxxRepository.findCourse()
                 .parallelStream()
-                .forEach(teacherClassCourseDto -> {
+                .filter(Objects::nonNull)
+                .filter(iTeacherClassCourseDto ->
+                        StrUtil.isNotBlank(iTeacherClassCourseDto.getClassId())
+                        && StrUtil.isNotBlank(iTeacherClassCourseDto.getCourseId())
+                        && StrUtil.isNotBlank(iTeacherClassCourseDto.getTeacherId()))
+                .forEach(iTeacherClassCourseDto -> {
                     //mysql
-                    list.add(TeacherAndClassAndCourse.builder()
-                            .classId(teacherClassCourseDto.getClassId())
-                            .courseId(teacherClassCourseDto.getCourseId())
-                            .teacherId(teacherClassCourseDto.getTeacherId())
-                            .build());
-
                     //mongodb
                     courseList.add(ClassTeacherCourse.builder()
-                            .classId(teacherClassCourseDto.getClassId())
-                            .courseId(teacherClassCourseDto.getCourseId())
-                            .teacherId(teacherClassCourseDto.getTeacherId())
+                            .classId(iTeacherClassCourseDto.getClassId())
+                            .courseId(iTeacherClassCourseDto.getCourseId())
+                            .teacherId(iTeacherClassCourseDto.getTeacherId())
+                            .build());
+                    teacherClassCourseRepository.save(TeacherClassCourse.builder()
+                            .classId(iTeacherClassCourseDto.getClassId())
+                            .courseId(iTeacherClassCourseDto.getCourseId())
+                            .teacherId(iTeacherClassCourseDto.getTeacherId())
                             .build());
                 });
         //保存mysql
-        teacherClassCourseRepository.saveAll(list);
+//        if (log.isDebugEnabled()){
+//            log.info("teacherClassCourse list.size [{}]", list.size());
+//        }
+//        if (list.size() > 0) {
+//            teacherClassCourseRepository.saveAll(list);
+//        }
         //保存mongodb
-        mongoTemplate.insertAll(courseList);
+        if (courseList.size() > 0) {
+
+            mongoTemplate.dropCollection(ClassTeacherCourse.class);
+
+            mongoTemplate.insertAll(courseList);
+        }
     }
 }

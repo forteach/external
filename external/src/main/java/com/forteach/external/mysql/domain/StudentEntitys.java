@@ -1,5 +1,6 @@
 package com.forteach.external.mysql.domain;
 
+import com.forteach.external.mysql.domain.base.Entitys;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.hibernate.annotations.DynamicInsert;
@@ -19,7 +20,10 @@ import javax.persistence.*;
 @EqualsAndHashCode(callSuper = true)
 @DynamicInsert
 @DynamicUpdate
-@Table(name = "student_info",indexes = {@Index(columnList = "id", name = "id_index"), @Index(columnList = "id_card_no", name = "id_card_no_index")})
+@Table(name = "student_info",indexes = {
+        @Index(columnList = "id", name = "id_index"),
+        @Index(columnList = "id_card_no", name = "id_card_no_index")
+})
 @org.hibernate.annotations.Table(appliesTo = "student_info", comment = "从学校数据库查询的学生信息")
 public class StudentEntitys extends Entitys {
     @Id

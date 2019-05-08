@@ -37,7 +37,7 @@ public class GzBjxxbEntity implements Serializable {
      */
     private Long xsrs;
     /**
-     * 男生树
+     * 男生数
      */
     private Long nss;
     /**

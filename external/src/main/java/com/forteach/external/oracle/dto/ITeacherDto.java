@@ -1,9 +1,10 @@
 package com.forteach.external.oracle.dto;
 
+import java.io.Serializable;
 /**
  * 教师dto
  */
-public interface ITeacherDto{
+public interface ITeacherDto extends Serializable {
     /**
      * 教师id
      * @return

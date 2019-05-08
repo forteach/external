@@ -1,5 +1,6 @@
 package com.forteach.external.mongodb.domain;
 
+import com.forteach.external.mongodb.domain.base.BaseEntity;
 import lombok.Builder;
 import lombok.Data;
 import org.springframework.data.mongodb.core.index.Indexed;

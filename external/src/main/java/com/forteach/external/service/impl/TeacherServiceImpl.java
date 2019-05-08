@@ -74,7 +74,8 @@ public class TeacherServiceImpl implements TeacherService {
         List<TeacherInfo> teacherInfoList = new ArrayList<>();
         iTeacherDtos.parallelStream()
                 .filter(Objects::nonNull)
-                .filter(iTeacherDto -> StrUtil.isNotBlank(iTeacherDto.getTeacherId()) &&
+                .filter(iTeacherDto ->
+                        StrUtil.isNotBlank(iTeacherDto.getTeacherId()) &&
                                 StrUtil.isNotBlank(iTeacherDto.getTeacherCode()) &&
                                 StrUtil.isNotBlank(iTeacherDto.getTeacherName()))
                 .forEach(iTeacherDto -> {
@@ -91,10 +92,25 @@ public class TeacherServiceImpl implements TeacherService {
                             .teacherId(iTeacherDto.getTeacherId())
                             .teacherName(iTeacherDto.getTeacherName())
                             .build());
+
+                    teacherRepository.save(TeacherBuilder.aTeacher()
+                            .withTeacherId(iTeacherDto.getTeacherId())
+                            .withTeacherName(iTeacherDto.getTeacherName())
+                            .withTeacherCode(iTeacherDto.getTeacherCode())
+                            .withIsValidated(ISVALIDATED_N.equals(iTeacherDto.getIsValidated()) ? ISVALIDATED_1 : ISVALIDATED_0)
+                            .build());
                 });
         //保存mysql
-        teacherRepository.saveAll(list);
+//        if (list.size() > 0) {
+//
+//            teacherRepository.saveAll(list);
+//        }
         //保存mongodb
-        mongoTemplate.insertAll(teacherInfoList);
+        if (teacherInfoList.size() > 0) {
+
+            mongoTemplate.dropCollection(TeacherInfo.class);
+
+            mongoTemplate.insertAll(teacherInfoList);
+        }
     }
 }

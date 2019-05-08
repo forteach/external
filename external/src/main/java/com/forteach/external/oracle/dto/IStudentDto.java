@@ -1,5 +1,7 @@
 package com.forteach.external.oracle.dto;
 
+import java.io.Serializable;
+
 /**
  * @Auther: zhangyy
  * @Email: zhang10092009@hotmail.com
@@ -7,7 +9,7 @@ package com.forteach.external.oracle.dto;
  * @Version: 1.0
  * @Description:
  */
-public interface IStudentDto {
+public interface IStudentDto extends Serializable {
 
     /**
      * 学生编号

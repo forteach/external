@@ -47,7 +47,7 @@ public class CourseJoinChapter extends Entitys {
     @Column(name = "join_number", columnDefinition = "INT(11) DEFAULT 0 COMMENT '加入课堂的人数'")
     private Integer joinNumber;
 
-    @Column(name = "join_students", columnDefinition = "TEXT(4000) COMMENT '加入课堂的学生id,逗号分割'")
+    @Column(name = "join_students", columnDefinition = "TEXT(10000) COMMENT '加入课堂的学生id,逗号分割'")
     private String students;
 
 }

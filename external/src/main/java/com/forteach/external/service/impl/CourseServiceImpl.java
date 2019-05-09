@@ -4,7 +4,7 @@ import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.map.MapUtil;
 import cn.hutool.core.util.StrUtil;
 import com.forteach.external.mongodb.domain.CourseInfo;
-import com.forteach.external.mysql.domain.Course;
+import com.forteach.external.mysql.domain.CourseEntitys;
 import com.forteach.external.mysql.domain.builder.CourseBuilder;
 import com.forteach.external.mysql.repository.CourseRepository;
 import com.forteach.external.oracle.dto.ICourseDto;
@@ -68,7 +68,7 @@ public class CourseServiceImpl implements CourseService {
     }
 
     private void saveAll(List<ICourseDto> iCourseDtos) {
-        List<Course> list = new ArrayList<>();
+        List<CourseEntitys> list = new ArrayList<>();
         List<CourseInfo> courseInfoList = new ArrayList<>();
         iCourseDtos.parallelStream()
                 .filter(Objects::nonNull)

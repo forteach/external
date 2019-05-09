@@ -1,6 +1,6 @@
 package com.forteach.external.mysql.domain.builder;
 
-import com.forteach.external.mysql.domain.Course;
+import com.forteach.external.mysql.domain.CourseEntitys;
 
 /**
  * @Auther: zhangyy
@@ -43,8 +43,8 @@ public final class CourseBuilder {
         return this;
     }
 
-    public Course build() {
-        Course course = new Course();
+    public CourseEntitys build() {
+        CourseEntitys course = new CourseEntitys();
         course.setCourseId(courseId);
         course.setIsValidated(isValidated);
         course.setCourseName(courseName);

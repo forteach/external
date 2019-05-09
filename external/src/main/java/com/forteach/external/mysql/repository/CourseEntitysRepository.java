@@ -1,6 +1,6 @@
 package com.forteach.external.mysql.repository;
 
-import com.forteach.external.mysql.domain.CourseEntitys;
+import com.forteach.external.mysql.domain.Course;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
@@ -10,6 +10,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @version: 1.0
  * @description:
  */
-public interface CourseEntitysRepository extends JpaRepository<CourseEntitys, String> {
+public interface CourseEntitysRepository extends JpaRepository<Course, String> {
 
 }

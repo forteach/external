@@ -1,11 +1,7 @@
 package com.forteach.external.mysql.repository;
 
-import com.forteach.external.mysql.domain.Course;
+import com.forteach.external.mysql.domain.CourseEntitys;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-import javax.annotation.Resource;
 
 /**
  * @Auther: zhangyy
@@ -15,6 +11,6 @@ import javax.annotation.Resource;
  * @Description:
  */
 
-public interface CourseRepository extends JpaRepository<Course, String> {
+public interface CourseRepository extends JpaRepository<CourseEntitys, String> {
 
 }

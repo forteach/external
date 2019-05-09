@@ -1,6 +1,6 @@
 package com.forteach.external.service.impl;
 
-import com.forteach.external.mysql.domain.CourseEntitys;
+import com.forteach.external.mysql.domain.Course;
 import com.forteach.external.mysql.repository.CourseEntitysRepository;
 import com.forteach.external.mysql.repository.CourseRepository;
 import com.forteach.external.service.CourseService;
@@ -44,7 +44,7 @@ public class CourseServiceImplTest {
                 .parallelStream()
                 .filter(Objects::nonNull)
                 .forEach(course -> {
-                    CourseEntitys courseEntitys = new CourseEntitys();
+                    Course courseEntitys = new Course();
                     courseEntitys.setCourseId(course.getCourseId());
                     courseEntitys.setCourseName(course.getCourseName());
                     courseEntitys.setCourseDescribe(course.getCourseDescribe());

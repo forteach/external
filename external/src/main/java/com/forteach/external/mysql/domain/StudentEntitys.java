@@ -22,7 +22,8 @@ import javax.persistence.*;
 @DynamicUpdate
 @Table(name = "student_info",indexes = {
         @Index(columnList = "id", name = "id_index"),
-        @Index(columnList = "id_card_no", name = "id_card_no_index")
+        @Index(columnList = "id_card_no", name = "id_card_no_index"),
+        @Index(columnList = "class_id", name = "class_id_index")
 })
 @org.hibernate.annotations.Table(appliesTo = "student_info", comment = "从学校数据库查询的学生信息")
 public class StudentEntitys extends Entitys {

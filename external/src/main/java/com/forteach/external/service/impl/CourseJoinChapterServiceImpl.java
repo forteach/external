@@ -6,6 +6,7 @@ import com.forteach.external.mysql.repository.CourseChapterRepository;
 import com.forteach.external.mysql.repository.CourseJoinChapterRepository;
 import com.forteach.external.service.CourseJoinChapterService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.redis.core.HashOperations;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 
@@ -30,8 +31,12 @@ public class CourseJoinChapterServiceImpl implements CourseJoinChapterService {
 
     @Resource
     private CourseJoinChapterRepository courseJoinChapterRepository;
+
     @Resource
     private CourseChapterRepository courseChapterRepository;
+
+    @Resource
+    private HashOperations<String, String, String> hashOperations;
 
     @Resource
     private StringRedisTemplate stringRedisTemplate;
@@ -76,9 +81,17 @@ public class CourseJoinChapterServiceImpl implements CourseJoinChapterService {
             c.setJoinNumber(getJoinStudentNumber(teacherId, stringSet));
             c.setStudents(getJoinStudents(teacherId, stringSet));
             c.setTeacherId(teacherId);
+            if (!stringSet.isEmpty()) {
+                String studentId = stringSet.stream().findFirst().get();
+                c.setClassId(hashOperations.get(getStudentKey(studentId), "classId"));
+            }
         }
     }
 
+
+    private String getStudentKey(String studentId){
+        return STUDENT_ADO.concat(studentId);
+    }
     private String getRoomChapterKey(String circleId) {
         return circleId.concat(CLASSROOM_CHAPTER);
     }

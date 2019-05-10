@@ -41,6 +41,9 @@ public class CourseJoinChapter extends Entitys {
 
     private String circleId;
 
+    @Column(name = "class_id", columnDefinition = "VARCHAR(32) COMMENT '班级id'")
+    private String classId;
+
     @Column(name = "teacher_id", columnDefinition = "VARCHAR(32) COMMENT '创建课堂的教师id'")
     private String teacherId;
 

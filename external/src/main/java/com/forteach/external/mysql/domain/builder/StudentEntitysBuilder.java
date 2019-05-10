@@ -15,6 +15,7 @@ public final class StudentEntitysBuilder {
     private String userName;
     private String IDCardNo;
     private String classId;
+    private String portrait;
 
     private StudentEntitysBuilder() {
     }
@@ -46,9 +47,13 @@ public final class StudentEntitysBuilder {
         this.classId = classId;
         return this;
     }
+    public StudentEntitysBuilder portrait(String portrait){
+        this.portrait = portrait;
+        return this;
+    }
 
     public StudentEntitys build() {
-        StudentEntitys studentEntitys = new StudentEntitys(id, userName, IDCardNo, classId);
+        StudentEntitys studentEntitys = new StudentEntitys(id, userName, IDCardNo, classId, portrait);
         studentEntitys.setIsValidated(isValidated);
         return studentEntitys;
     }

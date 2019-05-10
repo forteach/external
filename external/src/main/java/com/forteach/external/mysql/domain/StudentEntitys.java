@@ -36,16 +36,20 @@ public class StudentEntitys extends Entitys {
     @Column(name = "id_card_no", columnDefinition = "VARCHAR(32) COMMENT '身份证号码'")
     private String IDCardNo;
 
+    @Column(name = "portrait", columnDefinition = "VARCHAR(255) COMMENT '学生头像url'")
+    private String portrait;
+
     @Column(name = "class_id", columnDefinition = "VARCHAR(32) COMMENT '学生所属班级id'")
     private String classId;
 
     public StudentEntitys() {
     }
 
-    public StudentEntitys(String id, String userName, String IDCardNo, String classId) {
+    public StudentEntitys(String id, String userName, String IDCardNo, String classId, String portrait) {
         this.id = id;
         this.userName = userName;
         this.IDCardNo = IDCardNo;
         this.classId = classId;
+        this.portrait = portrait;
     }
 }

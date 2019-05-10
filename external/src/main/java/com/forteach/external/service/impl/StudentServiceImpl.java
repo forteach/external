@@ -23,6 +23,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
+
 import static com.forteach.external.common.Dic.*;
 
 /**
@@ -110,6 +111,7 @@ public class StudentServiceImpl implements StudentService {
         return StudentBuilder.aStudent()
                 .withId(iStudentDto.getId())
                 .withKey(STUDENT_ADO.concat(iStudentDto.getId()))
+                .withName(iStudentDto.getName())
                 .withMap(map)
                 .build();
     }
@@ -151,6 +153,7 @@ public class StudentServiceImpl implements StudentService {
                 .IDCardNo(map.get("IDCardNo"))
                 .classId(map.get("classId"))
                 .isValidated(map.get("isValidated"))
+                .portrait(map.get("portrait"))
                 .build());
     }
 }

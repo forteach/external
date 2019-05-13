@@ -11,10 +11,8 @@ import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
+import java.util.stream.Collectors;
 
 import static com.forteach.external.common.Dic.*;
 
@@ -78,12 +76,16 @@ public class CourseJoinChapterServiceImpl implements CourseJoinChapterService {
             Set<String> stringSet = stringRedisTemplate.opsForSet().members(getJoinMemberKey(circleId));
             c.setCourseId(courseJoinChapter.getCourseId());
             c.setCircleId(circleId);
-            c.setJoinNumber(getJoinStudentNumber(teacherId, stringSet));
-            c.setStudents(getJoinStudents(teacherId, stringSet));
             c.setTeacherId(teacherId);
-            if (!stringSet.isEmpty()) {
-                String studentId = stringSet.stream().findFirst().get();
-                c.setClassId(hashOperations.get(getStudentKey(studentId), "classId"));
+            if (!stringSet.isEmpty() && (stringSet.size() > 1)) {
+                c.setJoinNumber(getJoinStudentNumber(teacherId, stringSet));
+                c.setStudents(getJoinStudents(teacherId, stringSet));
+                Optional<String> optionalS = stringSet
+                        .stream()
+                        .filter(Objects::nonNull)
+                        .filter(s -> !s.equals(teacherId))
+                        .findFirst();
+                optionalS.ifPresent(s -> c.setClassId(hashOperations.get(getStudentKey(s), "classId")));
             }
         }
     }

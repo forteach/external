@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.stream.Stream;
 
 /**
  * @Auther: zhangyy
@@ -25,8 +26,8 @@ public interface CourseChapterRepository extends JpaRepository<CourseChapter, St
      * @param chapterIds
      * @return
      */
-    @Transactional(readOnly = true)
-    @Query(value = "select courseId AS courseId, chapterId AS chapterId from CourseChapter where chapterId in ?1")
+    @Transactional(readOnly = true, rollbackFor = Exception.class)
+    @Query(value = "select courseId AS courseId, chapterId AS chapterId FROM CourseChapter WHERE chapterId IN ?1")
     List<ICourseChapterDto> findByChapterIdIn(List<String> chapterIds);
 
 }

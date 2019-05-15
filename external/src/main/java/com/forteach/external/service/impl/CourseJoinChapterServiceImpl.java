@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.*;
-import java.util.stream.Collectors;
 
 import static com.forteach.external.common.Dic.*;
 
@@ -54,7 +53,7 @@ public class CourseJoinChapterServiceImpl implements CourseJoinChapterService {
 
         if (courseJoinChapters != null && courseJoinChapters.size() > 0) {
             findJoinCoursesIdsList(chapterIds)
-                    .parallelStream()
+                    .stream()
                     .filter(Objects::nonNull)
                     .forEach(courseJoinChapter -> {
                         courseJoinChapters
@@ -180,9 +179,20 @@ public class CourseJoinChapterServiceImpl implements CourseJoinChapterService {
                             .chapterId(iCourseChapterDto.getChapterId())
                             .build());
                 });
-        return courseJoinChapters;
+        if (courseJoinChapters.size() > 0) {
+            return courseJoinChapters;
+        } else {
+            return null;
+        }
     }
 
+    /**
+     * 计算加入的人数
+     *
+     * @param teacherId
+     * @param stringSet
+     * @return
+     */
     private int getJoinStudentNumber(String teacherId, Set<String> stringSet) {
         long count = stringSet.stream()
                 .filter(Objects::nonNull)
@@ -191,6 +201,13 @@ public class CourseJoinChapterServiceImpl implements CourseJoinChapterService {
         return (int) count;
     }
 
+    /**
+     * 加入的学生
+     *
+     * @param teacherId
+     * @param stringSet
+     * @return
+     */
     private String getJoinStudents(String teacherId, Set<String> stringSet) {
         StringBuffer stringBuffer = new StringBuffer();
         stringSet.stream()

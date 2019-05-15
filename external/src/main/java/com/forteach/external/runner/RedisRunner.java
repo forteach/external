@@ -46,12 +46,12 @@ public class RedisRunner implements ApplicationRunner {
     @Async
     @Override
     public void run(ApplicationArguments args) throws Exception {
-//        studentService.saveAll();
-//        teacherService.saveAll();
-//        teacherClassCourseService.saveTeacherClassAndCourseAll();
-//        courseService.saveDto();
-//        if(log.isInfoEnabled()) {
-//            log.info("Thread name : {}, save students redis OK!", Thread.currentThread().getName());
-//        }
+        studentService.saveAll();
+        teacherService.saveAll();
+        teacherClassCourseService.saveTeacherClassAndCourseAll();
+        courseService.saveDto();
+        if(log.isInfoEnabled()) {
+            log.info("Thread name : {}, save students redis OK!", Thread.currentThread().getName());
+        }
     }
 }

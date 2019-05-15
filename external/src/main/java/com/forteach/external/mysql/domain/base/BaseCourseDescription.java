@@ -1,5 +1,6 @@
 package com.forteach.external.mysql.domain.base;
 
+import com.forteach.external.mysql.domain.pk.CourseCountPk;
 import com.forteach.external.mysql.domain.pk.CourseJoinChapterPk;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -17,12 +18,12 @@ import javax.persistence.*;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @MappedSuperclass
-@IdClass(CourseJoinChapterPk.class)
+@IdClass(CourseCountPk.class)
 @EntityListeners(AuditingEntityListener.class)
 public abstract class BaseCourseDescription extends Entitys {
 
     @EmbeddedId
-    private CourseJoinChapterPk courseJoinChapterPk;
+    private CourseCountPk courseCountPk;
 
     private String courseId;
 
@@ -30,10 +31,4 @@ public abstract class BaseCourseDescription extends Entitys {
 
     private String classId;
 
-    private String circleId;
-
-    public String studentId;
-
-    @Column(name = "grade", columnDefinition = "VARCHAR(11) COMMENT '评分'")
-    private String grade;
 }

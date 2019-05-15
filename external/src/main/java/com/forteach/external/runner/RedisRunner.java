@@ -1,6 +1,5 @@
 package com.forteach.external.runner;
 
-import com.forteach.external.schedule.CourseSchedule;
 import com.forteach.external.service.CourseService;
 import com.forteach.external.service.StudentService;
 import com.forteach.external.service.TeacherClassCourseService;
@@ -11,8 +10,6 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.core.annotation.Order;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
-
-import javax.annotation.Resource;
 
 /**
  * @Auther: zhangyy

@@ -1,13 +1,12 @@
-package com.forteach.external.mysql.domain;
+package com.forteach.external.mysql.domain.description;
 
 import com.forteach.external.mysql.domain.base.BaseCourseDescription;
+import com.forteach.external.mysql.domain.pk.CourseJoinChapterPk;
 import lombok.*;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
-import javax.persistence.Entity;
-import javax.persistence.Index;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
 
 /**
@@ -29,7 +28,21 @@ import java.io.Serializable;
         @Index(name = "circle_id_index", columnList = "circle_id"),
         @Index(name = "student_id_index", columnList = "student_id")
 })
+@IdClass(CourseJoinChapterPk.class)
 @org.hibernate.annotations.Table(appliesTo = "course_join_chapter_description", comment = "课堂章节加入学生详情表")
 public class CourseJoinChapterDescription extends BaseCourseDescription implements Serializable {
+
+    @EmbeddedId
+    private CourseJoinChapterPk courseJoinChapterPk;
+
+    private String courseId;
+
+    private String chapterId;
+
+    private String classId;
+
+    private String circleId;
+
+    public String studentId;
 
 }

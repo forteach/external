@@ -2,11 +2,11 @@ package com.forteach.external.service.impl;
 
 import cn.hutool.core.collection.CollUtil;
 import com.forteach.external.mysql.domain.CourseChapterCount;
-import com.forteach.external.mysql.domain.CourseJoinChapterDescription;
+import com.forteach.external.mysql.domain.description.CourseJoinChapterDescription;
 import com.forteach.external.mysql.domain.builder.CourseJoinChapterDescriptionBuilder;
 import com.forteach.external.mysql.repository.CourseChapterCountRepository;
 import com.forteach.external.mysql.repository.CourseChapterRepository;
-import com.forteach.external.mysql.repository.CourseJoinChapterDescriptionRepository;
+import com.forteach.external.mysql.repository.description.CourseJoinChapterDescriptionRepository;
 import com.forteach.external.service.CourseJoinChapterService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.core.HashOperations;

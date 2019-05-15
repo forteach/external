@@ -1,6 +1,6 @@
-package com.forteach.external.mysql.repository;
+package com.forteach.external.mysql.repository.description;
 
-import com.forteach.external.mysql.domain.CourseJoinChapterDescription;
+import com.forteach.external.mysql.domain.description.CourseJoinChapterDescription;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**

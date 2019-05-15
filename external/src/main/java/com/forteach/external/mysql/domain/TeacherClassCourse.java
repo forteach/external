@@ -35,7 +35,7 @@ public class TeacherClassCourse extends Entitys implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @EmbeddedId
-    private TeacherClassCoursePk teacherClassCoursePrimarykey;
+    private TeacherClassCoursePk teacherClassCoursePk;
 
     private String teacherId;
 

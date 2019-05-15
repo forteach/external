@@ -1,6 +1,6 @@
 package com.forteach.external.mysql.domain.builder;
 
-import com.forteach.external.mysql.domain.CourseJoinChapterDescription;
+import com.forteach.external.mysql.domain.description.CourseJoinChapterDescription;
 
 /**
  * @author: zhangyy

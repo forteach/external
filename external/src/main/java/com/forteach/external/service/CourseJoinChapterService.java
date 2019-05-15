@@ -12,5 +12,5 @@ public interface CourseJoinChapterService {
     /**
      * 更新加入课堂章节信息
      */
-    void saveOrUpdateCourseJoinChapter();
+    void saveJoinCourseChapter();
 }

@@ -1,7 +1,7 @@
 package com.forteach.external.mysql.domain;
 
 import com.forteach.external.mysql.domain.base.Entitys;
-import com.forteach.external.mysql.domain.primarykey.TeacherClassCoursePrimaryKey;
+import com.forteach.external.mysql.domain.pk.TeacherClassCoursePk;
 import lombok.*;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
@@ -22,7 +22,7 @@ import java.io.Serializable;
 @DynamicInsert
 @DynamicUpdate
 @EqualsAndHashCode(callSuper = true)
-@IdClass(TeacherClassCoursePrimaryKey.class)
+@IdClass(TeacherClassCoursePk.class)
 @Table(name = "teacher_class_course", indexes = {
         @Index(columnList = "teacher_id", name = "teacher_id_index"),
         @Index(columnList = "class_id", name = "class_id_index"),
@@ -35,7 +35,7 @@ public class TeacherClassCourse extends Entitys implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @EmbeddedId
-    private TeacherClassCoursePrimaryKey teacherClassCoursePrimarykey;
+    private TeacherClassCoursePk teacherClassCoursePrimarykey;
 
     private String teacherId;
 

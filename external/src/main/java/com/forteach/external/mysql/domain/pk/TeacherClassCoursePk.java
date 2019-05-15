@@ -1,4 +1,4 @@
-package com.forteach.external.mysql.domain.primarykey;
+package com.forteach.external.mysql.domain.pk;
 
 import lombok.Data;
 
@@ -15,7 +15,7 @@ import java.io.Serializable;
  */
 @Data
 @Embeddable
-public class TeacherClassCoursePrimaryKey implements Serializable {
+public class TeacherClassCoursePk implements Serializable {
 
     @Column(name = "teacher_id", columnDefinition = "VARCHAR(32) COMMENT '老师id uuid'", insertable = false, updatable = false)
     private String teacherId;
@@ -26,10 +26,10 @@ public class TeacherClassCoursePrimaryKey implements Serializable {
     @Column(name = "course_id", columnDefinition = "VARCHAR(32) COMMENT '科目编号'", insertable = false, updatable = false)
     private String courseId;
 
-    public TeacherClassCoursePrimaryKey() {
+    public TeacherClassCoursePk() {
     }
 
-    public TeacherClassCoursePrimaryKey(String teacherId, String classId, String courseId) {
+    public TeacherClassCoursePk(String teacherId, String classId, String courseId) {
         this.teacherId = teacherId;
         this.classId = classId;
         this.courseId = courseId;

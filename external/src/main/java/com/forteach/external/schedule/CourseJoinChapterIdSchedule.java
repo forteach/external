@@ -35,7 +35,7 @@ public class CourseJoinChapterIdSchedule {
         if (log.isDebugEnabled()) {
             log.debug("执行线程 : {}", Thread.currentThread().getName());
         }
-        courseJoinChapterService.saveOrUpdateCourseJoinChapter();
+        courseJoinChapterService.saveJoinCourseChapter();
         log.info("{}　<== 执行更新加入课程章节信息定时任务结束", LocalDateTime.now());
     }
 }

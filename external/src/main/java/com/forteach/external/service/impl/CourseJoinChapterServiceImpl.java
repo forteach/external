@@ -69,7 +69,7 @@ public class CourseJoinChapterServiceImpl implements CourseJoinChapterService {
 
     }
 
-    private void updateJoinCourseChapter(CourseJoinChapter courseJoinChapter, CourseJoinChapter c){
+    private void updateJoinCourseChapter(CourseJoinChapter courseJoinChapter, CourseJoinChapter c) {
         if (c.getChapterId().equals(courseJoinChapter.getChapterId())) {
             String circleId = c.getCircleId();
             String teacherId = stringRedisTemplate.opsForValue().get(getJoinTeacherKey(circleId));
@@ -91,17 +91,19 @@ public class CourseJoinChapterServiceImpl implements CourseJoinChapterService {
     }
 
 
-    private String getStudentKey(String studentId){
+    private String getStudentKey(String studentId) {
         return STUDENT_ADO.concat(studentId);
     }
+
     private String getRoomChapterKey(String circleId) {
         return circleId.concat(CLASSROOM_CHAPTER);
     }
 
-    private String getJoinTeacherKey(String circleId){
+    private String getJoinTeacherKey(String circleId) {
         return circleId.concat(CLASSROOM_TEACHER);
     }
-    private String getJoinMemberKey(String circleId){
+
+    private String getJoinMemberKey(String circleId) {
         return circleId.concat(CLASS_ROOM_QR_CODE_PREFIX);
     }
 
@@ -127,7 +129,7 @@ public class CourseJoinChapterServiceImpl implements CourseJoinChapterService {
 
     private List<CourseJoinChapter> findCourseJoinChapters(List<String> circleId) {
         List<CourseJoinChapter> courseJoinChapters = CollUtil.newArrayList();
-        if (circleId != null && circleId.size() >0) {
+        if (circleId != null && circleId.size() > 0) {
             circleId.stream()
                     .filter(Objects::nonNull)
                     .forEach(c -> {
@@ -140,8 +142,9 @@ public class CourseJoinChapterServiceImpl implements CourseJoinChapterService {
                                     .build());
                         }
                     });
+            return courseJoinChapters;
         }
-        return courseJoinChapters;
+        return null;
     }
 
     /**
@@ -161,8 +164,9 @@ public class CourseJoinChapterServiceImpl implements CourseJoinChapterService {
                             stringSet.add(stringRedisTemplate.opsForValue().get(getRoomChapterKey(s)));
                         }
                     });
+            return new ArrayList<>(stringSet);
         }
-        return new ArrayList<>(stringSet);
+        return null;
     }
 
     private List<CourseJoinChapter> findJoinCoursesIdsList(List<String> chapterIds) {
@@ -179,15 +183,15 @@ public class CourseJoinChapterServiceImpl implements CourseJoinChapterService {
         return courseJoinChapters;
     }
 
-    private int getJoinStudentNumber(String teacherId, Set<String> stringSet){
+    private int getJoinStudentNumber(String teacherId, Set<String> stringSet) {
         long count = stringSet.stream()
                 .filter(Objects::nonNull)
                 .filter(s -> !s.equals(teacherId))
                 .count();
-        return (int)count;
+        return (int) count;
     }
 
-    private String getJoinStudents(String teacherId, Set<String> stringSet){
+    private String getJoinStudents(String teacherId, Set<String> stringSet) {
         StringBuffer stringBuffer = new StringBuffer();
         stringSet.stream()
                 .filter(Objects::nonNull)

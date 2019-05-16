@@ -41,6 +41,7 @@ public class CourseJoinChapterDescription extends BaseCourseDescription implemen
 
     private String classId;
 
+    @Column(name = "circle_Id", columnDefinition = "VARCHAR(32) COMMENT '课堂id'")
     private String circleId;
 
     public String studentId;

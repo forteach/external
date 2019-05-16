@@ -15,7 +15,6 @@ public final class CourseJoinChapterDescriptionBuilder {
     private String chapterId;
     private String classId;
     private String circleId;
-    private String grade;
 
     private CourseJoinChapterDescriptionBuilder() {
     }
@@ -50,11 +49,6 @@ public final class CourseJoinChapterDescriptionBuilder {
         return this;
     }
 
-    public CourseJoinChapterDescriptionBuilder withGrade(String grade) {
-        this.grade = grade;
-        return this;
-    }
-
     public CourseJoinChapterDescription build() {
         CourseJoinChapterDescription courseJoinChapterDescription = new CourseJoinChapterDescription();
         courseJoinChapterDescription.setCourseId(courseId);
@@ -62,7 +56,6 @@ public final class CourseJoinChapterDescriptionBuilder {
         courseJoinChapterDescription.setClassId(classId);
         courseJoinChapterDescription.setCircleId(circleId);
         courseJoinChapterDescription.setStudentId(studentId);
-        courseJoinChapterDescription.setGrade(grade);
         return courseJoinChapterDescription;
     }
 }

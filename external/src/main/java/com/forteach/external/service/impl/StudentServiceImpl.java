@@ -5,6 +5,7 @@ import cn.hutool.core.map.MapUtil;
 import cn.hutool.core.util.StrUtil;
 import com.forteach.external.jgravatar.Gravatar;
 import com.forteach.external.jgravatar.GravatarDefaultImage;
+import com.forteach.external.mysql.domain.StudentEntitys;
 import com.forteach.external.mysql.domain.builder.StudentEntitysBuilder;
 import com.forteach.external.mysql.repository.StudentRepository;
 import com.forteach.external.oracle.dto.IStudentDto;
@@ -19,10 +20,7 @@ import org.springframework.data.redis.core.HashOperations;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 import static com.forteach.external.common.Dic.*;
 
@@ -41,8 +39,8 @@ public class StudentServiceImpl implements StudentService {
     private StudentRepository studentRepository;
 
     private static final Gravatar gravatar;
-    @Resource
-    private MongoTemplate mongoTemplate;
+//    @Resource
+//    private MongoTemplate mongoTemplate;
 
     /**
      * 初始化用户图像设置信息
@@ -107,7 +105,7 @@ public class StudentServiceImpl implements StudentService {
         map.put("IDCardNo", iStudentDto.getIDCardNo());
         map.put("classId", iStudentDto.getClassId());
         map.put("isValidated", StringUtil.changeIsValidated(iStudentDto.getIsValidated()));
-        map.put("portrait", this.jGravatart(iStudentDto));
+        map.put("portrait", this.jGravatart(iStudentDto.getId()));
         return StudentBuilder.aStudent()
                 .withId(iStudentDto.getId())
                 .withKey(STUDENT_ADO.concat(iStudentDto.getId()))
@@ -118,11 +116,11 @@ public class StudentServiceImpl implements StudentService {
 
     /**
      * 生成用户头像
-     * @param iStudentDto
+     * @param id
      * @return
      */
-    private String jGravatart(IStudentDto iStudentDto){
-        return gravatar.getUrl(iStudentDto.getId());
+    private String jGravatart(String id){
+        return gravatar.getUrl(id);
     }
 
     /**
@@ -133,8 +131,10 @@ public class StudentServiceImpl implements StudentService {
         String isValidated = student.getMap().get("isValidated");
         //记录redis
         if (ISVALIDATED_0.equals(isValidated)){
-            hashOperations.putAll(student.getKey(), student.getMap());
-        }else if (ISVALIDATED_1.equals(isValidated)) {
+            if (!stringRedisTemplate.hasKey(student.getKey())) {
+                hashOperations.putAll(student.getKey(), student.getMap());
+            }
+        }else if (ISVALIDATED_1.equals(isValidated) && stringRedisTemplate.hasKey(student.getKey())){
             stringRedisTemplate.delete(student.getKey());
         }
         //保存mysql
@@ -147,13 +147,24 @@ public class StudentServiceImpl implements StudentService {
      */
     private void saveMySqlStudentInfo(Student student){
         HashMap<String, String> map = student.getMap();
-        studentRepository.save(StudentEntitysBuilder.aStudentEntitys()
-                .id(map.get("id"))
-                .userName(map.get("name"))
-                .IDCardNo(map.get("IDCardNo"))
-                .classId(map.get("classId"))
-                .isValidated(map.get("isValidated"))
-                .portrait(map.get("portrait"))
-                .build());
+        Optional<StudentEntitys> optionalStudentEntitys = studentRepository.findById(student.getId());
+        if (!optionalStudentEntitys.isPresent()) {
+            studentRepository.save(StudentEntitysBuilder.aStudentEntitys()
+                    .id(map.get("id"))
+                    .userName(map.get("name"))
+                    .IDCardNo(map.get("IDCardNo"))
+                    .classId(map.get("classId"))
+                    .isValidated(map.get("isValidated"))
+                    .portrait(map.get("portrait"))
+                    .build());
+        }else {
+            optionalStudentEntitys.ifPresent(studentEntitys -> {
+                String isValidated = map.get("isValidated");
+                if (ISVALIDATED_1.equals(isValidated)){
+                    studentEntitys.setPortrait(ISVALIDATED_1);
+                    studentRepository.save(studentEntitys);
+                }
+            });
+        }
     }
 }

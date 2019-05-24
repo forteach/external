@@ -1,6 +1,8 @@
 package com.forteach.external.redis.pojo;
 
 import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 /**
@@ -10,6 +12,8 @@ import lombok.NoArgsConstructor;
  * @Version: 1.0
  * @Description:
  */
+@Data
+@EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
 public class Student extends RedisBash {

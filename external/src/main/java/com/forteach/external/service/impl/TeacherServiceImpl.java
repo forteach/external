@@ -100,11 +100,6 @@ public class TeacherServiceImpl implements TeacherService {
                             .withIsValidated(ISVALIDATED_N.equals(iTeacherDto.getIsValidated()) ? ISVALIDATED_1 : ISVALIDATED_0)
                             .build());
                 });
-        //保存mysql
-//        if (list.size() > 0) {
-//
-//            teacherRepository.saveAll(list);
-//        }
         //保存mongodb
         if (teacherInfoList.size() > 0) {
 

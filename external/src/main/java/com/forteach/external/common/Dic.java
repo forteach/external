@@ -62,4 +62,9 @@ public class Dic {
      * 老师创建临时课堂前缀
      */
     public static final String CLASSROOM_TEACHER = "RoomTeacher";
+
+    /**
+     * 班级学生信息前缀
+     */
+    public static final String CLASS_ROOM = "classRoom#";
 }

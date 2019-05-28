@@ -1,5 +1,6 @@
 package com.forteach.external.runner;
 
+import com.forteach.external.redis.service.ClassStudentService;
 import com.forteach.external.service.CourseService;
 import com.forteach.external.service.StudentService;
 import com.forteach.external.service.TeacherClassCourseService;
@@ -27,12 +28,14 @@ public class RedisRunner implements ApplicationRunner {
     private final CourseService courseService;
     private final TeacherService teacherService;
     private final TeacherClassCourseService teacherClassCourseService;
+    private final ClassStudentService classStudentService;
 
-    private RedisRunner(StudentService studentService, TeacherService teacherService, TeacherClassCourseService teacherClassCourseService, CourseService courseService){
+    private RedisRunner(StudentService studentService, TeacherService teacherService, TeacherClassCourseService teacherClassCourseService, CourseService courseService, ClassStudentService classStudentService){
         this.studentService = studentService;
         this.teacherService = teacherService;
         this.teacherClassCourseService = teacherClassCourseService;
         this.courseService = courseService;
+        this.classStudentService = classStudentService;
     }
 
     /**
@@ -47,6 +50,7 @@ public class RedisRunner implements ApplicationRunner {
         teacherService.saveAll();
         teacherClassCourseService.saveTeacherClassAndCourseAll();
         courseService.saveDto();
+        classStudentService.saveUpdate();
         if(log.isInfoEnabled()) {
             log.info("Thread name : {}, save students redis OK!", Thread.currentThread().getName());
         }

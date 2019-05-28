@@ -2,10 +2,11 @@ package com.forteach.external.service.impl;
 
 import cn.hutool.core.collection.CollUtil;
 import com.forteach.external.mysql.domain.CourseChapterCount;
-import com.forteach.external.mysql.domain.description.CourseJoinChapterDescription;
 import com.forteach.external.mysql.domain.builder.CourseJoinChapterDescriptionBuilder;
+import com.forteach.external.mysql.domain.description.CourseJoinChapterDescription;
 import com.forteach.external.mysql.repository.CourseChapterCountRepository;
 import com.forteach.external.mysql.repository.CourseChapterRepository;
+import com.forteach.external.mysql.repository.CourseStudyRepository;
 import com.forteach.external.mysql.repository.description.CourseJoinChapterDescriptionRepository;
 import com.forteach.external.service.CourseJoinChapterService;
 import lombok.extern.slf4j.Slf4j;
@@ -49,6 +50,9 @@ public class CourseJoinChapterServiceImpl implements CourseJoinChapterService {
     @Resource
     private StringRedisTemplate stringRedisTemplate;
 
+    @Resource
+    private CourseStudyRepository courseStudyRepository;
+
     @Override
     public void saveJoinCourseChapter() {
         //保存对应的上课章节信息
@@ -66,15 +70,17 @@ public class CourseJoinChapterServiceImpl implements CourseJoinChapterService {
                     .filter(Objects::nonNull)
                     .forEach(iCourseChapterDto -> {
                         chapterDescriptions.forEach(c -> {
-                            if (c.getChapterId().equals(iCourseChapterDto.getChapterId())){
+                            if (c.getChapterId().equals(iCourseChapterDto.getChapterId())) {
                                 c.setCourseId(iCourseChapterDto.getCourseId());
                             }
                         });
-                        chapterCounts.stream().filter(Objects::nonNull).forEach(c -> {
-                            if (c.getChapterId().equals(iCourseChapterDto.getChapterId())){
-                                c.setCourseId(iCourseChapterDto.getCourseId());
-                            }
-                        });
+                        chapterCounts.stream()
+                                .filter(Objects::nonNull)
+                                .forEach(c -> {
+                                    if (c.getChapterId().equals(iCourseChapterDto.getChapterId())) {
+                                        c.setCourseId(iCourseChapterDto.getCourseId());
+                                    }
+                                });
                     });
             courseJoinChapterDescriptionRepository.saveAll(chapterDescriptions);
             courseChapterCountRepository.saveAll(chapterCounts);
@@ -93,6 +99,7 @@ public class CourseJoinChapterServiceImpl implements CourseJoinChapterService {
                         if (stringRedisTemplate.hasKey(key)) {
                             final String teacherId = stringRedisTemplate.opsForValue().get(getJoinTeacherKey(c));
                             Set<String> stringSet = stringRedisTemplate.opsForSet().members(getJoinMemberKey(c));
+                            //查找加入的学生id list
                             List<String> strings = findStudentsByCircleId(joinMemberKey, teacherId);
                             strings.forEach(s -> {
                                 final String studentKey = getStudentKey(s);

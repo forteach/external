@@ -1,9 +1,5 @@
 package com.forteach.external.service;
 
-import com.forteach.external.oracle.dto.ITeacherDto;
-
-import java.util.List;
-
 /**
  * @Auther: zhangyy
  * @Email: zhang10092009@hotmail.com
@@ -16,7 +12,7 @@ public interface TeacherService {
      * 从其他数据库查询的教师信息
      * @return
      */
-    List<ITeacherDto> findAllDto();
+//    List<ITeacherDto> findAllDto();
 
     /**
      * 保存教师信息

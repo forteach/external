@@ -1,9 +1,5 @@
 package com.forteach.external.service;
 
-import com.forteach.external.oracle.dto.ICourseDto;
-
-import java.util.List;
-
 /**
  * @Auther: zhangyy
  * @Email: zhang10092009@hotmail.com
@@ -16,7 +12,7 @@ public interface CourseService {
      * 查询需要的课程信息
      * @return
      */
-    List<ICourseDto> findAllDto();
+//    List<ICourseDto> findAllDto();
 
     /**
      * 保存课程到mysql数据库

@@ -6,7 +6,6 @@ import com.forteach.external.mysql.domain.builder.CourseJoinChapterDescriptionBu
 import com.forteach.external.mysql.domain.description.CourseJoinChapterDescription;
 import com.forteach.external.mysql.repository.CourseChapterCountRepository;
 import com.forteach.external.mysql.repository.CourseChapterRepository;
-import com.forteach.external.mysql.repository.CourseStudyRepository;
 import com.forteach.external.mysql.repository.description.CourseJoinChapterDescriptionRepository;
 import com.forteach.external.service.CourseJoinChapterService;
 import lombok.extern.slf4j.Slf4j;
@@ -15,13 +14,11 @@ import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
-import java.util.stream.Collectors;
+import java.util.*;
 
 import static com.forteach.external.common.Dic.*;
+import static java.util.stream.Collectors.toList;
+import static java.util.stream.Collectors.toSet;
 
 /**
  * @author: zhangyy
@@ -50,103 +47,92 @@ public class CourseJoinChapterServiceImpl implements CourseJoinChapterService {
     @Resource
     private StringRedisTemplate stringRedisTemplate;
 
-    @Resource
-    private CourseStudyRepository courseStudyRepository;
-
     @Override
     public void saveJoinCourseChapter() {
         //保存对应的上课章节信息
         List<String> circleIds = findCircleIdsList();
 
-        List<String> chapterIds = findJoinChapterIdsList(circleIds);
+        Set<String> chapterIds = findJoinChapterIdsList(circleIds);
 
         List<CourseJoinChapterDescription> chapterDescriptions = findCourseJoin(circleIds);
 
         List<CourseChapterCount> chapterCounts = findCourseCount(circleIds);
 
-        if (chapterDescriptions != null && chapterDescriptions.size() > 0) {
+        if (!chapterDescriptions.isEmpty()) {
             courseChapterRepository.findByChapterIdIn(chapterIds)
-                    .stream()
-                    .filter(Objects::nonNull)
                     .forEach(iCourseChapterDto -> {
                         chapterDescriptions.forEach(c -> {
                             if (c.getChapterId().equals(iCourseChapterDto.getChapterId())) {
                                 c.setCourseId(iCourseChapterDto.getCourseId());
                             }
                         });
-                        chapterCounts.stream()
-                                .filter(Objects::nonNull)
-                                .forEach(c -> {
-                                    if (c.getChapterId().equals(iCourseChapterDto.getChapterId())) {
-                                        c.setCourseId(iCourseChapterDto.getCourseId());
-                                    }
-                                });
+                        chapterCounts.forEach(c -> {
+                            if (c.getChapterId().equals(iCourseChapterDto.getChapterId())) {
+                                c.setCourseId(iCourseChapterDto.getCourseId());
+                            }
+                        });
                     });
-            courseJoinChapterDescriptionRepository.saveAll(chapterDescriptions);
-            courseChapterCountRepository.saveAll(chapterCounts);
+            if (!chapterDescriptions.isEmpty()) {
+                courseJoinChapterDescriptionRepository.saveAll(chapterDescriptions);
+            }
+            if (!chapterCounts.isEmpty()) {
+                courseChapterCountRepository.saveAll(chapterCounts);
+            }
         }
     }
 
+    @SuppressWarnings(value = "all")
     private List<CourseChapterCount> findCourseCount(List<String> circleIds) {
         List<CourseChapterCount> chapterCounts = CollUtil.newArrayList();
-        if (circleIds != null && circleIds.size() > 0) {
-            circleIds.stream()
-                    .filter(Objects::nonNull)
-                    .forEach(c -> {
-                        //查找对应的课程章节id
-                        final String key = getRoomChapterKey(c);
-                        final String joinMemberKey = getJoinMemberKey(c);
-                        if (stringRedisTemplate.hasKey(key)) {
-                            final String teacherId = stringRedisTemplate.opsForValue().get(getJoinTeacherKey(c));
-                            Set<String> stringSet = stringRedisTemplate.opsForSet().members(getJoinMemberKey(c));
-                            //查找加入的学生id list
-                            List<String> strings = findStudentsByCircleId(joinMemberKey, teacherId);
-                            strings.forEach(s -> {
-                                final String studentKey = getStudentKey(s);
-                                chapterCounts.add(
-                                        CourseChapterCount.builder()
-                                                .chapterId(stringRedisTemplate.opsForValue().get(key))
-                                                .circleId(c)
-                                                .teacherId(teacherId)
-                                                .classId(hashOperations.get(studentKey, "classId"))
-                                                .joinNumber(getJoinStudentNumber(teacherId, stringSet))
-                                                .build()
-                                );
-                            });
-                        }
-                    });
-            return chapterCounts;
-        }
-        return null;
+        circleIds.forEach(c -> {
+            //查找对应的课程章节id
+            final String key = getRoomChapterKey(c);
+            final String joinMemberKey = getJoinMemberKey(c);
+            if (stringRedisTemplate.hasKey(key)) {
+                final String teacherId = stringRedisTemplate.opsForValue().get(getJoinTeacherKey(c));
+                Set<String> stringSet = stringRedisTemplate.opsForSet().members(getJoinMemberKey(c));
+                //查找加入的学生id list
+                findStudentsByCircleId(joinMemberKey, teacherId)
+                        .forEach(s -> {
+                            chapterCounts.add(
+                                    CourseChapterCount.builder()
+                                            .chapterId(stringRedisTemplate.opsForValue().get(key))
+                                            .circleId(c)
+                                            .teacherId(teacherId)
+                                            .classId(hashOperations.get(getStudentKey(s), "classId"))
+                                            .joinNumber(getJoinStudentNumber(teacherId, stringSet))
+                                            .build()
+                            );
+                        });
+            }
+        });
+        return chapterCounts;
     }
 
+    @SuppressWarnings(value = "all")
     private List<CourseJoinChapterDescription> findCourseJoin(List<String> circleIds) {
         List<CourseJoinChapterDescription> chapterDescriptions = CollUtil.newArrayList();
-        if (circleIds != null && circleIds.size() > 0) {
-            circleIds.stream()
-                    .filter(Objects::nonNull)
-                    .forEach(c -> {
-                        //查找对应的课程章节id
-                        final String key = getRoomChapterKey(c);
-                        final String joinMemberKey = getJoinMemberKey(c);
-                        if (stringRedisTemplate.hasKey(key)) {
-                            final String teacherId = stringRedisTemplate.opsForValue().get(getJoinTeacherKey(c));
-                            List<String> strings = findStudentsByCircleId(joinMemberKey, teacherId);
-                            strings.forEach(s -> {
-                                final String studentKey = getStudentKey(s);
-                                chapterDescriptions.add(CourseJoinChapterDescriptionBuilder
-                                        .aCourseJoinChapterDescription()
-                                        .withCircleId(c)
-                                        .withClassId(hashOperations.get(studentKey, "classId"))
-                                        .withStudentId(s)
-                                        .withChapterId(stringRedisTemplate.opsForValue().get(key))
-                                        .build());
-                            });
-                        }
-                    });
-            return chapterDescriptions;
-        }
-        return null;
+        circleIds
+                .forEach(c -> {
+                    //查找对应的课程章节id
+                    final String key = getRoomChapterKey(c);
+                    final String joinMemberKey = getJoinMemberKey(c);
+                    if (stringRedisTemplate.hasKey(key)) {
+                        final String teacherId = stringRedisTemplate.opsForValue().get(getJoinTeacherKey(c));
+                        findStudentsByCircleId(joinMemberKey, teacherId)
+                                .forEach(s -> {
+                                    chapterDescriptions.add(CourseJoinChapterDescriptionBuilder
+                                            .aCourseJoinChapterDescription()
+                                            .withCircleId(c)
+                                            .withClassId(hashOperations.get(getStudentKey(s), "classId"))
+                                            .withStudentId(s)
+                                            .withChapterId(stringRedisTemplate.opsForValue().get(key))
+                                            .build());
+                                });
+//                            }
+                    }
+                });
+        return chapterDescriptions;
     }
 
     private String getStudentKey(String studentId) {
@@ -170,27 +156,23 @@ public class CourseJoinChapterServiceImpl implements CourseJoinChapterService {
      *
      * @return
      */
+    @SuppressWarnings(value = "all")
     private List<String> findCircleIdsList() {
         if (stringRedisTemplate.hasKey(OPEN_CLASSROOM)) {
-            return new ArrayList<>(Objects.requireNonNull(stringRedisTemplate
-                    .opsForSet()
-                    .members(OPEN_CLASSROOM)));
+            return stringRedisTemplate.opsForSet().members(OPEN_CLASSROOM).stream().collect(toList());
         }
-        return null;
+        return new ArrayList<>();
     }
 
-    private List<String> findStudentsByCircleId(final String key, final String teacherId) {
+    @SuppressWarnings(value = "all")
+    private Set<String> findStudentsByCircleId(final String key, final String teacherId) {
         if (stringRedisTemplate.hasKey(key)) {
-            return new ArrayList<>(Objects
-                    .requireNonNull(stringRedisTemplate
-                            .opsForSet()
-                            .members(key)))
-                    .stream()
-                    .filter(Objects::nonNull)
+            return stringRedisTemplate.opsForSet().members(key)
+                    .stream().filter(Objects::nonNull)
                     .filter(s -> !teacherId.equals(s))
-                    .collect(Collectors.toList());
+                    .collect(toSet());
         }
-        return null;
+        return new HashSet<>();
     }
 
     /**
@@ -198,21 +180,17 @@ public class CourseJoinChapterServiceImpl implements CourseJoinChapterService {
      *
      * @return
      */
-    private List<String> findJoinChapterIdsList(List<String> circleId) {
+    @SuppressWarnings(value = "all")
+    private Set<String> findJoinChapterIdsList(List<String> circleId) {
         Set<String> stringSet = CollUtil.newHashSet();
-        if (circleId != null && circleId.size() > 0) {
-            circleId.stream()
-                    .filter(Objects::nonNull)
-                    .forEach(s -> {
-                        //查找对应的课程章节id
-                        String key = getRoomChapterKey(s);
-                        if (stringRedisTemplate.hasKey(key)) {
-                            stringSet.add(stringRedisTemplate.opsForValue().get(getRoomChapterKey(s)));
-                        }
-                    });
-            return new ArrayList<>(stringSet);
-        }
-        return null;
+        circleId.forEach(s -> {
+            //查找对应的课程章节id
+            String key = getRoomChapterKey(s);
+            if (stringRedisTemplate.hasKey(key)) {
+                stringSet.add(stringRedisTemplate.opsForValue().get(getRoomChapterKey(s)));
+            }
+        });
+        return stringSet;
     }
 
 

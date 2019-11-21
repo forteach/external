@@ -12,6 +12,6 @@ import java.util.List;
  * @Description:
  */
 public interface ClassesService {
-    List<IClassesDto> findAllDto();
+//    List<IClassesDto> findAllDto();
     void saveAll();
 }

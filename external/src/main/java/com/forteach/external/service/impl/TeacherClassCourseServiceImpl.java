@@ -62,17 +62,12 @@ public class TeacherClassCourseServiceImpl implements TeacherClassCourseService 
                             .build());
                 });
         //保存mysql
-//        if (log.isDebugEnabled()){
-//            log.info("teacherClassCourse list.size [{}]", list.size());
-//        }
 //        if (list.size() > 0) {
 //            teacherClassCourseRepository.saveAll(list);
 //        }
         //保存mongodb
-        if (courseList.size() > 0) {
-
+        if (!courseList.isEmpty()) {
             mongoTemplate.dropCollection(ClassTeacherCourse.class);
-
             mongoTemplate.insertAll(courseList);
         }
     }

@@ -44,10 +44,10 @@ public class TeacherServiceImpl implements TeacherService {
      * 保存查询到的教师信息
      * @return
      */
-    @Override
-    public List<ITeacherDto> findAllDto() {
-        return zhxyJzgxxRepository.findAllByDto(ISVALIDATED_Y);
-    }
+//    @Override
+//    public List<ITeacherDto> findAllDto() {
+//        return zhxyJzgxxRepository.findAllByDto(ISVALIDATED_Y);
+//    }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
@@ -70,8 +70,8 @@ public class TeacherServiceImpl implements TeacherService {
      * @param iTeacherDtos
      */
     private void saveTeacher(List<ITeacherDto> iTeacherDtos){
-        List<Teacher> list = new ArrayList<>();
-        List<TeacherInfo> teacherInfoList = new ArrayList<>();
+        ArrayList<Teacher> list = new ArrayList<>();
+        ArrayList<TeacherInfo> teacherInfoList = new ArrayList<>();
         iTeacherDtos.parallelStream()
                 .filter(Objects::nonNull)
                 .filter(iTeacherDto ->
@@ -101,10 +101,8 @@ public class TeacherServiceImpl implements TeacherService {
                             .build());
                 });
         //保存mongodb
-        if (teacherInfoList.size() > 0) {
-
+        if (!teacherInfoList.isEmpty()) {
             mongoTemplate.dropCollection(TeacherInfo.class);
-
             mongoTemplate.insertAll(teacherInfoList);
         }
     }

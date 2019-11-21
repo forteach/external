@@ -1,7 +1,7 @@
-package com.forteach.external.controller;
+//package com.forteach.external.controller;
 
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+//import org.springframework.web.bind.annotation.RequestMapping;
+//import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @Auther: zhangyy
@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RestController;
  * @Version: 1.0
  * @Description:　用户信息
  */
-@RestController
-@RequestMapping("/user")
-public class SysUserController {
-
-}
+//@RestController
+//@RequestMapping("/user")
+//public class SysUserController {
+//
+//}

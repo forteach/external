@@ -4,7 +4,6 @@ import cn.hutool.core.util.StrUtil;
 import com.forteach.external.mongodb.domain.ClassesInfo;
 import com.forteach.external.mysql.domain.Classes;
 import com.forteach.external.mysql.repository.ClassesRepository;
-import com.forteach.external.oracle.dto.IClassesDto;
 import com.forteach.external.oracle.repository.GzBjxxbRepository;
 import com.forteach.external.service.ClassesService;
 import lombok.extern.slf4j.Slf4j;
@@ -33,10 +32,10 @@ public class ClassesServerImpl implements ClassesService {
     private ClassesRepository classesRepository;
     @Resource
     private MongoTemplate mongoTemplate;
-    @Override
-    public List<IClassesDto> findAllDto() {
-        return gzBjxxbRepository.findAllDto();
-    }
+//    @Override
+//    public List<IClassesDto> findAllDto() {
+//        return gzBjxxbRepository.findAllDto();
+//    }
 
     @Transactional(rollbackFor = Exception.class)
     @Override
@@ -60,14 +59,12 @@ public class ClassesServerImpl implements ClassesService {
                             .build());
                 });
         //保存mysql
-        if (list.size() > 0) {
+        if (!list.isEmpty()) {
             classesRepository.saveAll(list);
         }
         //保存mongodb
-        if (classesInfos.size() > 0) {
-
+        if (!classesInfos.isEmpty()) {
             mongoTemplate.dropCollection(ClassesInfo.class);
-
             mongoTemplate.insertAll(classesInfos);
         }
     }

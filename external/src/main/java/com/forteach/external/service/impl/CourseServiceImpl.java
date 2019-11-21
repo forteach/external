@@ -13,7 +13,7 @@ import com.forteach.external.service.CourseService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.redis.core.HashOperations;
-import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -36,8 +36,8 @@ public class CourseServiceImpl implements CourseService {
     @Resource
     private HashOperations<String, String, String> hashOperations;
 
-//    @Resource
-//    private StringRedisTemplate redisTemplate;
+    @Resource
+    private RedisTemplate redisTemplate;
 
     @Resource
     private CourseRepository courseRepository;
@@ -48,10 +48,10 @@ public class CourseServiceImpl implements CourseService {
     @Resource
     private MongoTemplate mongoTemplate;
 
-    @Override
-    public List<ICourseDto> findAllDto() {
-        return zhxyKcxxRepository.findAllDto(ISVALIDATED_Y);
-    }
+//    @Override
+//    public List<ICourseDto> findAllDto() {
+//        return zhxyKcxxRepository.findAllDto(ISVALIDATED_Y);
+//    }
 
     @Override
     public void saveDto() {
@@ -73,7 +73,7 @@ public class CourseServiceImpl implements CourseService {
         iCourseDtos.parallelStream()
                 .filter(Objects::nonNull)
                 .filter(iCourseDto -> StrUtil.isNotBlank(iCourseDto.getCourseId()) &&
-                                StrUtil.isNotBlank(iCourseDto.getCourseName()))
+                        StrUtil.isNotBlank(iCourseDto.getCourseName()))
                 .forEach(iCourseDto -> {
                     //mysql
                     list.add(CourseBuilder.aCourse()
@@ -126,13 +126,11 @@ public class CourseServiceImpl implements CourseService {
         map.put("courseDescribe", iCourseDto.getCourseDescribe());
         String key = getKey(iCourseDto.getCourseId());
         hashOperations.putAll(key, map);
-//        redisTemplate.expire(key, 5, TimeUnit.DAYS);
+        redisTemplate.expire(key, 365, TimeUnit.DAYS);
     }
 
 
-
-    private String getKey(String courseId){
+    private String getKey(String courseId) {
         return COURSE_PREFIX.concat(courseId);
     }
-
 }

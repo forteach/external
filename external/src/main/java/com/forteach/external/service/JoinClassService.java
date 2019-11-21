@@ -1,4 +1,4 @@
-package com.forteach.external.service;
+//package com.forteach.external.service;
 
 /**
  * @author: zhangyy
@@ -7,9 +7,9 @@ package com.forteach.external.service;
  * @version: 1.0
  * @description:
  */
-public interface JoinClassService {
+//public interface JoinClassService {
     /**
      * 同步加入课堂的学生保存为学习到的位置
      */
-    void saveJoinClassInfo();
-}
+//    void saveJoinClassInfo();
+//}

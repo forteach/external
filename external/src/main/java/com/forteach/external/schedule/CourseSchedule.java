@@ -26,7 +26,7 @@ public class CourseSchedule {
 
     @Schedules({
             // TODO 注释每分钟执行任务
-//            @Scheduled(cron = "0 0/1 * * * ?"),
+//            @Scheduled(cron = "0 0/1 * * * ?")
             @Scheduled(cron = "0 20 1 * * ?")
     })
     @Async

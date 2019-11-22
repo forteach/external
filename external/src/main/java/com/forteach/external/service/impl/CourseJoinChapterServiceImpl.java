@@ -112,26 +112,24 @@ public class CourseJoinChapterServiceImpl implements CourseJoinChapterService {
     @SuppressWarnings(value = "all")
     private List<CourseJoinChapterDescription> findCourseJoin(List<String> circleIds) {
         List<CourseJoinChapterDescription> chapterDescriptions = CollUtil.newArrayList();
-        circleIds
-                .forEach(c -> {
-                    //查找对应的课程章节id
-                    final String key = getRoomChapterKey(c);
-                    final String joinMemberKey = getJoinMemberKey(c);
-                    if (stringRedisTemplate.hasKey(key)) {
-                        final String teacherId = stringRedisTemplate.opsForValue().get(getJoinTeacherKey(c));
-                        findStudentsByCircleId(joinMemberKey, teacherId)
-                                .forEach(s -> {
-                                    chapterDescriptions.add(CourseJoinChapterDescriptionBuilder
-                                            .aCourseJoinChapterDescription()
-                                            .withCircleId(c)
-                                            .withClassId(hashOperations.get(getStudentKey(s), "classId"))
-                                            .withStudentId(s)
-                                            .withChapterId(stringRedisTemplate.opsForValue().get(key))
-                                            .build());
-                                });
-//                            }
-                    }
-                });
+        circleIds.forEach(c -> {
+            //查找对应的课程章节id
+            final String key = getRoomChapterKey(c);
+            final String joinMemberKey = getJoinMemberKey(c);
+            if (stringRedisTemplate.hasKey(key)) {
+                final String teacherId = stringRedisTemplate.opsForValue().get(getJoinTeacherKey(c));
+                findStudentsByCircleId(joinMemberKey, teacherId)
+                        .forEach(s -> {
+                            chapterDescriptions.add(CourseJoinChapterDescriptionBuilder
+                                    .aCourseJoinChapterDescription()
+                                    .withCircleId(c)
+                                    .withClassId(hashOperations.get(getStudentKey(s), "classId"))
+                                    .withStudentId(s)
+                                    .withChapterId(stringRedisTemplate.opsForValue().get(key))
+                                    .build());
+                        });
+            }
+        });
         return chapterDescriptions;
     }
 
@@ -193,7 +191,6 @@ public class CourseJoinChapterServiceImpl implements CourseJoinChapterService {
         return stringSet;
     }
 
-
     /**
      * 计算加入的人数
      *
@@ -208,5 +205,4 @@ public class CourseJoinChapterServiceImpl implements CourseJoinChapterService {
                 .count();
         return (int) count;
     }
-
 }

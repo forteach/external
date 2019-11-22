@@ -1,5 +1,6 @@
 package com.forteach.external.mysql.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.forteach.external.mysql.domain.base.Entitys;
 import com.forteach.external.mysql.domain.pk.TeacherClassCoursePk;
 import lombok.*;
@@ -35,6 +36,7 @@ public class TeacherClassCourse extends Entitys implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @EmbeddedId
+    @JsonIgnore
     private TeacherClassCoursePk teacherClassCoursePk;
 
     private String teacherId;

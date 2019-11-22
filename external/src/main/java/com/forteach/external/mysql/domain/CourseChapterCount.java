@@ -1,5 +1,6 @@
 package com.forteach.external.mysql.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.forteach.external.mysql.domain.base.Entitys;
 import com.forteach.external.mysql.domain.pk.CourseCountPk;
 import lombok.*;
@@ -35,6 +36,7 @@ import java.io.Serializable;
 public class CourseChapterCount extends Entitys implements Serializable {
 
     @EmbeddedId
+    @JsonIgnore
     private CourseCountPk courseCountPk;
 
     private String courseId;

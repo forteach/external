@@ -1,5 +1,6 @@
 package com.forteach.external.mysql.domain.description;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.forteach.external.mysql.domain.base.BaseCourseDescription;
 import com.forteach.external.mysql.domain.pk.CourseJoinChapterPk;
 import lombok.*;
@@ -33,6 +34,7 @@ import java.io.Serializable;
 public class CourseJoinChapterDescription extends BaseCourseDescription implements Serializable {
 
     @EmbeddedId
+    @JsonIgnore
     private CourseJoinChapterPk courseJoinChapterPk;
 
     private String courseId;

@@ -1,5 +1,6 @@
 package com.forteach.external.mysql.domain.base;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.forteach.external.mysql.domain.pk.CourseCountPk;
 import com.forteach.external.mysql.domain.pk.CourseJoinChapterPk;
 import lombok.Data;
@@ -23,6 +24,7 @@ import javax.persistence.*;
 public abstract class BaseCourseDescription extends Entitys {
 
     @EmbeddedId
+    @JsonIgnore
     private CourseCountPk courseCountPk;
 
     private String courseId;

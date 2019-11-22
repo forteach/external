@@ -91,12 +91,12 @@ public class CourseServiceImpl implements CourseService {
                 });
 
         //mysql
-        if (list.size() > 0) {
+        if (!list.isEmpty()) {
             courseRepository.saveAll(list);
         }
 
         //mongodb
-        if (courseInfoList.size() > 0) {
+        if (!courseInfoList.isEmpty()) {
 
             mongoTemplate.dropCollection(CourseInfo.class);
 

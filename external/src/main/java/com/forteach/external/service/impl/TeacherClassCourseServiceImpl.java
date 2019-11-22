@@ -38,10 +38,10 @@ public class TeacherClassCourseServiceImpl implements TeacherClassCourseService 
 
     @Override
     public void saveTeacherClassAndCourseAll(){
-        List<TeacherClassCourse> list = new ArrayList<>();
+//        List<TeacherClassCourse> list = new ArrayList<>();
         List<ClassTeacherCourse> courseList = new ArrayList<>();
         zhxyKcxxPkxxRepository.findCourse()
-                .parallelStream()
+                .stream()
                 .filter(Objects::nonNull)
                 .filter(iTeacherClassCourseDto ->
                         StrUtil.isNotBlank(iTeacherClassCourseDto.getClassId())

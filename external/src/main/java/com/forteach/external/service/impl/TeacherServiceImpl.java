@@ -3,7 +3,6 @@ package com.forteach.external.service.impl;
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.StrUtil;
 import com.forteach.external.mongodb.domain.TeacherInfo;
-import com.forteach.external.mysql.domain.Teacher;
 import com.forteach.external.mysql.domain.builder.TeacherBuilder;
 import com.forteach.external.mysql.repository.TeacherRepository;
 import com.forteach.external.oracle.dto.ITeacherDto;
@@ -13,11 +12,13 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
+
 import static com.forteach.external.common.Dic.*;
 
 /**
@@ -70,9 +71,9 @@ public class TeacherServiceImpl implements TeacherService {
      * @param iTeacherDtos
      */
     private void saveTeacher(List<ITeacherDto> iTeacherDtos){
-        ArrayList<Teacher> list = new ArrayList<>();
+//        ArrayList<Teacher> list = new ArrayList<>();
         ArrayList<TeacherInfo> teacherInfoList = new ArrayList<>();
-        iTeacherDtos.parallelStream()
+        iTeacherDtos.stream()
                 .filter(Objects::nonNull)
                 .filter(iTeacherDto ->
                         StrUtil.isNotBlank(iTeacherDto.getTeacherId()) &&
@@ -80,12 +81,12 @@ public class TeacherServiceImpl implements TeacherService {
                                 StrUtil.isNotBlank(iTeacherDto.getTeacherName()))
                 .forEach(iTeacherDto -> {
                     //mysql
-                    list.add(TeacherBuilder.aTeacher()
-                            .withTeacherId(iTeacherDto.getTeacherId())
-                            .withTeacherName(iTeacherDto.getTeacherName())
-                            .withTeacherCode(iTeacherDto.getTeacherCode())
-                            .withIsValidated(ISVALIDATED_N.equals(iTeacherDto.getIsValidated()) ? ISVALIDATED_1 : ISVALIDATED_0)
-                            .build());
+//                    list.add(TeacherBuilder.aTeacher()
+//                            .withTeacherId(iTeacherDto.getTeacherId())
+//                            .withTeacherName(iTeacherDto.getTeacherName())
+//                            .withTeacherCode(iTeacherDto.getTeacherCode())
+//                            .withIsValidated(ISVALIDATED_N.equals(iTeacherDto.getIsValidated()) ? ISVALIDATED_1 : ISVALIDATED_0)
+//                            .build());
                     //mongodb
                     teacherInfoList.add(TeacherInfo.builder()
                             .teacherCode(iTeacherDto.getTeacherCode())

@@ -3,6 +3,7 @@ package com.forteach.external.mongodb.domain;
 import com.forteach.external.mongodb.domain.base.BaseEntity;
 import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -13,6 +14,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
  * @version: 1.0
  * @description: 教师信息
  */
+@EqualsAndHashCode(callSuper = true)
 @Data
 @Builder
 @Document(collection = "teacherInfo")

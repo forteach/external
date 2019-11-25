@@ -1,10 +1,7 @@
 package com.forteach.external.runner;
 
 import com.forteach.external.redis.service.ClassStudentService;
-import com.forteach.external.service.CourseService;
-import com.forteach.external.service.StudentService;
-import com.forteach.external.service.TeacherClassCourseService;
-import com.forteach.external.service.TeacherService;
+import com.forteach.external.service.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -29,13 +26,17 @@ public class RedisRunner implements ApplicationRunner {
     private final TeacherService teacherService;
     private final TeacherClassCourseService teacherClassCourseService;
     private final ClassStudentService classStudentService;
+    private final ClassesService classesService;
 
-    private RedisRunner(StudentService studentService, TeacherService teacherService, TeacherClassCourseService teacherClassCourseService, CourseService courseService, ClassStudentService classStudentService){
+    private RedisRunner(StudentService studentService, TeacherService teacherService,
+                        TeacherClassCourseService teacherClassCourseService, ClassesService classesService,
+                        CourseService courseService, ClassStudentService classStudentService){
         this.studentService = studentService;
         this.teacherService = teacherService;
         this.teacherClassCourseService = teacherClassCourseService;
         this.courseService = courseService;
         this.classStudentService = classStudentService;
+        this.classesService = classesService;
     }
 
     /**
@@ -51,6 +52,7 @@ public class RedisRunner implements ApplicationRunner {
         teacherClassCourseService.saveTeacherClassAndCourseAll();
         courseService.saveDto();
         classStudentService.saveUpdate();
+        classesService.saveAll();
         if(log.isInfoEnabled()) {
             log.info("Thread name : {}, save students redis OK!", Thread.currentThread().getName());
         }

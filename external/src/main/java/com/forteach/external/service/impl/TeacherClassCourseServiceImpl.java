@@ -8,6 +8,7 @@ import com.forteach.external.oracle.repository.ZhxyKcxxPkxxRepository;
 import com.forteach.external.service.TeacherClassCourseService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -36,6 +37,7 @@ public class TeacherClassCourseServiceImpl implements TeacherClassCourseService 
         this.mongoTemplate = mongoTemplate;
     }
 
+    @Async
     @Override
     public void saveTeacherClassAndCourseAll(){
 //        List<TeacherClassCourse> list = new ArrayList<>();

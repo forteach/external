@@ -29,5 +29,6 @@ public interface ITeacherDto extends Serializable {
      */
     public String getIsValidated();
 
-
+    /** 移动电话手机*/
+    public String getPhone();
 }

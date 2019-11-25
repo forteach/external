@@ -10,6 +10,7 @@ import com.forteach.external.oracle.repository.ZhxyJzgxxRepository;
 import com.forteach.external.service.TeacherService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -50,6 +51,7 @@ public class TeacherServiceImpl implements TeacherService {
 //        return zhxyJzgxxRepository.findAllByDto(ISVALIDATED_Y);
 //    }
 
+    @Async
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void saveAll(){
@@ -60,6 +62,7 @@ public class TeacherServiceImpl implements TeacherService {
      * 执行定时任务需要保存的最近两天修改的信息
      * 修改最近教师信息
      */
+    @Async
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void saveAllByTimestamp(){
@@ -81,23 +84,19 @@ public class TeacherServiceImpl implements TeacherService {
                                 StrUtil.isNotBlank(iTeacherDto.getTeacherName()))
                 .forEach(iTeacherDto -> {
                     //mysql
-//                    list.add(TeacherBuilder.aTeacher()
-//                            .withTeacherId(iTeacherDto.getTeacherId())
-//                            .withTeacherName(iTeacherDto.getTeacherName())
-//                            .withTeacherCode(iTeacherDto.getTeacherCode())
-//                            .withIsValidated(ISVALIDATED_N.equals(iTeacherDto.getIsValidated()) ? ISVALIDATED_1 : ISVALIDATED_0)
-//                            .build());
                     //mongodb
                     teacherInfoList.add(TeacherInfo.builder()
                             .teacherCode(iTeacherDto.getTeacherCode())
                             .teacherId(iTeacherDto.getTeacherId())
                             .teacherName(iTeacherDto.getTeacherName())
+                            .phone(iTeacherDto.getPhone())
                             .build());
 
                     teacherRepository.save(TeacherBuilder.aTeacher()
                             .withTeacherId(iTeacherDto.getTeacherId())
                             .withTeacherName(iTeacherDto.getTeacherName())
                             .withTeacherCode(iTeacherDto.getTeacherCode())
+                            .withPhone(iTeacherDto.getPhone())
                             .withIsValidated(ISVALIDATED_N.equals(iTeacherDto.getIsValidated()) ? ISVALIDATED_1 : ISVALIDATED_0)
                             .build());
                 });

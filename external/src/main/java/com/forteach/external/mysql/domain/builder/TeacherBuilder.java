@@ -27,6 +27,8 @@ public final class TeacherBuilder {
      */
     private String teacherCode;
 
+    private String phone;
+
     private TeacherBuilder() {
     }
 
@@ -53,6 +55,10 @@ public final class TeacherBuilder {
         this.teacherCode = teacherCode;
         return this;
     }
+    public TeacherBuilder withPhone(String phone) {
+        this.phone = phone;
+        return this;
+    }
 
     public Teacher build() {
         Teacher teacher = new Teacher();
@@ -60,6 +66,7 @@ public final class TeacherBuilder {
         teacher.setTeacherId(teacherId);
         teacher.setTeacherName(teacherName);
         teacher.setTeacherCode(teacherCode);
+        teacher.setPhone(phone);
         return teacher;
     }
 }

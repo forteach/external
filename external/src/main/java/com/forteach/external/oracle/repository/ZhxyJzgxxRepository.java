@@ -24,7 +24,7 @@ public interface ZhxyJzgxxRepository extends JpaRepository<ZhxyJzgxxEntity, Stri
      * @return
      */
     @Transactional(readOnly = true)
-    @Query(value = "select id as teacherId, jgh as teacherCode, xm as teacherName, ryzt as idValidated from ZhxyJzgxxEntity where yxbz = ?1")
+    @Query(value = "select id as teacherId, jgh as teacherCode, xm as teacherName, ryzt as idValidated, \"yddh\" as phone from zhxy_jzgxx where yxbz = ?1", nativeQuery = true)
     List<ITeacherDto> findAllByDto(String isValidated);
 
     /**
@@ -33,7 +33,7 @@ public interface ZhxyJzgxxRepository extends JpaRepository<ZhxyJzgxxEntity, Stri
      * @return
      */
     @Transactional(readOnly = true)
-    @Query(value = "select z.id as teacherId, z.jgh as teacherCode, z.xm as teacherName, z.ryzt as idValidated from ZhxyJzgxxEntity as z where z.timestamp >= ?1")
+    @Query(value = "select z.id as teacherId, z.jgh as teacherCode, z.xm as teacherName, z.ryzt as idValidated, \"yddh\" as phone from zhxy_jzgxx as z where z.timestamp >= ?1", nativeQuery = true)
     List<ITeacherDto> findAllByDtoByTimestamp(Timestamp timestamp);
 
 }

@@ -14,6 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.redis.core.HashOperations;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -54,6 +55,7 @@ public class CourseServiceImpl implements CourseService {
 //    }
 
     @Override
+    @Async
     public void saveDto() {
         this.saveAll(zhxyKcxxRepository.findAllDto(ISVALIDATED_Y));
     }
@@ -63,6 +65,7 @@ public class CourseServiceImpl implements CourseService {
      * 课程信息
      */
     @Override
+    @Async
     public void saveByTimestamp() {
         this.saveAll(zhxyKcxxRepository.findAllDtoByTimestamp(DateUtil.offsetDay(new Date(), -3).toDateStr()));
     }

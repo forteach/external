@@ -8,6 +8,7 @@ import com.forteach.external.oracle.repository.GzBjxxbRepository;
 import com.forteach.external.service.ClassesService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -37,6 +38,7 @@ public class ClassesServerImpl implements ClassesService {
 //        return gzBjxxbRepository.findAllDto();
 //    }
 
+    @Async
     @Transactional(rollbackFor = Exception.class)
     @Override
     public void saveAll() {

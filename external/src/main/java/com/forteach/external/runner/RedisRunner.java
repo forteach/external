@@ -6,7 +6,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.core.annotation.Order;
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 
 /**
@@ -44,7 +43,6 @@ public class RedisRunner implements ApplicationRunner {
      * @param args
      * @throws Exception
      */
-    @Async
     @Override
     public void run(ApplicationArguments args) throws Exception {
         studentService.saveAll();

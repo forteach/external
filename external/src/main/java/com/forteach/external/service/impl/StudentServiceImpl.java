@@ -18,6 +18,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.core.HashOperations;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -66,6 +67,7 @@ public class StudentServiceImpl implements StudentService {
      * 查询有效的学生信息
      */
     @Override
+    @Async
     public void saveAll() {
         this.saveOrUpdateStudentsInfo(zhxyXsxxRepository.findAllRedisDto());
     }
@@ -73,6 +75,7 @@ public class StudentServiceImpl implements StudentService {
     /**
      * 查询3天内修改的用户信息
      */
+    @Async
     @Override
     public void updateTimestamp() {
         this.saveOrUpdateStudentsInfo(zhxyXsxxRepository.findAllDtoByTimeStamp(DateUtil.offsetDay(new Date(), -3).toTimestamp()));

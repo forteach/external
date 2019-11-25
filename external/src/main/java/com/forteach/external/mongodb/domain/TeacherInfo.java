@@ -35,4 +35,6 @@ public class TeacherInfo extends BaseEntity {
      * 教师名称
      */
     private String teacherName;
+    /** 电话*/
+    private String phone;
 }

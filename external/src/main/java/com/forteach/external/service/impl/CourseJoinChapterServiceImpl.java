@@ -11,6 +11,7 @@ import com.forteach.external.service.CourseJoinChapterService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.core.HashOperations;
 import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -48,6 +49,7 @@ public class CourseJoinChapterServiceImpl implements CourseJoinChapterService {
     private StringRedisTemplate stringRedisTemplate;
 
     @Override
+    @Async
     public void saveJoinCourseChapter() {
         //保存对应的上课章节信息
         List<String> circleIds = findCircleIdsList();

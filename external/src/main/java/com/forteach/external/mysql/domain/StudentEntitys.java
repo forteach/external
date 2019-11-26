@@ -46,8 +46,8 @@ public class StudentEntitys extends Entitys {
     @Column(name = "class_id", columnDefinition = "VARCHAR(32) COMMENT '学生所属班级id'")
     private String classId;
 
-//    @Column(name = "class_name", columnDefinition = "VARCHAR(32) COMMENT '班级名称'")
-//    private String className;
+    @Column(name = "class_name", columnDefinition = "VARCHAR(32) COMMENT '班级名称'")
+    private String className;
 
     @Column(name = "grade", columnDefinition = "VARCHAR(32) COMMENT '年级'")
     private String grade;
@@ -58,10 +58,10 @@ public class StudentEntitys extends Entitys {
     @Column(name = "birth_date", columnDefinition = "VARCHAR(32) COMMENT '出生日期'")
     private String birthDate;
 
-    @Column(name = "IS_GRADUATE", columnDefinition = "VARCHAR(32) COMMENT '是否毕业'")
+    @Column(name = "is_graduate", columnDefinition = "VARCHAR(32) COMMENT '是否毕业'")
     private String isGraduate;
 
-    @Column(name = "studentStatus", columnDefinition = "VARCHAR(32) COMMENT '学籍状态'")
+    @Column(name = "student_status", columnDefinition = "VARCHAR(32) COMMENT '学籍状态'")
     private String studentStatus;
 
     public StudentEntitys() {

@@ -21,4 +21,11 @@ public class StringUtil {
         }
         return ISVALIDATED_0;
     }
+
+    public static String changeGender(String gender){
+        if (GENDER_F.equals(gender)){
+            return "女";
+        }
+        return "男";
+    }
 }

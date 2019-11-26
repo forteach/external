@@ -23,7 +23,19 @@ public interface ZhxyXsxxRepository extends JpaRepository<ZhxyXsxxEntity, String
      * @return
      */
     @Transactional(readOnly = true)
-    @Query(value = "select xsid as id, xsxm as name, sfzjh AS IDCardNo, lsbj as classId from ZhxyXsxxEntity where yxbz = 'Y'")
+    @Query(value = "select " +
+            " xsid as id, " +
+            " xsxm as name, " +
+            " sfzjh AS IDCardNo, " +
+            " lsbj as classId, " +
+            " yddh as phone, " +
+            " csrq as birthDate, " +
+            " nj as grade, " +
+            " xb as gender, " +
+            " isgraduate as isGraduate, " +
+            " xjzt as studentStatus, " +
+            " yxbz as isValidated " +
+            " from ZhxyXsxxEntity where yxbz = 'Y'")
     List<IStudentDto> findAllRedisDto();
 
     /**
@@ -32,6 +44,18 @@ public interface ZhxyXsxxRepository extends JpaRepository<ZhxyXsxxEntity, String
      * @return
      */
     @Transactional(readOnly = true)
-    @Query(value = "select xsid as id, xsxm as name, sfzjh AS IDCardNo, lsbj as classId, yxbz AS isValidated from ZhxyXsxxEntity where timestamp >= ?1")
+    @Query(value = "select " +
+            " xsid as id, " +
+            " xsxm as name, " +
+            " sfzjh AS IDCardNo, " +
+            " lsbj as classId, " +
+            " yddh as phone, " +
+            " csrq as birthDate, " +
+            " nj as grade, " +
+            " xb as gender, " +
+            " isgraduate as isGraduate, " +
+            " xjzt as studentStatus, " +
+            " yxbz AS isValidated " +
+            " from ZhxyXsxxEntity where timestamp >= ?1")
     List<IStudentDto> findAllDtoByTimeStamp(Timestamp timeStamp);
 }

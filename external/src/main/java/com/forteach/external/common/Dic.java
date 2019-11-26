@@ -13,6 +13,11 @@ public class Dic {
      * oracle 数据库有效字段
      */
     public final static String ISVALIDATED_Y = "Y";
+    /** 性别 M/F  男性/女性 */
+    public final static String GENDER_M = "M";
+    public final static String GENDER_F = "F";
+
+
 
     /**
      * mysql 有效字段

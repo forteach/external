@@ -34,6 +34,20 @@ public interface IStudentDto extends Serializable {
      * @return
      */
     public String getClassId();
+    /** 移动电话*/
+    public String getPhone();
+    /*性别*/
+    public String getGender();
+    /** 年级 */
+    public String getGrade();
+    /** 出生日期*/
+    public String getBirthDate();
+
+    /** 是否毕业*/
+    public String getIsGraduate();
+
+    /** 学籍状态*/
+    public String getStudentStatus();
 
     /**
      * 有效状态 1有效

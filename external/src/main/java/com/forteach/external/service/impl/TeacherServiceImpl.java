@@ -79,7 +79,7 @@ public class TeacherServiceImpl implements TeacherService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void saveAllByTimestamp() {
-        this.saveTeacher(zhxyJzgxxRepository.findAllByDtoByTimestamp(DateUtil.offsetDay(new Date(), -3).toTimestamp()));
+        this.saveTeacher(zhxyJzgxxRepository.findAllByDtoByTimestamp(DateUtil.offsetDay(new Date(), -7).toTimestamp()));
     }
 
     /**

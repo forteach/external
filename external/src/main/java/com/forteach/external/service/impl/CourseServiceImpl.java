@@ -67,7 +67,7 @@ public class CourseServiceImpl implements CourseService {
     @Override
     @Async
     public void saveByTimestamp() {
-        this.saveAll(zhxyKcxxRepository.findAllDtoByTimestamp(DateUtil.offsetDay(new Date(), -3).toDateStr()));
+        this.saveAll(zhxyKcxxRepository.findAllDtoByTimestamp(DateUtil.offsetDay(new Date(), -7).toDateStr()));
     }
 
     private void saveAll(List<ICourseDto> iCourseDtos) {

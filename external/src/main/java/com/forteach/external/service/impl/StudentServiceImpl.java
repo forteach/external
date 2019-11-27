@@ -78,7 +78,7 @@ public class StudentServiceImpl implements StudentService {
     @Async
     @Override
     public void updateTimestamp() {
-        this.saveOrUpdateStudentsInfo(zhxyXsxxRepository.findAllDtoByTimeStamp(DateUtil.offsetDay(new Date(), -3).toTimestamp()));
+        this.saveOrUpdateStudentsInfo(zhxyXsxxRepository.findAllDtoByTimeStamp(DateUtil.offsetDay(new Date(), -7).toTimestamp()));
     }
 
     /**
@@ -124,6 +124,7 @@ public class StudentServiceImpl implements StudentService {
         studentEntitys.setGender(gender);
         studentEntitys.setIDCardNo(iStudentDto.getIDCardNo());
         studentEntitys.setPortrait(jGravatart);
+        String classId = StrUtil.isBlank(iStudentDto.getClassId()) ? "9999" : iStudentDto.getClassId();
         studentEntitys.setClassId(iStudentDto.getClassId());
         studentEntitys.setBirthDate(iStudentDto.getBirthDate());
         studentEntitys.setGrade(iStudentDto.getGrade());

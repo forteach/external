@@ -61,6 +61,7 @@ public class StudentEntitys extends Entitys {
     @Column(name = "is_graduate", columnDefinition = "VARCHAR(32) COMMENT '是否毕业'")
     private String isGraduate;
 
+    /** 98在校 */
     @Column(name = "student_status", columnDefinition = "VARCHAR(32) COMMENT '学籍状态'")
     private String studentStatus;
 

@@ -111,6 +111,7 @@ public class TeacherServiceImpl implements TeacherService {
                             .withPhone(iTeacherDto.getPhone())
                             .withIsValidated(ISVALIDATED_N.equals(iTeacherDto.getIsValidated()) ? ISVALIDATED_1 : ISVALIDATED_0)
                             .build());
+                    //将教师信息添加到用户表,登录系统 教工号就是账号
                     SysUsers user = userRepository.findById(iTeacherDto.getTeacherCode()).orElseGet(SysUsers::new);
                     if (StrUtil.isBlank(user.getPassWord())) {
                         String passWord = Md5Util.macMD5(initPassWord.concat(salt));

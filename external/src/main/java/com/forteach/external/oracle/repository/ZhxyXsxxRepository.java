@@ -34,7 +34,8 @@ public interface ZhxyXsxxRepository extends JpaRepository<ZhxyXsxxEntity, String
             " xb as gender, " +
             " isgraduate as isGraduate, " +
             " xjzt as studentStatus, " +
-            " yxbz as isValidated " +
+            " yxbz as isValidated, " +
+            " lsxy as teacherOfficeId " +
             " from ZhxyXsxxEntity where yxbz = 'Y' and xjzt = '98'")
     List<IStudentDto> findAllRedisDto();
 
@@ -55,7 +56,8 @@ public interface ZhxyXsxxRepository extends JpaRepository<ZhxyXsxxEntity, String
             " xb as gender, " +
             " isgraduate as isGraduate, " +
             " xjzt as studentStatus, " +
-            " yxbz AS isValidated " +
+            " yxbz AS isValidated," +
+            " lsxy as teacherOfficeId " +
             " from ZhxyXsxxEntity where xjzt = '98' and timestamp >= ?1")
     List<IStudentDto> findAllDtoByTimeStamp(Timestamp timeStamp);
 }

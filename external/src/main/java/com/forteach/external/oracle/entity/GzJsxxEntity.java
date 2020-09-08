@@ -9,7 +9,7 @@ import java.util.Objects;
  * @Email: zhang10092009@hotmail.com
  * @Date: 18-12-24 16:33
  * @Version: 1.0
- * @Description:
+ * @Description: 教师信息
  */
 @Entity
 @Table(name = "GZ_JSXX", schema = "SZXY", catalog = "")

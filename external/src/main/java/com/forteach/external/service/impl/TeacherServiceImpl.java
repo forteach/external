@@ -109,6 +109,8 @@ public class TeacherServiceImpl implements TeacherService {
                             .withTeacherName(iTeacherDto.getTeacherName())
                             .withTeacherCode(iTeacherDto.getTeacherCode())
                             .withPhone(iTeacherDto.getPhone())
+                            .withTeacherOfficeId(iTeacherDto.getTeacherOfficeId())
+                            .withTeacherOfficeName(iTeacherDto.getTeacherOfficeName())
                             .withIsValidated(ISVALIDATED_N.equals(iTeacherDto.getIsValidated()) ? ISVALIDATED_1 : ISVALIDATED_0)
                             .build());
                     //将教师信息添加到用户表,登录系统 教工号就是账号
@@ -121,6 +123,8 @@ public class TeacherServiceImpl implements TeacherService {
                     user.setId(iTeacherDto.getTeacherCode());
                     user.setRegisterPhone(iTeacherDto.getPhone());
                     user.setUserName(iTeacherDto.getTeacherName());
+                    user.setTeacherOfficeId(iTeacherDto.getTeacherOfficeId());
+                    user.setTeacherOfficeName(iTeacherDto.getTeacherOfficeName());
                     userRepository.save(user);
                 });
         //保存mongodb

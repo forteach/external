@@ -54,4 +54,8 @@ public interface IStudentDto extends Serializable {
      * @return
      */
     public String getIsValidated();
+    /**
+     * 院系教研室编码
+     */
+    public String getTeacherOfficeId();
 }

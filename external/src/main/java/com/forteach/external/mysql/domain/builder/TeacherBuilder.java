@@ -28,6 +28,14 @@ public final class TeacherBuilder {
     private String teacherCode;
 
     private String phone;
+    /**
+     * 教研室Id
+     */
+    private String teacherOfficeId;
+    /**
+     * 教研室名称
+     */
+    private String teacherOfficeName;
 
     private TeacherBuilder() {
     }
@@ -60,6 +68,15 @@ public final class TeacherBuilder {
         return this;
     }
 
+    public TeacherBuilder withTeacherOfficeId(String teacherOfficeId){
+        this.teacherOfficeId = teacherOfficeId;
+        return this;
+    }
+    public TeacherBuilder withTeacherOfficeName(String teacherOfficeName){
+        this.teacherOfficeName = teacherOfficeName;
+        return this;
+    }
+
     public Teacher build() {
         Teacher teacher = new Teacher();
         teacher.setIsValidated(isValidated);
@@ -67,6 +84,8 @@ public final class TeacherBuilder {
         teacher.setTeacherName(teacherName);
         teacher.setTeacherCode(teacherCode);
         teacher.setPhone(phone);
+        teacher.setTeacherOfficeId(teacherOfficeId);
+        teacher.setTeacherOfficeName(teacherOfficeName);
         return teacher;
     }
 }

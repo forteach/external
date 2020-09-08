@@ -10,6 +10,7 @@ import com.forteach.external.mysql.repository.StudentRepository;
 import com.forteach.external.oracle.dto.IStudentDto;
 import com.forteach.external.oracle.repository.ZhxyXsxxRepository;
 import com.forteach.external.service.StudentService;
+import com.forteach.external.service.TeacherOfficeService;
 import com.forteach.external.util.StringUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.core.HashOperations;
@@ -40,6 +41,9 @@ public class StudentServiceImpl implements StudentService {
 
     @Resource
     private StudentRepository studentRepository;
+
+    @Resource
+    private TeacherOfficeService teacherOfficeService;
 
     private static final Gravatar gravatar;
 
@@ -101,6 +105,8 @@ public class StudentServiceImpl implements StudentService {
         String isValidated = StringUtil.changeIsValidated(iStudentDto.getIsValidated());
         String gender = StringUtil.changeGender(iStudentDto.getGender());
         String jGravatart = this.jGravatart(iStudentDto.getId());
+        String teacherOfficeId = iStudentDto.getTeacherOfficeId();
+        String teacherOfficeName = teacherOfficeService.findTeacherName(teacherOfficeId);
         String key = STUDENT_ADO.concat(iStudentDto.getId());
         if (ISVALIDATED_0.equals(isValidated)) {
             if (!stringRedisTemplate.hasKey(key)) {
@@ -112,6 +118,8 @@ public class StudentServiceImpl implements StudentService {
                 map.put("classId", iStudentDto.getClassId());
                 map.put("isValidated", isValidated);
                 map.put("portrait", jGravatart);
+                map.put("teacherOfficeId", teacherOfficeId);
+                map.put("teacherOfficeName", teacherOfficeName);
                 hashOperations.putAll(key, map);
                 redisTemplate.expire(key, 365, TimeUnit.DAYS);
             }
@@ -132,6 +140,8 @@ public class StudentServiceImpl implements StudentService {
         studentEntitys.setStudentStatus(iStudentDto.getStudentStatus());
         studentEntitys.setPhone(iStudentDto.getPhone());
         studentEntitys.setIsValidated(isValidated);
+        studentEntitys.setTeacherOfficeId(teacherOfficeId);
+        studentEntitys.setTeacherOfficeName(teacherOfficeName);
         studentRepository.save(studentEntitys);
     }
     /**

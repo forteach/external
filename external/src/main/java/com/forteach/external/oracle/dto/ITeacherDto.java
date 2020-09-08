@@ -29,6 +29,21 @@ public interface ITeacherDto extends Serializable {
      */
     public String getIsValidated();
 
-    /** 移动电话手机*/
+    /**
+     * 移动电话手机
+     * @return
+     */
     public String getPhone();
+
+    /**
+     * 教研室Id
+     * @return
+     */
+    public String getTeacherOfficeId();
+
+    /**
+     * 教研室名称
+     * @return
+     */
+    public String getTeacherOfficeName();
 }

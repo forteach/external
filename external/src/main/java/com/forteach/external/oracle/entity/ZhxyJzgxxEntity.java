@@ -214,10 +214,13 @@ public class ZhxyJzgxxEntity implements Serializable {
     private String yjfx;
     /**
      * LSXY
+     * 隶属学院
+     * 教研室代码
      */
     private String lsxy;
     /**
      * 隶属院校
+     * 专业名称
      * 所属组织机构代码
      */
     private String lsyx;

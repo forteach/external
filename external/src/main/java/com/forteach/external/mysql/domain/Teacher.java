@@ -50,14 +50,22 @@ public class Teacher extends Entitys implements Serializable {
     @Column(name = "phone", columnDefinition = "VARCHAR(32) COMMENT '电话号码'")
     private String phone;
 
+    @Column(name = "teacher_office_id", columnDefinition = "varchar(32) comment '教研室id'")
+    private String teacherOfficeId;
+
+    @Column(name = "teacher_office_name", columnDefinition = "varchar(32) comment '教研室名称'")
+    private String teacherOfficeName;
+
     public Teacher() {
     }
 
-    public Teacher(String teacherId, String specialtyId, @NotNull(message = "教师名称不能为空") String teacherName, @NotNull(message = "教师编号不能为空") String teacherCode, String phone) {
+    public Teacher(String teacherId, String specialtyId, @NotNull(message = "教师名称不能为空") String teacherName, @NotNull(message = "教师编号不能为空") String teacherCode, String phone, String teacherOfficeId, String teacherOfficeName) {
         this.teacherId = teacherId;
         this.specialtyId = specialtyId;
         this.teacherName = teacherName;
         this.teacherCode = teacherCode;
         this.phone = phone;
+        this.teacherOfficeId = teacherOfficeId;
+        this.teacherOfficeName = teacherOfficeName;
     }
 }

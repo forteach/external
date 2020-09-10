@@ -42,6 +42,9 @@ public class TaskWork {
     @Resource
     public ClassesService classesService;
 
+    @Resource
+    private PlanCourseService planCourseService;
+
     @Schedules({
             // TODO 注释每分钟执行任务
 //            @Scheduled(cron = "0 0/1 * * * ?")
@@ -149,5 +152,20 @@ public class TaskWork {
         }
         courseJoinChapterService.saveJoinCourseChapter();
         log.info("{}　<== 执行更新加入课程章节信息定时任务结束", LocalDateTime.now());
+    }
+
+    @Schedules({
+            // TODO 注释每分钟执行任务
+//            @Scheduled(cron = "0 0/30 * * * ?")
+            @Scheduled(cron = "0 30 4 * * ?")
+    })
+    @Async
+    public void updatePlanCourse(){
+        log.info("开始执行定时任务同步课程表 ==> {}", LocalDateTime.now());
+        if (log.isDebugEnabled()) {
+            log.debug("执行线程 : {}", Thread.currentThread().getName());
+        }
+        planCourseService.saveAll();
+        log.info("{}　<== 执行更新同步课程表定时任务结束", LocalDateTime.now());
     }
 }

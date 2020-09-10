@@ -17,7 +17,7 @@ public interface ITeacherClassCourseDto extends Serializable {
     public String getTeacherId();
 
     /**
-     * 课程id
+     * 班级id
      * @return
      */
     public String getClassId();

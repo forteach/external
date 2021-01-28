@@ -10,7 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Stream;
 
 /**
  * @Auther: zhangyy
@@ -24,6 +23,7 @@ public interface CourseChapterRepository extends JpaRepository<CourseChapter, St
 
     /**
      * 通过章节信息查询课程信息
+     *
      * @param chapterIds
      * @return
      */

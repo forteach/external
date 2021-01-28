@@ -55,6 +55,7 @@ public interface IPlanCourseDto extends Serializable {
      * 课程类别
      */
     public String getCourseType();
+
     /**
      * 周别 0 不分单双周
      * 1 单周 2 双周
@@ -88,6 +89,7 @@ public interface IPlanCourseDto extends Serializable {
 
     /**
      * 周次
+     *
      * @return
      */
     public String getClassRoomWeekNum();

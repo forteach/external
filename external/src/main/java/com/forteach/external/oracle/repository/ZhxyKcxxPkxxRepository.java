@@ -20,6 +20,7 @@ public interface ZhxyKcxxPkxxRepository extends JpaRepository<ZhxyKcxxPkxxEntity
 
     /**
      * 查询排课信息
+     *
      * @return
      */
     @Transactional(readOnly = true, rollbackFor = Exception.class)
@@ -28,6 +29,7 @@ public interface ZhxyKcxxPkxxRepository extends JpaRepository<ZhxyKcxxPkxxEntity
 
     /**
      * 查询排课信息
+     *
      * @return
      */
     @Transactional(readOnly = true)

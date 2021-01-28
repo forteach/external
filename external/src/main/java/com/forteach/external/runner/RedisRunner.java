@@ -3,7 +3,6 @@ package com.forteach.external.runner;
 import com.forteach.external.redis.service.ClassStudentService;
 import com.forteach.external.service.*;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.core.annotation.Order;
@@ -32,7 +31,7 @@ public class RedisRunner implements ApplicationRunner {
 
     private RedisRunner(StudentService studentService, TeacherService teacherService,
                         TeacherClassCourseService teacherClassCourseService, ClassesService classesService,
-                        CourseService courseService, ClassStudentService classStudentService, PlanCourseService planCourseService){
+                        CourseService courseService, ClassStudentService classStudentService, PlanCourseService planCourseService) {
         this.studentService = studentService;
         this.teacherService = teacherService;
         this.teacherClassCourseService = teacherClassCourseService;
@@ -44,6 +43,7 @@ public class RedisRunner implements ApplicationRunner {
 
     /**
      * 保存用户信息到 redis
+     *
      * @param args
      * @throws Exception
      */
@@ -57,7 +57,7 @@ public class RedisRunner implements ApplicationRunner {
         classesService.saveAll();
         //同步课程表数据
         planCourseService.saveAll();
-        if(log.isInfoEnabled()) {
+        if (log.isInfoEnabled()) {
             log.info("Thread name : {}, save students redis OK!", Thread.currentThread().getName());
         }
     }

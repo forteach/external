@@ -17,7 +17,7 @@ import java.util.Objects;
 @Table(name = "ZHXY_JZGXX", schema = "SZXY", catalog = "")
 public class ZhxyJzgxxEntity implements Serializable {
     /**
-     *  教工号
+     * 教工号
      */
     private String jgh;
     /**
@@ -116,7 +116,7 @@ public class ZhxyJzgxxEntity implements Serializable {
      * 从教年月
      */
     private String cjny;
-    /** 
+    /**
      * 编制类别码
      */
     private String bzlbm;

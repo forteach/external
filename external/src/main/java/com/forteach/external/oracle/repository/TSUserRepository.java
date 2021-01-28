@@ -21,6 +21,7 @@ public interface TSUserRepository extends JpaRepository<TSUserEntity, String> {
 
     /**
      * 查询有效的用户信息
+     *
      * @return
      */
     @Transactional(readOnly = true)
@@ -31,6 +32,7 @@ public interface TSUserRepository extends JpaRepository<TSUserEntity, String> {
 
     /**
      * 根据时间查询对应的dto信息
+     *
      * @param updateDate
      * @return
      */

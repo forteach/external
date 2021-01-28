@@ -25,7 +25,7 @@ public class ClassStudentService {
     private StringRedisTemplate stringRedisTemplate;
 
 
-    public void saveUpdate(){
+    public void saveUpdate() {
         studentRepository.findByIsValidatedEqualsAndClassId()
                 .parallelStream()
                 .filter(Objects::nonNull)

@@ -20,13 +20,13 @@ import javax.sql.DataSource;
  */
 @Indexed
 @Configuration
-public class DataSourceConfig{
+public class DataSourceConfig {
 
     @Primary
     @Bean("dataSourcePropertiesMysql")
     @Qualifier(value = "dataSourcePropertiesMysql")
     @ConfigurationProperties(prefix = "spring.datasource.datasource-mysql")
-    public DataSourceProperties dataSourcePropertiesMysql(){
+    public DataSourceProperties dataSourcePropertiesMysql() {
         return new DataSourceProperties();
     }
 
@@ -41,7 +41,7 @@ public class DataSourceConfig{
     @Bean("dataSourcePropertiesOracle")
     @Qualifier(value = "dataSourcePropertiesOracle")
     @ConfigurationProperties(prefix = "spring.datasource.datasource-oracle")
-    public DataSourceProperties dataSourcePropertiesOracle(){
+    public DataSourceProperties dataSourcePropertiesOracle() {
         return new DataSourceProperties();
     }
 

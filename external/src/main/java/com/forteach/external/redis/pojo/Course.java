@@ -2,6 +2,7 @@ package com.forteach.external.redis.pojo;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+
 /**
  * @author: zhangyy
  * @email: zhang10092009@hotmail.com
@@ -11,7 +12,7 @@ import lombok.EqualsAndHashCode;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-public class Course extends RedisBash{
+public class Course extends RedisBash {
     /**
      * 课程id
      */

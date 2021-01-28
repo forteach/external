@@ -132,7 +132,7 @@ public class ZhxyZxfwQjxxEntity implements Serializable {
      */
     private String dxsj;
     /**
-     * 
+     *
      */
     private String sffsyj;
     /**

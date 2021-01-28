@@ -22,13 +22,14 @@ import javax.annotation.Resource;
 public class ZhxyXsxxRepositoryTest {
     @Resource
     private ZhxyXsxxRepository zhxyXsxxRepository;
+
     @Test
-    public void findAllRedisDto(){
+    public void findAllRedisDto() {
         zhxyXsxxRepository.findAllRedisDto()
                 .stream()
                 .parallel()
                 .forEach(iStudentDto -> {
-                    log.info("id : {}, name : {} \r\n",iStudentDto.getId(), iStudentDto.getName());
+                    log.info("id : {}, name : {} \r\n", iStudentDto.getId(), iStudentDto.getName());
                 });
     }
 

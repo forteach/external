@@ -20,6 +20,7 @@ public interface ZhxyXsxxRepository extends JpaRepository<ZhxyXsxxEntity, String
 
     /**
      * 查询有效的学生信息需要保存到　redis 缓存
+     *
      * @return
      */
     @Transactional(readOnly = true)
@@ -41,6 +42,7 @@ public interface ZhxyXsxxRepository extends JpaRepository<ZhxyXsxxEntity, String
 
     /**
      * 查询近期修改的学生信息
+     *
      * @param timeStamp
      * @return
      */

@@ -59,7 +59,7 @@ public class ZhxyXsxxEntity implements Serializable {
      */
     private String xsxm;
     /**
-     * 隶属学院　
+     * 隶属学院
      * 教研室代码
      */
     private String lsxy;
@@ -169,7 +169,7 @@ public class ZhxyXsxxEntity implements Serializable {
      */
     private String mzm;
     /**
-     * 
+     *
      */
     private String zpKtl;
     /**

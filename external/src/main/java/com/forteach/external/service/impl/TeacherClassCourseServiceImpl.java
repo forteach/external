@@ -29,9 +29,10 @@ public class TeacherClassCourseServiceImpl implements TeacherClassCourseService 
     private final TeacherClassCourseRepository teacherClassCourseRepository;
     private final ZhxyKcxxPkxxRepository zhxyKcxxPkxxRepository;
     private final MongoTemplate mongoTemplate;
+
     public TeacherClassCourseServiceImpl(TeacherClassCourseRepository teacherClassCourseRepository,
                                          ZhxyKcxxPkxxRepository zhxyKcxxPkxxRepository,
-                                         MongoTemplate mongoTemplate){
+                                         MongoTemplate mongoTemplate) {
         this.teacherClassCourseRepository = teacherClassCourseRepository;
         this.zhxyKcxxPkxxRepository = zhxyKcxxPkxxRepository;
         this.mongoTemplate = mongoTemplate;
@@ -39,7 +40,7 @@ public class TeacherClassCourseServiceImpl implements TeacherClassCourseService 
 
     @Async
     @Override
-    public void saveTeacherClassAndCourseAll(){
+    public void saveTeacherClassAndCourseAll() {
 //        List<TeacherClassCourse> list = new ArrayList<>();
         List<ClassTeacherCourse> courseList = new ArrayList<>();
         zhxyKcxxPkxxRepository.findCourse()
@@ -47,8 +48,8 @@ public class TeacherClassCourseServiceImpl implements TeacherClassCourseService 
                 .filter(Objects::nonNull)
                 .filter(iTeacherClassCourseDto ->
                         StrUtil.isNotBlank(iTeacherClassCourseDto.getClassId())
-                        && StrUtil.isNotBlank(iTeacherClassCourseDto.getCourseId())
-                        && StrUtil.isNotBlank(iTeacherClassCourseDto.getTeacherId()))
+                                && StrUtil.isNotBlank(iTeacherClassCourseDto.getCourseId())
+                                && StrUtil.isNotBlank(iTeacherClassCourseDto.getTeacherId()))
                 .forEach(iTeacherClassCourseDto -> {
                     //mysql
                     //mongodb

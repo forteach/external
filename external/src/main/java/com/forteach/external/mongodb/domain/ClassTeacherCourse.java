@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
+
 /**
  * @author: zhangyy
  * @email: zhang10092009@hotmail.com
@@ -24,7 +25,7 @@ public class ClassTeacherCourse extends BaseEntity {
     private String classId;
 
     /**
-     *　教师id
+     * 　教师id
      */
     @Indexed
     private String teacherId;

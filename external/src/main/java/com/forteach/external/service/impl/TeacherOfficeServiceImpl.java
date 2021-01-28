@@ -24,8 +24,9 @@ public class TeacherOfficeServiceImpl implements TeacherOfficeService {
     public TeacherOfficeServiceImpl(GzJsxxRepository gzJsxxRepository) {
         this.gzJsxxRepository = gzJsxxRepository;
     }
+
     @Override
-    public String findTeacherName(String teacherOfficeId){
+    public String findTeacherName(String teacherOfficeId) {
         return gzJsxxRepository.findAllByJysbh(teacherOfficeId)
                 .stream()
                 .filter(Objects::nonNull)
@@ -33,8 +34,9 @@ public class TeacherOfficeServiceImpl implements TeacherOfficeService {
                 .findFirst()
                 .orElseGet(String::new);
     }
+
     @Override
-    public String findTeacherId(String teacherId){
+    public String findTeacherId(String teacherId) {
         return gzJsxxRepository.findById(teacherId)
                 .filter(Objects::nonNull)
                 .map(GzJsxxEntity::getJysmc)

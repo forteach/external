@@ -10,12 +10,14 @@ package com.forteach.external.mysql.dto;
 public interface IStudentDto {
     /**
      * 学生id
+     *
      * @return
      */
     public String getStudentId();
 
     /**
      * 班级id
+     *
      * @return
      */
     public String getClassId();

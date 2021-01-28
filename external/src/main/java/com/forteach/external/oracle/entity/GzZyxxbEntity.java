@@ -36,7 +36,7 @@ public class GzZyxxbEntity implements Serializable {
      */
     private String kbsj;
     /**
-     * 
+     *
      */
     private String dwdm;
 

@@ -43,11 +43,13 @@ public final class StudentEntitysBuilder {
         this.IDCardNo = IDCardNo;
         return this;
     }
+
     public StudentEntitysBuilder classId(String classId) {
         this.classId = classId;
         return this;
     }
-    public StudentEntitysBuilder portrait(String portrait){
+
+    public StudentEntitysBuilder portrait(String portrait) {
         this.portrait = portrait;
         return this;
     }

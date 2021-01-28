@@ -14,7 +14,7 @@ import java.util.Objects;
 @Entity
 @Table(name = "GZ_ZGDW_FDY_SDXSBJ", schema = "SZXY", catalog = "")
 public class GzZgdwFdySdxsbjEntity implements Serializable {
-    
+
     @Id
     private String id;
     /**
@@ -31,7 +31,7 @@ public class GzZgdwFdySdxsbjEntity implements Serializable {
      */
     private String lgrq;
     /**
-     * 教工号　
+     * 教工号
      * 关联教职工信息表jgh
      */
     private String zgh;

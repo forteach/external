@@ -51,13 +51,13 @@ public class TaskWork {
             @Scheduled(cron = "0 0 1 * * ?")
     })
     @Async
-    public void classesTasks(){
+    public void classesTasks() {
         log.info("开始执行定时任务更新班级信息 ==> {}", LocalDateTime.now());
-        if (log.isDebugEnabled()){
+        if (log.isDebugEnabled()) {
             log.debug("执行线程 : {}", Thread.currentThread().getName());
         }
         classesService.saveAll();
-        log.info( "{}　<== 执行更新班级信息定时任务结束", LocalDateTime.now());
+        log.info("{}　<== 执行更新班级信息定时任务结束", LocalDateTime.now());
     }
 
     @Schedules({
@@ -66,7 +66,7 @@ public class TaskWork {
             @Scheduled(cron = "0 10 1 * * ?")
     })
     @Async
-    public void teacherTasks(){
+    public void teacherTasks() {
         log.info("开始执行定时任务更新教师信息 ==> {}", LocalDateTime.now());
         if (log.isDebugEnabled()) {
             log.debug("执行线程 : {}", Thread.currentThread().getName());
@@ -81,7 +81,7 @@ public class TaskWork {
             @Scheduled(cron = "0 20 1 * * ?")
     })
     @Async
-    public void courseTasks(){
+    public void courseTasks() {
         log.info("开始执行定时任务更新课程信息 ==> {}", LocalDateTime.now());
         if (log.isDebugEnabled()) {
             log.debug("执行线程 : {}", Thread.currentThread().getName());
@@ -99,7 +99,7 @@ public class TaskWork {
             @Scheduled(cron = "0 30 1 * * ?")
     })
     @Async
-    public void studentTasks(){
+    public void studentTasks() {
         log.info("开始执行定时任务更新学生信息 ==> {}", LocalDateTime.now());
         if (log.isDebugEnabled()) {
             log.debug("执行线程 : {}", Thread.currentThread().getName());
@@ -115,7 +115,7 @@ public class TaskWork {
             @Scheduled(cron = "0 40 1 * * ?")
     })
     @Async
-    public void saveTeacherClassCourse(){
+    public void saveTeacherClassCourse() {
         log.info("开始执行定时任务更新教师课程和班级对应的信息 ==> {}", LocalDateTime.now());
         if (log.isDebugEnabled()) {
             log.debug("执行线程 : {}", Thread.currentThread().getName());
@@ -130,13 +130,13 @@ public class TaskWork {
             @Scheduled(cron = "0 10 4 * * ?")
     })
     @Async
-    public void classStudentTasks(){
+    public void classStudentTasks() {
         log.info("开始执行定时任务更新班级学生信息 ==> {}", LocalDateTime.now());
-        if (log.isDebugEnabled()){
+        if (log.isDebugEnabled()) {
             log.debug("执行线程 : {}", Thread.currentThread().getName());
         }
         classStudentService.saveUpdate();
-        log.info( "{}　<== 执行更新班级学生信息定时任务结束", LocalDateTime.now());
+        log.info("{}　<== 执行更新班级学生信息定时任务结束", LocalDateTime.now());
     }
 
     @Schedules({
@@ -145,7 +145,7 @@ public class TaskWork {
             @Scheduled(cron = "0 0/20 * * * ?")
     })
     @Async
-    public void saveOrUpdateJoinCourse(){
+    public void saveOrUpdateJoinCourse() {
         log.info("开始执行定时任务加入课程章节信息开始 ==> {}", LocalDateTime.now());
         if (log.isDebugEnabled()) {
             log.debug("执行线程 : {}", Thread.currentThread().getName());
@@ -160,7 +160,7 @@ public class TaskWork {
             @Scheduled(cron = "0 30 4 * * ?")
     })
     @Async
-    public void updatePlanCourse(){
+    public void updatePlanCourse() {
         log.info("开始执行定时任务同步课程表 ==> {}", LocalDateTime.now());
         if (log.isDebugEnabled()) {
             log.debug("执行线程 : {}", Thread.currentThread().getName());

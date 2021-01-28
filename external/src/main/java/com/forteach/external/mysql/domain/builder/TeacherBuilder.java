@@ -63,16 +63,18 @@ public final class TeacherBuilder {
         this.teacherCode = teacherCode;
         return this;
     }
+
     public TeacherBuilder withPhone(String phone) {
         this.phone = phone;
         return this;
     }
 
-    public TeacherBuilder withTeacherOfficeId(String teacherOfficeId){
+    public TeacherBuilder withTeacherOfficeId(String teacherOfficeId) {
         this.teacherOfficeId = teacherOfficeId;
         return this;
     }
-    public TeacherBuilder withTeacherOfficeName(String teacherOfficeName){
+
+    public TeacherBuilder withTeacherOfficeName(String teacherOfficeName) {
         this.teacherOfficeName = teacherOfficeName;
         return this;
     }

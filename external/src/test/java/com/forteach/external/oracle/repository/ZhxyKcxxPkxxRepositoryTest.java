@@ -6,10 +6,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.annotation.Resource;
-
 import java.util.Objects;
-
-import static org.junit.Assert.*;
 
 /**
  * @author: zhangyy
@@ -25,7 +22,7 @@ public class ZhxyKcxxPkxxRepositoryTest {
     private ZhxyKcxxPkxxRepository zhxyKcxxPkxxRepository;
 
     @Test
-    public void selectAllTest(){
+    public void selectAllTest() {
         zhxyKcxxPkxxRepository.findAll()
                 .parallelStream()
                 .filter(Objects::nonNull)

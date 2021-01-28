@@ -2,9 +2,11 @@ package com.forteach.external.oracle.entity;
 
 import lombok.Data;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.io.Serializable;
-import java.util.Objects;
 
 /**
  * @Auther: zhangyy
@@ -167,10 +169,10 @@ public class ZhxyKcxxPkxxEntity implements Serializable {
      */
     @Column(name = "KCLB1", nullable = true, length = 2)
     private String kclb1;
-     /**
+    /**
      * 课程类别2
      */
-     @Column(name = "KCLB2", nullable = true, length = 2)
+    @Column(name = "KCLB2", nullable = true, length = 2)
     private String kclb2;
     /**
      *

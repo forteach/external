@@ -6,7 +6,6 @@ import com.forteach.external.oracle.dto.IPlanCourseDto;
 import com.forteach.external.oracle.repository.ZhxyKcxxPkxxRepository;
 import com.forteach.external.service.PlanCourseService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
@@ -34,7 +33,7 @@ public class PlanCourseServiceImpl implements PlanCourseService {
 
     @Async
     @Override
-    public void saveAll(){
+    public void saveAll() {
         List<PlanCourse> list = findAll().parallelStream().map(p -> {
             PlanCourse planCourse = new PlanCourse();
             planCourse.setId(p.getId());
@@ -57,12 +56,12 @@ public class PlanCourseServiceImpl implements PlanCourseService {
             planCourse.setWeekType(p.getWeekType());
             return planCourse;
         }).collect(Collectors.toList());
-        if (!list.isEmpty()){
+        if (!list.isEmpty()) {
             planCourseRepository.saveAll(list);
         }
     }
 
-    private List<IPlanCourseDto> findAll(){
+    private List<IPlanCourseDto> findAll() {
         return zhxyKcxxPkxxRepository.findPlanCourse();
     }
 }

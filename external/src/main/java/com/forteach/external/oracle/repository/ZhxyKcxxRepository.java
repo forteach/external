@@ -19,6 +19,7 @@ public interface ZhxyKcxxRepository extends JpaRepository<ZhxyKcxxEntity, String
 
     /**
      * 查询是有效状态的教师信息
+     *
      * @param isValidated
      * @return
      */
@@ -28,6 +29,7 @@ public interface ZhxyKcxxRepository extends JpaRepository<ZhxyKcxxEntity, String
 
     /**
      * 查询最近修改的教师信息
+     *
      * @param timeStamp
      * @return
      */

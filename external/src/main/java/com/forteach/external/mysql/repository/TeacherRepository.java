@@ -10,5 +10,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @Version: 1.0
  * @Description:
  */
-public interface TeacherRepository extends JpaRepository <Teacher, String>{
+public interface TeacherRepository extends JpaRepository<Teacher, String> {
 }

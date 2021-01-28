@@ -1,9 +1,5 @@
 package com.forteach.external.service;
 
-import com.forteach.external.oracle.dto.IClassesDto;
-
-import java.util.List;
-
 /**
  * @Auther: zhangyy
  * @Email: zhang10092009@hotmail.com
@@ -12,6 +8,6 @@ import java.util.List;
  * @Description:
  */
 public interface ClassesService {
-//    List<IClassesDto> findAllDto();
+    //    List<IClassesDto> findAllDto();
     void saveAll();
 }

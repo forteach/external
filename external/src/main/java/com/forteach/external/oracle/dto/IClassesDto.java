@@ -12,25 +12,28 @@ import java.io.Serializable;
 public interface IClassesDto extends Serializable {
     /**
      * 班级编号id
+     *
      * @return
      */
     public String getClassId();
 
     /**
      * 班级名称
+     *
      * @return
      */
     public String getClassName();
 
     /**
      * 年级
+     *
      * @return
      */
     public Long getGrade();
 
     /**
      * 班级生效标识
-//     * @return
+     //     * @return
      */
 //    public String getIsValidated();
 

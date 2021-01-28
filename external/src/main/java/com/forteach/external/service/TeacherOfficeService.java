@@ -11,6 +11,7 @@ package com.forteach.external.service;
 public interface TeacherOfficeService {
     /**
      * 根据教研室Id查询名称
+     *
      * @param teacherOfficeId
      * @return
      */
@@ -18,6 +19,7 @@ public interface TeacherOfficeService {
 
     /**
      * 根据教师Id查询教研室名称
+     *
      * @param teacherId
      * @return
      */

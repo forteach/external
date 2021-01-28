@@ -50,7 +50,7 @@ public class TSRoleEntity implements Serializable {
      */
     private String createBy;
     /**
-     *     角色类型
+     * 角色类型
      * 1： 系统全局据角色
      * 2： 部门私有角色
      */

@@ -12,15 +12,18 @@ import java.io.Serializable;
 public interface ICourseDto extends Serializable {
     /**
      * 课程id
+     *
      * @return
      */
     public String getCourseId();
 
     /**
      * 课程名称
+     *
      * @return
      */
     public String getCourseName();
+
     /**
      * 课程描述
      */
@@ -28,6 +31,7 @@ public interface ICourseDto extends Serializable {
 
     /**
      * 有效标识
+     *
      * @return
      */
     public String getIsValidated();

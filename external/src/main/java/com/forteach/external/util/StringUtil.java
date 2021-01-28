@@ -12,18 +12,19 @@ import static com.forteach.external.common.Dic.*;
 public class StringUtil {
     /**
      * 将 Orache  数据库的 'Y' 转换为　'0'
+     *
      * @param isValidated
      * @return
      */
-    public static String changeIsValidated(String isValidated){
-        if(ISVALIDATED_N.equals(isValidated)){
+    public static String changeIsValidated(String isValidated) {
+        if (ISVALIDATED_N.equals(isValidated)) {
             return ISVALIDATED_1;
         }
         return ISVALIDATED_0;
     }
 
-    public static String changeGender(String gender){
-        if (GENDER_F.equals(gender)){
+    public static String changeGender(String gender) {
+        if (GENDER_F.equals(gender)) {
             return "女";
         }
         return "男";

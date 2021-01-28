@@ -53,7 +53,6 @@ public class ZhxyKcxxEntity implements Serializable {
     private String cksm;
     /**
      * 有效标志
-     * 
      */
     private String yxbz;
     /**
@@ -77,7 +76,7 @@ public class ZhxyKcxxEntity implements Serializable {
      */
     private String kclb;
     /**
-     * 开课院系ID 
+     * 开课院系ID
      * 组织机构编号
      */
     private String yxid;

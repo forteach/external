@@ -16,6 +16,7 @@ import java.util.List;
 public interface GzJsxxRepository extends JpaRepository<GzJsxxEntity, String> {
     /**
      * 查询教研室对应的教师信息
+     *
      * @param jysbh
      * @return
      */

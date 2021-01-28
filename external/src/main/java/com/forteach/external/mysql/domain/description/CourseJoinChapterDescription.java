@@ -3,7 +3,8 @@ package com.forteach.external.mysql.domain.description;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.forteach.external.mysql.domain.base.BaseCourseDescription;
 import com.forteach.external.mysql.domain.pk.CourseJoinChapterPk;
-import lombok.*;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 

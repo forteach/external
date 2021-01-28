@@ -1,7 +1,9 @@
 package com.forteach.external.mysql.domain;
 
 import com.forteach.external.mysql.domain.base.Entitys;
-import lombok.*;
+import lombok.Builder;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 

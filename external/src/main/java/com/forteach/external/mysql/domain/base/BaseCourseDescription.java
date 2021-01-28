@@ -2,12 +2,14 @@ package com.forteach.external.mysql.domain.base;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.forteach.external.mysql.domain.pk.CourseCountPk;
-import com.forteach.external.mysql.domain.pk.CourseJoinChapterPk;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import javax.persistence.*;
+import javax.persistence.EmbeddedId;
+import javax.persistence.EntityListeners;
+import javax.persistence.IdClass;
+import javax.persistence.MappedSuperclass;
 
 /**
  * @author: zhangyy

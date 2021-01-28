@@ -20,6 +20,7 @@ public interface StudentRepository extends JpaRepository<StudentEntitys, String>
 
     /**
      * 查询班级学生信息
+     *
      * @return
      */
     @Query(value = "select " +

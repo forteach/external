@@ -20,6 +20,7 @@ public interface ZhxyJzgxxRepository extends JpaRepository<ZhxyJzgxxEntity, Stri
 
     /**
      * 查询有效的课程信息
+     *
      * @param isValidated
      * @return
      */
@@ -30,6 +31,7 @@ public interface ZhxyJzgxxRepository extends JpaRepository<ZhxyJzgxxEntity, Stri
 
     /**
      * 条件查询最近修改的课程信息
+     *
      * @param timestamp
      * @return
      */

@@ -11,12 +11,14 @@ public interface ICourseChapterDto {
 
     /**
      * 课程id
+     *
      * @return
      */
     public String getCourseId();
 
     /**
      * 章节id
+     *
      * @return
      */
     public String getChapterId();

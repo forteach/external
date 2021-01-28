@@ -1,6 +1,7 @@
 package com.forteach.external.oracle.dto;
 
 import java.io.Serializable;
+
 /**
  * @author: zhangyy
  * @email: zhang10092009@hotmail.com
@@ -12,18 +13,21 @@ public interface ITeacherClassCourseDto extends Serializable {
 
     /**
      * 教师id
+     *
      * @return
      */
     public String getTeacherId();
 
     /**
      * 班级id
+     *
      * @return
      */
     public String getClassId();
 
     /**
      * 课程id
+     *
      * @return
      */
     public String getCourseId();

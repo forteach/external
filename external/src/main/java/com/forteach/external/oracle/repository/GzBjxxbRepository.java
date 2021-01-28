@@ -19,9 +19,10 @@ public interface GzBjxxbRepository extends JpaRepository<GzBjxxbEntity, String> 
 
     /**
      * 查询需要的班级信息
+     *
      * @return
      */
     @Transactional(readOnly = true)
-    @Query(value = "select \"bjbh\" as classId, \"bjmc\" as className, \"ssnj\" as grade from gz_bjxxb ",nativeQuery = true)
+    @Query(value = "select \"bjbh\" as classId, \"bjmc\" as className, \"ssnj\" as grade from gz_bjxxb ", nativeQuery = true)
     List<IClassesDto> findAllDto();
 }

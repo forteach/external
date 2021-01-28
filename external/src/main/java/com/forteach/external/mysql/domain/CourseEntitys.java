@@ -2,7 +2,9 @@ package com.forteach.external.mysql.domain;
 
 
 import com.forteach.external.mysql.domain.base.Entitys;
-import lombok.*;
+import lombok.Builder;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
@@ -36,7 +38,7 @@ public class CourseEntitys extends Entitys implements Serializable {
     @Column(name = "course_name", columnDefinition = "VARCHAR(40) COMMENT '科目名称'")
     private String courseName;
 
-    @Column(name = "course_describe", columnDefinition = "MEDIUMTEXT COMMENT'课程描述'" )
+    @Column(name = "course_describe", columnDefinition = "MEDIUMTEXT COMMENT'课程描述'")
     private String courseDescribe;
 
     public CourseEntitys() {

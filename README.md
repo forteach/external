@@ -1,3 +1,3 @@
 # external
 
-external oracle
+导入外部数据（学生，教师，排课等）信息进行同步处理，
